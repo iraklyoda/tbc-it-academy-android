@@ -11,17 +11,17 @@ fun main() {
         println("Input the value of Y")
         val y: String? = readlnOrNull()
 
-        var xValue: Double = getNumbers(x)
-        var yValue: Double = getNumbers(y)
+        var xValue: Int = getNumbers(x)
+        var yValue: Int = getNumbers(y)
 
-        if (yValue != 0.0)
-            println("$xValue divided by $yValue is ${xValue / yValue}")
+        if (yValue != 0)
+            println("$xValue divided by $yValue is ${xValue / yValue.toFloat()}")
         else
             println("Can't divide on 0")
 
         while(true) {
             println("Would you like to re-run the program? <Y/N>")
-            val answer = readLine()
+            val answer: String? = readlnOrNull()
 
             when (answer?.uppercase()) {
                 "N" -> {
@@ -39,7 +39,7 @@ fun main() {
 
 }
 
-fun getNumbers(input: String?): Double {
+fun getNumbers(input: String?): Int {
     var result = ""
     if (input != null) {
 
@@ -50,8 +50,8 @@ fun getNumbers(input: String?): Double {
         }
 
         if(result != "") {
-            return result.toDouble()
+            return result.toInt()
         }
     }
-    return 0.0
+    return 0
 }
