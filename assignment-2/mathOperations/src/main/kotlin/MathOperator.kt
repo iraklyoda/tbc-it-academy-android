@@ -1,6 +1,5 @@
 object MathOperator {
 
-
     fun findHCF(x: Int, y: Int): Int? {
 
         var hcf: Int = 0

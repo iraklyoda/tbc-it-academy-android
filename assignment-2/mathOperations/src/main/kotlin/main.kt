@@ -21,13 +21,3 @@ fun main() {
     println(MathOperator.checkPalindrome("kotlin")) // returns false
 
 }
-
-class User1 {
-    // Defines a named companion object
-    companion object Named {
-        fun show(): String = "User1's Named Companion Object"
-    }
-}
-
-// References the companion object of User1 using the class name
-val reference1 = User1
