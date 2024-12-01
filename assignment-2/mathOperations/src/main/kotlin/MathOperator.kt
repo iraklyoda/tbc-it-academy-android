@@ -1,4 +1,4 @@
-class MathOperator {
+object MathOperator {
 
 
     fun findHCF(x: Int, y: Int): Int? {
