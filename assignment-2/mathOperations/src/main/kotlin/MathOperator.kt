@@ -70,23 +70,13 @@ class MathOperator {
             println("Please input whole number")
             return null
         }
-        var numberString: String = number.toString()
-        var reversedNumberString: String = ""
-
-        for (i in numberString.length-1 downTo 0) {
-            reversedNumberString += numberString[i]
-        }
+        val numberString: String = number.toString()
+        val reversedNumberString: String = numberString.reversed()
 
         return reversedNumberString.toInt()
     }
 
     fun checkPalindrome(string: String): Boolean {
-        var reversedString: String = ""
-
-        for (i in string.length - 1 downTo 0) {
-            reversedString += string[i]
-        }
-
-        return string == reversedString
+        return string == string.reversed()
     }
 }

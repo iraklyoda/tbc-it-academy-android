@@ -1,5 +1,5 @@
 fun main() {
-    var mathOperator = MathOperator()
+    val mathOperator = MathOperator()
 
     // #1 HCF Finder
     println(mathOperator.findHCF(40, 15)) // returns 5
