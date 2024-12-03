@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NumberToTextConverter</string>
+    <string name="input_from_1_to_1000">Input from 1 to 1000</string>
+    <string name="generate">Generate</string>
+</resources>
