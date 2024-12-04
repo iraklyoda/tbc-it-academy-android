@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">RegistrationFormApp</string>
+    <string name="profile_info">Profile Info</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="age">Age</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="email_required">Email Required</string>
+    <string name="please_enter_proper_email">Please enter proper email</string>
+    <string name="username_is_required">Username is required</string>
+    <string name="username_should_contain_more_than_10_characters">Username should contain more than 10 characters</string>
+    <string name="first_name_is_required">First name is required</string>
+    <string name="last_name_is_required">Last name is required</string>
+    <string name="age_is_required">Age is required</string>
+    <string name="age_should_be_a_whole_number">Age should be a whole number</string>
+</resources>
