@@ -16,4 +16,5 @@
     <string name="last_name_is_required">Last name is required</string>
     <string name="age_is_required">Age is required</string>
     <string name="age_should_be_a_whole_number">Age should be a whole number</string>
+    <string name="again">Again</string>
 </resources>
