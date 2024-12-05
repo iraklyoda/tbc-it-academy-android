@@ -6,11 +6,13 @@
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/profile_info" />
+        android:gravity="center_horizontal"
+        android:text="@string/profile_info"
+        android:textSize="36dp" />
 
-        <LinearLayout
+    <LinearLayout
             android:id="@+id/form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,12 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
+                android:textSize="24dp"
                 android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/username_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
                 android:hint="@string/username"
                 android:inputType="text" />
 
@@ -35,6 +39,7 @@
                 android:id="@+id/first_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
                 android:hint="@string/first_name"
                 android:inputType="text" />
 
@@ -42,6 +47,7 @@
                 android:id="@+id/last_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
                 android:hint="@string/last_name"
                 android:inputType="text" />
 
@@ -49,24 +55,32 @@
                 android:id="@+id/age_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
                 android:hint="@string/age"
                 android:inputType="number" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                >
 
                 <Button
                     android:id="@+id/btn_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/save" />
+                    android:text="@string/save"
+                    android:layout_marginEnd="44dp"
+                    android:textSize="20dp"
+                    />
 
                 <Button
                     android:id="@+id/btn_clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/clear" />
+                    android:text="@string/clear"
+                    android:textSize="20dp"
+                    />
 
             </LinearLayout>
 
@@ -83,30 +97,35 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
             android:text="Email" />
 
         <TextView
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
             android:text="Username" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
             android:text="Name" />
 
         <TextView
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
             android:text="Age" />
 
         <Button
             android:id="@+id/btn_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
             android:text="@string/again" />
 
     </LinearLayout>
