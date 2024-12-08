@@ -25,17 +25,15 @@ class MainActivity : AppCompatActivity() {
         val addUserBtn: Button = binding.btnAddUser
         val usersInfoText: TextView = binding.txtUserCount
 
-
         val emailSearchInput: EditText = binding.inputEmailSearch
         val getUserBtn: Button = binding.btnGetUser
         val userNameText: TextView = binding.txtNameInfo
         val userEmailText: TextView = binding.txtEmailInfo
 
-
         addUserBtn.setOnClickListener {
             var formValid: Boolean = true
             val nameValue: String = nameInput.text.toString().trim()
-            val emailValue: String = emailInput.text.toString().trim()
+            val emailValue: String = emailInput.text.toString().trim().lowercase()
 
             // Full Name validation
             if (nameValue.isEmpty()) {
