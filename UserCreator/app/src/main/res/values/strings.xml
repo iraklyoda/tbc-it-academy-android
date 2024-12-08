@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">UserCreator</string>
+    <string name="enter_full_name">Enter Full Name</string>
+    <string name="enter_email">Enter email</string>
+    <string name="name_is_required">Name is required</string>
+    <string name="get_user_info">Get User Info</string>
+    <string name="users_0"><![CDATA[Users -> 0]]></string>
+    <string name="add_user">Add user</string>
+    <string name="email_is_required">Email is required</string>
+</resources>
