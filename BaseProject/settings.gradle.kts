@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BaseProject"
+rootProject.name = "AnagramSorter"
 include(":app")
  

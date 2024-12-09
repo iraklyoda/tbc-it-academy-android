@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BaseProject</string>
+    <string name="clear">Clear</string>
+    <string name="output">Output</string>
+    <string name="save">Save</string>
+    <string name="never_had_the_makings_of_a_varsity_hacker">never had the makings of a varsity hacker ;(</string>
 </resources>
