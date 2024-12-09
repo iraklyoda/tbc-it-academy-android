@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         val anagramsList: MutableList<String> = mutableListOf()
 
         fun checkAnagram(text1: String, text2: String): Boolean {
-            val textOne: String = text1.lowercase()
-            val textSecond: String = text2.lowercase()
+            val textOne: String = text1.lowercase().trim()
+            val textSecond: String = text2.lowercase().trim()
 
             if (text1.length != text2.length) {
                 return false
@@ -40,23 +40,23 @@ class MainActivity : AppCompatActivity() {
             if (textOne.toCharArray().sorted() == textSecond.toCharArray().sorted()) {
                 return true
             }
-            return false
 
+            return false
         }
 
-        btnSave.setOnClickListener() {
-            val anagramValue = inputAnagram.text.toString().toString()
+        btnSave.setOnClickListener {
+            val anagramValue = inputAnagram.text.toString()
             if (anagramValue.isEmpty()) {
-                inputAnagram.error = "Input shouldn't be empty"
+                inputAnagram.error = getString(R.string.input_shouldn_t_be_empty)
             } else if (anagramsList.contains(anagramValue)) {
-                inputAnagram.error = "Anagram already in the list"
+                inputAnagram.error = getString(R.string.anagram_already_in_the_list)
             } else {
                 anagramsList.add(anagramValue)
                 inputAnagram.text.clear()
             }
         }
 
-        btnOutput.setOnClickListener() {
+        btnOutput.setOnClickListener {
             // Copy original anagrams list
             val currentAnagrams = anagramsList.toMutableList()
 
@@ -64,8 +64,8 @@ class MainActivity : AppCompatActivity() {
 
             while (currentAnagrams.size > 0) {
                 // Create list of grouped anagram lists
-                var currentAnagramList: MutableList<String> = mutableListOf()
-                var currentAnagram: String = currentAnagrams[0]
+                val currentAnagramList: MutableList<String> = mutableListOf()
+                val currentAnagram: String = currentAnagrams[0]
 
                 for (index in currentAnagrams.indices) {
                     if (checkAnagram(text1 = currentAnagram, text2 = currentAnagrams[index])) {
