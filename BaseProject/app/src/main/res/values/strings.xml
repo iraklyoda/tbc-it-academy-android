@@ -6,4 +6,6 @@
     <string name="never_had_the_makings_of_a_varsity_hacker">never had the makings of a varsity hacker ;(</string>
     <string name="input_shouldn_t_be_empty">Input shouldn\'t be empty</string>
     <string name="anagram_already_in_the_list">Anagram already in the list</string>
+    <string name="enter_anagram">Enter Anagram</string>
+    <string name="connect_and_transfer">Connect and Transfer</string>
 </resources>
