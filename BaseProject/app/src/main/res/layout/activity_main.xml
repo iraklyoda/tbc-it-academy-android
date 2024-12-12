@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--Only works for large screens. Coulnd't make it scrollable as of yet-->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
@@ -228,6 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/nav_distance_margin_top"
             android:textSize="20sp" />
+
         <!--    Button  -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.textDescription?.text = getString(R.string.description)
         binding.textBookNow?.text = getString(R.string.book_now)
+
     }
 }
 
