@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="eerie_black_40">#661D1D1D</color>
+    <color name="eerie_black_30">#4D1D1D1D</color>
+    <color name="chinese_silver">#CAC8C8</color>
+    <color name="arsenic">#434343</color>
 </resources>

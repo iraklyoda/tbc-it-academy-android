@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_height">460dp</dimen>
+    <dimen name="horizontal_margin">28dp</dimen>
+    <dimen name="card_radius">25.5dp</dimen>
+    <dimen name="icon_margin_top">18dp</dimen>
+    <dimen name="card_horizontal_margin">21dp</dimen>
+
+    <dimen name="info_frame_height">104dp</dimen>
+    <dimen name="info_frame_padding_start">14dp</dimen>
+    <dimen name="info_frame_padding_end">21dp</dimen>
+    <dimen name="info_frame_padding_vertical">18dp</dimen>
+
+    <dimen name="info_frame_margin_bottom">20dp</dimen>
+
+    <dimen name="location_margin_left">6dp</dimen>
+
+    <dimen name="details_margin_left">32dp</dimen>
+    <dimen name="button_height">44dp</dimen>
+
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_22">22sp</dimen>
+    <dimen name="text_26">26sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_18">22sp</dimen>
+
+</resources>
