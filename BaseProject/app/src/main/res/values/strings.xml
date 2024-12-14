@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BaseProject</string>
+    <string name="log_in">LOG IN</string>
+    <string name="register">REGISTER</string>
+    <string name="pawer_czewinski">Pawer Czewinski</string>
+    <string name="pawer_czewinski_username">\@pawer_czewinski</string>
+    <string name="founder_profile_picture">Founder Profile Picture</string>
+    <string name="graphic_background">graphic background</string>
+    <string name="application_logo">application logo</string>
+
 </resources>
