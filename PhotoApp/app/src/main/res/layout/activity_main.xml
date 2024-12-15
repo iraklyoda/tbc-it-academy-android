@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     >
 
     <FrameLayout
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="@dimen/margin_sm"
+                android:layout_marginStart="@dimen/distance_sm"
                 >
 
                 <TextView
@@ -79,9 +80,11 @@
         >
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:text="@string/log_in"
+            android:text="@string/log_in_uppercase"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:layout_marginEnd="4.5dp"
             android:background="@drawable/login_btn_background"
@@ -89,13 +92,14 @@
             />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_register"
             android:layout_width="0dp"
             android:height="52dp"
             android:layout_height="wrap_content"
-            android:text="@string/register"
+            android:text="@string/register_uppercase"
             android:layout_weight="1"
             android:layout_marginStart="4.5dp"
-            android:background="@drawable/register_btn_background"
+            android:background="@drawable/dark_btn_background"
             android:textColor="@color/white"
             />
 

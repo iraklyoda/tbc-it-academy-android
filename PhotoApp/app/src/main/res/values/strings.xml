@@ -1,11 +1,27 @@
 <resources>
-    <string name="app_name">BaseProject</string>
-    <string name="log_in">LOG IN</string>
-    <string name="register">REGISTER</string>
+    <string name="app_name">PhotoApp</string>
+    <string name="log_in">Log in</string>
+    <string name="log_in_uppercase">LOG IN</string>
+    <string name="register_uppercase">REGISTER</string>
     <string name="pawer_czewinski">Pawer Czewinski</string>
     <string name="pawer_czewinski_username">\@pawer_czewinski</string>
     <string name="founder_profile_picture">Founder Profile Picture</string>
     <string name="graphic_background">graphic background</string>
     <string name="application_logo">application logo</string>
+    <string name="return_button">Return button</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="next_uppercase">NEXT</string>
+    <string name="username">Username</string>
+    <string name="sign_up_uppercase">SIGN UP</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="username_is_required">Username is required</string>
+    <string name="email_or_password_is_incorrect">Email or password is incorrect</string>
+    <string name="please_enter_a_proper_email">Please enter a proper email</string>
+    <string name="password_should_contain_more_than_6_characters">Password should contain more than 6 characters</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="welcome">Welcome,</string>
 
 </resources>

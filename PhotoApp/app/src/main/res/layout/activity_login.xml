@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/distance_md"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    >
+
+    <ImageButton
+        android:id="@+id/btn_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_back_arrow"
+        android:contentDescription="@string/return_button"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="@dimen/distance_md"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in"
+        android:fontFamily="@font/comforta"
+        android:textSize="@dimen/text_lg"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/distance_lg" />
+
+    <EditText
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_md"
+        android:layout_marginTop="@dimen/distance_lg"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/input_background"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="@dimen/distance_md" />
+
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_md"
+        android:layout_marginTop="@dimen/distance_md"
+        android:autofillHints="password"
+        android:background="@drawable/input_background"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="@dimen/distance_md" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_log_in"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_md"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@drawable/dark_btn_background"
+        android:text="@string/log_in_uppercase"
+        android:textColor="@color/white" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
