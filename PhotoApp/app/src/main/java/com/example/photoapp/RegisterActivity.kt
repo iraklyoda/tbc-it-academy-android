@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.photoapp.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.userProfileChangeRequest
 
@@ -31,8 +32,7 @@ class RegisterActivity : AppCompatActivity() {
             if (binding.layoutStepOne.visibility == View.VISIBLE) {
                 finish()
             } else {
-                binding.layoutStepTwo.visibility = View.GONE
-                binding.layoutStepOne.visibility = View.VISIBLE
+                toggleStep()
             }
         }
     }
@@ -107,13 +107,28 @@ class RegisterActivity : AppCompatActivity() {
                             }
                     } else {
                         d("TAG", "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            baseContext,
-                            "authentication failed: ${task.exception?.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+                        if (task.exception is FirebaseAuthUserCollisionException) {
+                            toggleStep()
+                            binding.inputEmail.error = task.exception?.message
+                        } else {
+                            Toast.makeText(
+                                baseContext,
+                                "authentication failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
+        }
+    }
+
+    private fun toggleStep() {
+        with(binding) {
+            layoutStepOne.visibility =
+                if (layoutStepOne.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            layoutStepTwo.visibility =
+                if (layoutStepTwo.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
     }
 

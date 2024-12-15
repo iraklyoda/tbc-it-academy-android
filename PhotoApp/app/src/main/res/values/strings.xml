@@ -23,5 +23,8 @@
     <string name="password_should_contain_more_than_6_characters">Password should contain more than 6 characters</string>
     <string name="sign_out">SIGN OUT</string>
     <string name="welcome">Welcome,</string>
+    <string name="by_signing_up_you_agree_to_photo_s_terms_of_service_and_privacy_policy">
+        By signing up, you agree to Photo’s <u>Terms of Service</u> and <u>Privacy Policy</u>.
+    </string>
 
 </resources>

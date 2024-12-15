@@ -95,6 +95,13 @@
             android:background="@drawable/dark_btn_background"
             android:text="@string/sign_up_uppercase"
             android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/by_signing_up_you_agree_to_photo_s_terms_of_service_and_privacy_policy"
+            android:textSize="@dimen/text_sm"
+            android:layout_marginTop="@dimen/distance_lg" />
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
