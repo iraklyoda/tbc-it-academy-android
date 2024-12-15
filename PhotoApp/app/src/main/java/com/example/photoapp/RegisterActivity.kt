@@ -64,8 +64,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             if (formValid) {
-                binding.layoutStepOne.visibility = View.GONE
-                binding.layoutStepTwo.visibility = View.VISIBLE
+                toggleStep()
             }
         }
     }
