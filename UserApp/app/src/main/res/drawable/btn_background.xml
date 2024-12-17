@@ -1,0 +1,13 @@
+<!-- res/drawable/button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Transparent background -->
+    <solid android:color="@color/dark_vanilla" />
+
+    <!-- Black stroke -->
+    <stroke
+        android:width="3dp"
+        android:color="#dfc5a4" />
+
+    <!-- Rounded corners -->
+    <corners android:radius="8dp" />
+</shape>

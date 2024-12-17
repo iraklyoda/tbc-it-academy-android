@@ -1,19 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/backgroundImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/wave_of_kanagawa"
+        android:scaleType="centerCrop"
+        android:src="@drawable/kanagawa" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_80" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/distance_md">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/distance_md">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_md"
+                android:text="@string/user_app"
+                android:fontFamily="@font/mochiy_pop_one"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_lg" />
+
+            <EditText
+                android:id="@+id/input_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/distance_md"
+                android:layout_weight="1"
+                android:autofillHints="name"
+                android:background="@drawable/input_background"
+                android:hint="@string/first_name"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/distance_md"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_50"
+                android:textSize="@dimen/text_md" />
+
+            <EditText
+                android:id="@+id/input_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/distance_md"
+                android:layout_weight="1"
+                android:autofillHints="name"
+                android:background="@drawable/input_background"
+                android:hint="@string/last_name"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/distance_md"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_50"
+                android:textSize="@dimen/text_md" />
+
+            <EditText
+                android:id="@+id/input_age"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/distance_md"
+                android:layout_weight="1"
+                android:background="@drawable/input_background"
+                android:hint="@string/age"
+                android:inputType="number"
+                android:paddingHorizontal="@dimen/distance_md"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_50"
+                android:textSize="@dimen/text_md" />
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/distance_md"
+                android:layout_weight="1"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/input_background"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="@dimen/distance_md"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_50"
+                android:textSize="@dimen/text_md" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_background"
+                android:text="@string/add_user"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_md"
+                android:textColor="@color/black"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_remove_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_md"
+                android:background="@drawable/btn_background"
+                android:text="@string/remove_user"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_md"
+                android:textColor="@color/black"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_update_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_md"
+                android:background="@drawable/btn_background"
+                android:text="@string/update_user"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_md"
+                android:textColor="@color/black"
+                />
+
+
+            <TextView
+                android:id="@+id/text_active_users"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/active_users_0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_md" />
+
+            <TextView
+                android:id="@+id/text_deleted_users"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deleted_users_0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_md" />
+
+            <TextView
+                android:id="@+id/text_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_lg" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</FrameLayout>
