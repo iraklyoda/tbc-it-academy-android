@@ -4,6 +4,9 @@
 
     <!-- Black stroke -->
     <stroke
-        android:width="3dp"
+        android:width="@dimen/stroke_md"
         android:color="@color/white" />
+
+    <!-- Rounded corners -->
+    <corners android:radius="@dimen/radius_md" />
 </shape>

@@ -10,4 +10,7 @@
     <dimen name="text_lg">36sp</dimen>
 
     <dimen name="height_md">52dp</dimen>
+    <dimen name="radius_md">6dp</dimen>
+    <dimen name="stroke_md">3dp</dimen>
+    <dimen name="radius_lg">8dp</dimen>
 </resources>

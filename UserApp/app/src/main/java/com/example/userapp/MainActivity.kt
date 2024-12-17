@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         return null
     }
 
-    fun clearValues() {
+    private fun clearValues() {
         binding.inputFirstName.text.clear()
         binding.inputEmail.text.clear()
         binding.inputLastName.text.clear()
