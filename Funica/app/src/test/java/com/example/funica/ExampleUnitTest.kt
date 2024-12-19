@@ -1,4 +1,4 @@
-package com.example.baseproject
+package com.example.funica
 
 import org.junit.Test
 
