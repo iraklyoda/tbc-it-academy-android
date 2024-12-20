@@ -13,4 +13,6 @@
     <string name="last_name">Last Name</string>
     <string name="first_name_is_required">First name is required</string>
     <string name="email_address">Email Address</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="please_enter_proper_email">Please enter proper email</string>
 </resources>

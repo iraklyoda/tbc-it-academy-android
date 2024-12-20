@@ -1,6 +1,7 @@
 package com.example.baseproject
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,12 +34,17 @@ class AddUserFragment : Fragment() {
 
             val firstName = binding.inputFirstName.text.toString()
             val lastName = binding.inputLastName.text.toString()
-            val birthdayDay = binding.inputBirthdayDay.text.toString().toInt()
-            val birthdayMonth = binding.inputBirthdayMonth.text.toString().toInt()
-            val birthdayYear = binding.inputBirthdayYear.text.toString().toInt()
+            var birthdayDayString = binding.inputBirthdayDay.text.toString()
+            val birthdayMonthString = binding.inputBirthdayMonth.text.toString()
+            val birthdayYearString = binding.inputBirthdayYear.text.toString()
             val email: String = binding.inputEmail.text.toString()
             val address = binding.inputAddress.text.toString()
             val desc = binding.inputDesc.text.toString()
+
+            var birthdayDay = if (birthdayDayString.isEmpty()) 0 else birthdayDayString.toInt()
+            val birthdayMonth = if (birthdayMonthString.isEmpty()) 0 else birthdayMonthString.toInt()
+            val birthdayYear = if (birthdayYearString.isEmpty()) 0 else birthdayYearString.toInt()
+
 
             if (firstName.isEmpty()) {
                 binding.inputFirstName.error = getString(R.string.first_name_is_required)
@@ -50,17 +56,17 @@ class AddUserFragment : Fragment() {
                 formValid = false
             }
 
-            if (birthdayDay < 0 || birthdayDay > 31) {
+            if (birthdayDay < 1 || birthdayDay > 31) {
                 binding.inputBirthdayDay.error = "Please enter valid day"
                 formValid = false
             }
 
-            if (birthdayMonth < 0 || birthdayMonth > 12) {
+            if (birthdayMonth < 1 || birthdayMonth > 12) {
                 binding.inputBirthdayMonth.error = "Please enter valid month"
                 formValid = false
             }
 
-            if (birthdayYear < 0) {
+            if (birthdayYear < 1) {
                 binding.inputBirthdayYear.error = "You are not from B.C bro"
                 formValid = false
             }
@@ -71,19 +77,26 @@ class AddUserFragment : Fragment() {
             }
 
             if (email.isEmpty()) {
-                binding.inputEmail.error = "Email is required"
+                binding.inputEmail.error = getString(R.string.email_is_required)
+                formValid = false
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.inputEmail.error = getString(R.string.please_enter_proper_email)
+                formValid = false
             }
 
-            if (binding.inputDesc.visibility == View.VISIBLE || desc.isEmpty()) {
+            if (binding.inputDesc.visibility == View.VISIBLE && desc.isEmpty()) {
                 binding.inputDesc.error = "Please enter Desc"
                 formValid = false
             }
 
             if (formValid) {
-                val birthdayDate = "${birthdayDay}-${birthdayMonth}-${birthdayYear}"
-                val formatter = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
-                val date: Date? = formatter.parse(birthdayDate)
-                val timestamp: Long? = date?.time
+//                val birthdayDate = "${birthdayDay}-${birthdayMonth}-${birthdayYear}"
+//                if (birthdayDay < 10) {
+//
+//                }
+//                val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+//                val date: Date? = formatter.parse(birthdayDate)
+//                val timestamp: Long? = date?.time
 
                 val user = User(
                     id = User.currentId,
@@ -91,10 +104,11 @@ class AddUserFragment : Fragment() {
                     lastName = lastName,
                     birthday = timestamp.toString(),
                     address = address,
-                    email = empt()
-
+                    email = email,
+                    desc = desc
                 )
-
+                User.users.add(user)
+                requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }
