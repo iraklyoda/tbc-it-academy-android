@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/return_button_icon"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_illustration"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/illustration_of_woman_sitting"
+        android:src="@drawable/ic_main_page"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_return"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubranist"
+        android:text="@string/let_s_you_in"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_illustration" />
+
+    <!--    FB Login Button     -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_log_in_fb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/distance_sm"
+        android:background="@drawable/btn_background_transparent"
+        android:fontFamily="@font/ubranist"
+        app:layout_constraintBottom_toTopOf="@+id/btn_log_in_google"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:layout_editor_absoluteX="-23dp" />
+
+    <TextView
+        android:id="@+id/text_login_fb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_sm"
+        android:text="@string/continue_with_facebook"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_log_in_fb"
+        app:layout_constraintEnd_toEndOf="@+id/btn_log_in_fb"
+        app:layout_constraintStart_toStartOf="@+id/btn_log_in_fb"
+        app:layout_constraintTop_toTopOf="@+id/btn_log_in_fb" />
+
+    <ImageView
+        android:id="@+id/img_ic_fb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/facebook_icon"
+        android:src="@drawable/ic_fb"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_log_in_fb"
+        app:layout_constraintEnd_toStartOf="@+id/text_login_fb"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="@+id/btn_log_in_fb"
+        app:layout_constraintTop_toTopOf="@+id/btn_log_in_fb" />
+
+    <!--    Google Login Button     -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_log_in_google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/distance_sm"
+        android:background="@drawable/btn_background_transparent"
+        android:fontFamily="@font/ubranist"
+        app:layout_constraintBottom_toTopOf="@+id/btn_log_in_apple"
+        app:layout_constraintTop_toBottomOf="@+id/btn_log_in_fb"
+        tools:layout_editor_absoluteX="-22dp" />
+
+    <TextView
+        android:id="@+id/text_login_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_sm"
+        android:text="@string/continue_with_google"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_log_in_google"
+        app:layout_constraintEnd_toEndOf="@+id/btn_log_in_google"
+        app:layout_constraintStart_toStartOf="@+id/btn_log_in_google"
+        app:layout_constraintTop_toTopOf="@+id/btn_log_in_google" />
+
+    <ImageView
+        android:id="@+id/img_ic_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/google_icon"
+        android:src="@drawable/ic_google"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_log_in_google"
+        app:layout_constraintEnd_toStartOf="@+id/text_login_google"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="@+id/btn_log_in_google"
+        app:layout_constraintTop_toTopOf="@+id/btn_log_in_google" />
+
+    <!--    Apple   -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_log_in_apple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background_transparent"
+        android:fontFamily="@font/ubranist"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_log_in_google"
+        tools:layout_editor_absoluteX="5dp" />
+
+    <TextView
+        android:id="@+id/text_login_apple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_sm"
+        android:text="@string/continue_with_apple"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_log_in_apple"
+        app:layout_constraintEnd_toEndOf="@+id/btn_log_in_apple"
+        app:layout_constraintStart_toStartOf="@+id/btn_log_in_apple"
+        app:layout_constraintTop_toTopOf="@+id/btn_log_in_apple" />
+
+    <ImageView
+        android:id="@+id/img_ic_apple"
+        android:layout_width="@dimen/size_xs"
+        android:layout_height="0dp"
+        android:contentDescription="@string/apple_logo_icon"
+        android:src="@drawable/ic_apple"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_log_in_apple"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toStartOf="@+id/text_login_apple"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="@+id/btn_log_in_apple"
+        app:layout_constraintTop_toTopOf="@+id/btn_log_in_apple" />
+
+
+    <View
+        android:id="@+id/stroke"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/text_or"
+        app:layout_constraintEnd_toStartOf="@+id/text_or"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_or" />
+
+    <TextView
+        android:id="@+id/text_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:text="@string/or"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/stroke2"
+        app:layout_constraintStart_toEndOf="@id/stroke"
+        app:layout_constraintTop_toBottomOf="@+id/btn_log_in_apple"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <View
+        android:id="@+id/stroke2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/text_or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/text_or"
+        app:layout_constraintTop_toTopOf="@id/text_or"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_background_black"
+        android:text="@string/sign_in_with_password"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_or"
+        app:layout_constraintVertical_bias="0.15"
+        tools:layout_editor_absoluteX="20dp" />
+
+
+    <TextView
+        android:id="@+id/text_have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/don_t_have_an_account"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_register"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/img_ic_apple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
+
+    <TextView
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/sign_up"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_have_account"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

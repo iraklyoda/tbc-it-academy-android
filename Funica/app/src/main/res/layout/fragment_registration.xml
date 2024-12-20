@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/return_button_icon"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_illustration"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/funica_logo"
+        android:src="@drawable/logo_funica"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_return"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubranist"
+        android:text="@string/create_your_account"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_illustration" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/input_background"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="48dp"
+        android:paddingVertical="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.08"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@string/email_icon"
+        android:src="@drawable/ic_email"
+        app:layout_constraintBottom_toBottomOf="@+id/input_email"
+        app:layout_constraintStart_toStartOf="@+id/input_email"
+        app:layout_constraintTop_toTopOf="@+id/input_email" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/input_background"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="48dp"
+        android:paddingVertical="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_email"
+        app:layout_constraintVertical_bias="0.05"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@string/email_icon"
+        android:src="@drawable/ic_lock"
+        app:layout_constraintBottom_toBottomOf="@+id/input_password"
+        app:layout_constraintStart_toStartOf="@+id/input_password"
+        app:layout_constraintTop_toTopOf="@+id/input_password" />
+
+    <ImageView
+        android:id="@+id/btn_show_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="@string/email_icon"
+        android:src="@drawable/eye_off_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="@+id/input_password"
+        app:layout_constraintEnd_toEndOf="@+id/input_password"
+        app:layout_constraintTop_toTopOf="@+id/input_password" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="@dimen/size_sm"
+        android:layout_height="@dimen/size_sm"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/text_remember_me"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_password"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/text_remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/remember_me"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkbox"
+        app:layout_constraintTop_toTopOf="@+id/checkbox" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_background_black"
+        android:text="@string/sign_up"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox"
+        app:layout_constraintVertical_bias="0.15"
+        tools:layout_editor_absoluteX="20dp" />
+
+
+    <View
+        android:id="@+id/stroke"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/text_or"
+        app:layout_constraintEnd_toStartOf="@+id/text_or"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_or" />
+
+    <TextView
+        android:id="@+id/text_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="8dp"
+        android:text="@string/or_continue_with"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/stroke2"
+        app:layout_constraintStart_toEndOf="@id/stroke"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_up"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <View
+        android:id="@+id/stroke2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@id/text_or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/text_or"
+        app:layout_constraintTop_toTopOf="@id/text_or"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_background_transparent"
+        android:contentDescription="@string/facebook_icon"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_fb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_apple"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_google"
+        app:layout_constraintTop_toBottomOf="@+id/text_or" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_background_transparent"
+        android:contentDescription="@string/google_icon"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_google"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_facebook"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_or" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_apple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_background_transparent"
+        android:contentDescription="@string/apple_logo_icon"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:src="@drawable/ic_apple_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_facebook"
+        app:layout_constraintTop_toBottomOf="@+id/text_or" />
+
+    <TextView
+        android:id="@+id/text_have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/already_have_an_account"
+        android:textColor="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sign_in"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_sign_in" />
+
+    <TextView
+        android:id="@+id/btn_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/sign_in"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_have_account"
+        app:layout_constraintTop_toBottomOf="@+id/btn_facebook" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

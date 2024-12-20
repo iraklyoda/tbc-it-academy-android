@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="distance_sm">18dp</dimen>
+
+    <dimen name="size_xs">20dp</dimen>
+    <dimen name="size_sm">24dp</dimen>
+    <dimen name="text_md">16sp</dimen>
+
+</resources>
