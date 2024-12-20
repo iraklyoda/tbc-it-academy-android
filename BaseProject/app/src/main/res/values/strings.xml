@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">BaseProject</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_user">Search User...</string>
+    <string name="desc">Desc</string>
+    <string name="user_not_found">User Not Found</string>
+    <string name="add_user">Add User</string>
+    <string name="birthday_day">Birthday Day</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="address">Address</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name_is_required">First name is required</string>
+    <string name="email_address">Email Address</string>
 </resources>
