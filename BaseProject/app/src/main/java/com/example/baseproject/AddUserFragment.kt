@@ -102,10 +102,9 @@ class AddUserFragment : Fragment() {
                     id = User.currentId,
                     firstName = firstName,
                     lastName = lastName,
-                    birthday = timestamp.toString(),
+                    birthday = "1724647601641",
                     address = address,
                     email = email,
-                    desc = desc
                 )
                 User.users.add(user)
                 requireActivity().supportFragmentManager.popBackStack()

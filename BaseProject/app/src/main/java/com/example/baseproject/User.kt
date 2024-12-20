@@ -69,7 +69,6 @@ data class User(
                     it.birthday,
                     it.address,
                     it.email,
-                    it.desc
                 ).any() { it.equals(input, ignoreCase = true) }
             }
 
