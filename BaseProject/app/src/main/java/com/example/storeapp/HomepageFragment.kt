@@ -11,6 +11,7 @@ import com.example.storeapp.databinding.FragmentHomepageBinding
 import com.example.storeapp.model.Category
 import com.example.storeapp.model.Product
 import com.example.storeapp.model.ProductData
+import kotlin.enums.EnumEntries
 
 class HomepageFragment : Fragment() {
     private var _binding: FragmentHomepageBinding? = null
@@ -22,8 +23,6 @@ class HomepageFragment : Fragment() {
     ): View {
         _binding = FragmentHomepageBinding.inflate(inflater, container, false)
 
-        val categories = Category.entries
-
         fun getProducts(selectedCategory: Category = Category.ALL) {
             val productList: List<Product> = ProductData.getProducts(selectedCategory)
             val productAdapter = ProductAdapter(productList)
@@ -31,6 +30,9 @@ class HomepageFragment : Fragment() {
             binding.rvProducts.layoutManager = GridLayoutManager(requireContext(), 2)
         }
         getProducts()
+
+
+        val categories: EnumEntries<Category> = Category.entries
 
         val categoryAdapter = CategoryAdapter(categories)
         { selectedCategory: Category ->
@@ -43,8 +45,6 @@ class HomepageFragment : Fragment() {
             false
         )
         binding.rvCategories.adapter = categoryAdapter
-
-
 
         return binding.root
     }

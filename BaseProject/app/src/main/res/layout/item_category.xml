@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="@dimen/distance_md"
     android:paddingVertical="@dimen/distance_sm"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_marginEnd="@dimen/distance_xs"
     android:background="@drawable/shape_category_background">
 
