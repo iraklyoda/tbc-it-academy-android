@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.baseproject"
+    namespace = "com.example.storeapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.baseproject"
+        applicationId = "com.example.storeapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -33,6 +33,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true   }
 }
 
 dependencies {

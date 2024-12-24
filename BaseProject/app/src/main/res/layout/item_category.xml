@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_category_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/distance_md"
+    android:paddingVertical="@dimen/distance_sm"
+    android:layout_marginEnd="@dimen/distance_xs"
+    android:background="@drawable/shape_category_background">
+
+    <TextView
+        android:id="@+id/tv_category_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginEnd="@dimen/distance_sm"
+        android:text="💪" />
+
+    <TextView
+        android:id="@+id/tv_category_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test"
+        android:textStyle="bold"
+        android:textColor="@color/cadet_gray"
+        android:layout_gravity="end"
+        />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

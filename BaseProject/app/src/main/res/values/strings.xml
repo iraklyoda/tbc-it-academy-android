@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">BaseProject</string>
+    <string name="app_name">StoreApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_picture">Product Picture</string>
+    <string name="navigation_menu">Navigation Menu</string>
+    <string name="test">Test</string>
+    <string name="_120">$120</string>
+    <string name="test_suit_blazer">test suit blazer</string>
 </resources>
