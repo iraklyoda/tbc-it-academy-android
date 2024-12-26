@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/distance_md2"
+    android:paddingTop="18dp"
+    android:paddingBottom="20dp"
+    android:layout_marginBottom="18dp"
+    android:background="@drawable/item_background"
+    >
+
+    <CheckBox
+        android:id="@+id/checkbox_address"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_address_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:contentDescription="@string/address_type_icon"
+        android:src="@drawable/ic_office"
+        app:layout_constraintStart_toEndOf="@id/checkbox_address"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_send_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:fontFamily="@font/pt_sans"
+        android:text="@string/send_to"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/img_address_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:text="@string/my_office"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/img_address_icon"
+        app:layout_constraintTop_toBottomOf="@id/text_send_to" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SBI Building, street 3, Software Park"
+        app:layout_constraintTop_toBottomOf="@id/img_address_icon"
+        app:layout_constraintStart_toStartOf="@id/img_address_icon"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_sm"
+        android:textColor="@color/slate_gray" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

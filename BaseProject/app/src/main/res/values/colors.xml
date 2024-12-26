@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="black_20">#33000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="space_cadet">#1E3354</color>
+    <color name="chinese_black">#121420</color>
+    <color name="red">#F80000</color>
+    <color name="slate_gray">#777E90</color>
+    <color name="cultured">#F4F4F4</color>
+    <color name="jet">#343434</color>
 </resources>
