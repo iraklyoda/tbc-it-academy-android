@@ -8,4 +8,15 @@
     <string name="my_office">My Office</string>
     <string name="send_to">SEND TO</string>
     <string name="add_new_address">Add new address</string>
+    <string name="return_button_icon">Return button Icon</string>
+    <string name="add_address">Add Address</string>
+    <string name="address_name">Address name</string>
+    <string name="full_address">Full Address</string>
+    <string name="home">Home</string>
+    <string name="office">Office</string>
+    <string name="address_type">Address Type:</string>
+    <string name="please_choose_type">Please choose type</string>
+    <string name="address_name_is_required">Address name is required!</string>
+    <string name="address_is_required">Address is required!</string>
+    <string name="update_address">Update Address</string>
 </resources>

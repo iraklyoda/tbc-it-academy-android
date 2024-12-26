@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/distance_lg"
+    tools:context=".MainFragment">
+
+    <ImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@drawable/ic_btn_background"
+        android:contentDescription="@string/return_button_icon"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txt_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pt_sans"
+        android:text="@string/add_address"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_return" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_address_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md2"
+        android:background="@drawable/item_background"
+        android:hint="@string/address_name"
+        android:paddingHorizontal="@dimen/distance_md2"
+        android:paddingVertical="@dimen/distance_md"
+        app:layout_constraintTop_toBottomOf="@id/txt_header" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md2"
+        android:background="@drawable/item_background"
+        android:hint="@string/full_address"
+        android:paddingHorizontal="@dimen/distance_md2"
+        android:paddingVertical="@dimen/distance_md"
+        app:layout_constraintTop_toBottomOf="@id/et_address_name" />
+
+    <TextView
+        android:id="@+id/text_address_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_address"
+        android:text="@string/address_type"
+        android:paddingHorizontal="@dimen/distance_md"
+        android:paddingVertical="@dimen/distance_md"
+        android:fontFamily="@font/pt_sans"
+        android:textSize="24sp"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_type"
+        app:layout_constraintTop_toBottomOf="@id/text_address_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_home"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/pt_sans"
+            android:text="@string/home"/>
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radio_office"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_office"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/pt_sans"
+            android:text="@string/office"/>
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginBottom="@dimen/distance_md"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/pt_sans"
+        android:paddingHorizontal="@dimen/distance_md2"
+        android:text="@string/add_new_address"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
