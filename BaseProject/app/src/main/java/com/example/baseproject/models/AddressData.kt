@@ -25,4 +25,8 @@ object AddressData {
         addressList[position].addressName = addressName
         addressList[position].addressType = addressType
     }
+
+    fun deleteAddress(position: Int) {
+        addressList.removeAt(position)
+    }
 }

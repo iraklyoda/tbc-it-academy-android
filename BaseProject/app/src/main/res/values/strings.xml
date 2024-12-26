@@ -19,4 +19,5 @@
     <string name="address_name_is_required">Address name is required!</string>
     <string name="address_is_required">Address is required!</string>
     <string name="update_address">Update Address</string>
+    <string name="delete_address">Delete address</string>
 </resources>

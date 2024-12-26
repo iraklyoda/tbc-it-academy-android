@@ -91,6 +91,24 @@
     </RadioGroup>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/btn_delete_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginBottom="@dimen/distance_md"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/pt_sans"
+        android:paddingHorizontal="@dimen/distance_md2"
+        android:text="@string/delete_address"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

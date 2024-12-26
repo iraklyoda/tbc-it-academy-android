@@ -36,6 +36,7 @@ class CreateAddressFragment : Fragment() {
             val address = AddressData.getAddresses()[position]
 
             binding.btnAddAddress.text = getString(R.string.update_address)
+            binding.btnDeleteAddress.visibility = View.VISIBLE
             binding.etAddress.setText(address.address)
             binding.etAddressName.setText(address.addressName)
 
@@ -53,6 +54,7 @@ class CreateAddressFragment : Fragment() {
     private fun setUp() {
         returnClick()
         addNewAddress()
+        deleteAddress()
     }
 
     private fun returnClick() {
@@ -82,6 +84,18 @@ class CreateAddressFragment : Fragment() {
                 AddressData.addAddress(address)
                 requireActivity().supportFragmentManager.popBackStack()
             }
+        }
+    }
+
+    private fun deleteAddress() {
+        binding.btnDeleteAddress.setOnLongClickListener {
+            val position = arguments?.getInt("position")
+
+            if(position!= null) {
+                AddressData.deleteAddress(position)
+            }
+            requireActivity().supportFragmentManager.popBackStack()
+            true
         }
     }
 
