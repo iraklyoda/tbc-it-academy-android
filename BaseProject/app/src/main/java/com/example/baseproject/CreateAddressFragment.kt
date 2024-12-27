@@ -17,7 +17,6 @@ import com.example.baseproject.models.AddressType
 class CreateAddressFragment : Fragment() {
     private var _binding: FragmentCreateAddressBinding? = null
     private val binding: FragmentCreateAddressBinding get() = _binding!!
-    private var position: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +40,9 @@ class CreateAddressFragment : Fragment() {
             binding.etAddressName.setText(address.addressName)
 
             if(address.addressType == AddressType.WORK) {
-                binding.radioHome.isChecked = true
-            } else {
                 binding.radioOffice.isChecked = true
+            } else {
+                binding.radioHome.isChecked = true
             }
         }
 
