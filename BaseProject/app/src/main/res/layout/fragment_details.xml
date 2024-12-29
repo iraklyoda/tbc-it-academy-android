@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/order_details"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_xl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_order_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order Id: #1"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_lg"
+        app:layout_constraintTop_toBottomOf="@id/text_header" />
+
+    <TextView
+        android:id="@+id/text_tracking_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tracking Number:"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_lg"
+        app:layout_constraintTop_toBottomOf="@id/text_order_number" />
+
+    <TextView
+        android:id="@+id/text_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md2"
+        android:text="Status:"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_lg"
+        app:layout_constraintTop_toBottomOf="@id/text_tracking_number" />
+
+    <TextView
+        android:id="@+id/text_status_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm"
+        android:text="Status:"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_lg"
+        app:layout_constraintTop_toBottomOf="@id/text_status" />
+
+    <RadioGroup
+        android:id="@+id/rg_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_status_current">
+
+        <RadioButton
+            android:id="@+id/rb_delivered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delivered"
+            android:textColor="@color/spanish_green" />
+
+        <RadioButton
+            android:id="@+id/rb_canceled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/canceled"
+            android:textColor="@color/boston_university_red" />
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:background="@drawable/bg_btn_details"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rg_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Submit" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/distance_xs2"
+    android:layout_marginBottom="20dp"
+    android:padding = "20dp"
+    android:background="@drawable/bg_order"
+    android:paddingEnd="12dp">
+
+    <TextView
+        android:id="@+id/text_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/product_sans"
+        android:text="Order #0001"
+        android:textSize="@dimen/text_lg"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13/05/2021"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_tracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm2"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/tracking_number"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_header" />
+
+    <TextView
+        android:id="@+id/text_tracking_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/distance_xs2"
+        android:text="IK84392343"
+        app:layout_constraintStart_toEndOf="@id/text_tracking"
+        app:layout_constraintTop_toTopOf="@id/text_tracking" />
+
+    <TextView
+        android:id="@+id/text_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm2"
+        android:fontFamily="@font/product_sans"
+        android:text="Quantity: "
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_tracking" />
+
+    <TextView
+        android:id="@+id/text_quantity_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        app:layout_constraintStart_toEndOf="@id/text_quantity"
+        app:layout_constraintTop_toTopOf="@id/text_quantity" />
+
+
+    <TextView
+        android:id="@+id/text_subtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/distance_xs"
+        android:text="@string/subtotal"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toStartOf="@id/text_subtotal_amount"
+        app:layout_constraintTop_toTopOf="@id/text_subtotal_amount" />
+
+
+    <TextView
+        android:id="@+id/text_subtotal_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/product_sans"
+        android:text="230$"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_quantity" />
+
+    <TextView
+        android:id="@+id/text_order_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:fontFamily="@font/product_sans"
+        android:text="PENDING"
+        android:textColor="@color/alloy_orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_quantity" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_details"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_md"
+        android:layout_marginTop="@dimen/distance_sm"
+        android:background="@drawable/bg_btn_details"
+        android:fontFamily="@font/product_sans"
+        android:text="Details"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_subtotal_amount" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
