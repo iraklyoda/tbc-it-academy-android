@@ -14,16 +14,6 @@ import com.example.baseproject.models.OrderData
 import com.example.baseproject.models.OrderStatus
 import com.example.baseproject.models.OrderStatusData
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!
@@ -78,7 +68,7 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
-    fun getSelectedStatus(): String {
+    private fun getSelectedStatus(): String {
         return if (binding.rbDelivered.isChecked) {
             "DELIVERED"
         } else {

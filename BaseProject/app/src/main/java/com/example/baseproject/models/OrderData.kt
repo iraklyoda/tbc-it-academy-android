@@ -7,7 +7,7 @@ object OrderData {
 
     private val trackingIds: MutableSet<String> = mutableSetOf()
 
-    val ordersList = listOf(
+    private val ordersList = listOf(
         Order(
             orderID = ++orderId,
             trackingID = generateTrackingId(),

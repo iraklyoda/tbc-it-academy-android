@@ -30,6 +30,7 @@ class OrdersFragment : Fragment() {
     ): View {
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
 
+        currentStatus = OrderStatusData.getStatus("PENDING")
         setUp()
 
         return binding.root
