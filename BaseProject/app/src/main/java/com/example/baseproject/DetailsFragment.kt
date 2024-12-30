@@ -75,4 +75,9 @@ class DetailsFragment : Fragment() {
             "CANCELED"
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

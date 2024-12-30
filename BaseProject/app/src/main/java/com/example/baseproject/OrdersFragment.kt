@@ -29,7 +29,6 @@ class OrdersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
-
         currentStatus = OrderStatusData.getStatus("PENDING")
         setUp()
 
@@ -76,5 +75,10 @@ class OrdersFragment : Fragment() {
         }
 
         orderAdapter.submitList(orders)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

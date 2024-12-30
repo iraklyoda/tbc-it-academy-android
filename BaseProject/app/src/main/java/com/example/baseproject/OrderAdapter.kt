@@ -40,7 +40,7 @@ class OrderAdapter :
             date: String,
             status: OrderStatus
         ) {
-            with(binding) {
+            binding.apply {
                 val color: Int = ContextCompat.getColor(
                     root.context, status.color
                 )
