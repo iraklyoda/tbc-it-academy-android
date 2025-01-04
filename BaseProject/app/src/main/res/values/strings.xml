@@ -2,4 +2,13 @@
     <string name="app_name">BaseProject</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_profile_picture">User Profile Picture</string>
+    <string name="admin">Admin</string>
+    <string name="online">Online</string>
+    <string name="type_your_messages_here">Type your messages here</string>
+    <string name="hello_how_can_i_help_you">Hello! How Can I help you?</string>
+    <string name="polygon_shape">polygon shape</string>
+    <string name="today_7_02pm">Today, 7:02pm</string>
+    <string name="hi_i_have_a_question_about_my_order">Hi! I have a question about my order!</string>
+    <string name="today">Today, %1$s</string>
 </resources>

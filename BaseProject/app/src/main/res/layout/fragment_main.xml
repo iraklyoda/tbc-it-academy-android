@@ -1,14 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    android:paddingTop="@dimen/distance_lg"
+    tools:context="messanger.example.baseproject.messenger.MessengerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/distance_md"
+        android:background="@drawable/bg_circle_shadow"
+        android:src="@drawable/ic_btn_return"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_profile_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/distance_md"
+        android:contentDescription="@string/user_profile_picture"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintStart_toEndOf="@id/btn_return"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/distance_sm"
+        android:fontFamily="@font/pt_sans"
+        android:text="@string/admin"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/iv_profile_picture"
+        app:layout_constraintTop_toTopOf="@id/iv_profile_picture" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pt_sans_light"
+        android:text="@string/online"
+        android:textColor="@color/black_85"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintBottom_toBottomOf="@id/iv_profile_picture"
+        app:layout_constraintStart_toStartOf="@id/tv_profile_name" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/distance_md"
+        android:background="@null"
+        android:src="@drawable/ic_btn_menu"
+        app:layout_constraintBottom_toBottomOf="@id/btn_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_profile_name" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="0dp"
+        android:translationZ="2dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@color/black_25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_profile_picture" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_messages"
+        app:layout_constraintTop_toTopOf="@id/view_line"
+        app:layout_constraintBottom_toTopOf="@id/view_send_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp" />
 
-</FrameLayout>
+    <View
+        android:id="@+id/view_send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:background="@color/lotion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm3"
+        android:layout_marginEnd="@dimen/distance_sm"
+        android:background="@null"
+        android:src="@drawable/ic_btn_send"
+        app:layout_constraintEnd_toEndOf="@id/view_send_message"
+        app:layout_constraintTop_toTopOf="@id/view_send_message" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_message"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/distance_sm3"
+        android:layout_marginTop="@dimen/distance_sm3"
+        android:layout_marginEnd="@dimen/distance_sm"
+        android:background="@drawable/input_background"
+        android:hint="@string/type_your_messages_here"
+        android:paddingHorizontal="@dimen/distance_sm"
+        android:textColorHint="@color/cadet_blue"
+        app:layout_constraintBottom_toBottomOf="@id/btn_send"
+        app:layout_constraintEnd_toStartOf="@id/btn_send"
+        app:layout_constraintStart_toStartOf="@id/view_send_message"
+        app:layout_constraintTop_toTopOf="@id/view_send_message" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

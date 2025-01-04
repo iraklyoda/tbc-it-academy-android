@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Distance    -->
+    <dimen name="distance_sm">12dp</dimen>
+    <dimen name="distance_sm2">15dp</dimen>
+    <dimen name="distance_sm3">20dp</dimen>
+    <dimen name="distance_md">30dp</dimen>
+    <dimen name="distance_md2">40dp</dimen>
+    <dimen name="distance_lg">50dp</dimen>
+    <dimen name="text_sm">12sp</dimen>
+    <dimen name="text_md">16sp</dimen>
+    <dimen name="radius_sm">10dp</dimen>
+
+</resources>

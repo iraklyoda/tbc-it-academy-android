@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
+    <color name="black_25">#40000000</color>
+    <color name="black_85">#D9000000</color>
+
+    <color name="lotion">#FCFCFD</color>
+    <color name="cultured">#F4F5F6</color>
+    <color name="light_gray">#E6E8EC</color>
+    <color name="cadet_blue">#B1B5C3</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

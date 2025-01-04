@@ -1,4 +1,4 @@
-package com.example.baseproject
+package messanger.example.baseproject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

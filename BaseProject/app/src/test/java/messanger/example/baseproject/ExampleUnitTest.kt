@@ -1,4 +1,4 @@
-package com.example.baseproject
+package messanger.example.baseproject
 
 import org.junit.Test
 
