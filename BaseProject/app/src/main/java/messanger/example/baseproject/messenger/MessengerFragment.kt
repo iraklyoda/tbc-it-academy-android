@@ -31,11 +31,6 @@ class MessengerFragment : Fragment() {
         addMessage()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setMessages() {
         binding.rvMessages.layoutManager =
             LinearLayoutManager(requireContext())
@@ -55,11 +50,22 @@ class MessengerFragment : Fragment() {
 
             messageAdapter.submitList(updatedMessages)
             binding.etMessage.text?.clear()
+            binding.rvMessages.smoothScrollToPosition(0)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
         var messageList: MutableList<Message> = mutableListOf(
+            Message(
+                message = "Hello can you help me?",
+                incoming = false,
+                date = 1735992000000
+            )
         )
     }
 }
