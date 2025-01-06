@@ -43,9 +43,13 @@ class GameFragment : Fragment() {
     }
 
     private fun setGame() {
+
+        for (i in 1..gridSize * gridSize) {
+            buttonList.add(GameButton())
+        }
         binding.rvTictactoe.layoutManager = GridLayoutManager(requireContext(), gridSize)
         binding.rvTictactoe.adapter = gameAdapter
-        gameAdapter.submitList(buttonList)
+        gameAdapter.submitList(buttonList.toList())
     }
 
     private fun playAgain() {
@@ -56,10 +60,6 @@ class GameFragment : Fragment() {
 
     private fun gameLogic() {
         var activePlayer: Int = 1
-
-        for (i in 1..gridSize * gridSize) {
-            buttonList.add(GameButton())
-        }
 
         gameAdapter.itemClickListener = { position: Int ->
             if (gameIsActive) {
@@ -75,12 +75,8 @@ class GameFragment : Fragment() {
                         binding.textHeader.text = getString(R.string.player_1)
                     }
                 }
-
-                // Setting this up for second time, since logic didn't work only for first button click
-                // For sure wrong practice but not sure how to fix this yer
-                binding.rvTictactoe.layoutManager = GridLayoutManager(requireContext(), gridSize)
-                binding.rvTictactoe.adapter = gameAdapter
-                gameAdapter.submitList(buttonList)
+                
+                gameAdapter.submitList(buttonList.toList())
 
                 val winner: CellState? = checkWin(buttonList, gridSize)
 
