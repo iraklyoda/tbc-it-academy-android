@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.example.baseproject.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
-
     private var _binding: FragmentFirstBinding? = null
     private val binding: FragmentFirstBinding get() = _binding!!
 
