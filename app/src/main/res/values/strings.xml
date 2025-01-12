@@ -1,5 +1,17 @@
 <resources>
-    <string name="app_name">Base Project</string>
+    <string name="app_name">Furniture Store</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_picture">Product Picture</string>
+    <string name="qty">"  | Qty ="</string>
+    <string name="currency">$</string>
+    <string name="active_orders">Active Orders</string>
+    <string name="completed_orders">Completed Orders</string>
+    <string name="how_is_your_order">How is your order?</string>
+    <string name="image_icon">image icon</string>
+    <string name="write_review">Write Review...</string>
+    <string name="cancel">Cancel</string>
+    <string name="leave_a_review">Leave a Review</string>
+    <string name="please_give_your_rating_amp_also_your_review"><![CDATA[Please give your rating & also your review...]]></string>
+    <string name="submit">Submit</string>
 </resources>

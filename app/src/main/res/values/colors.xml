@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="eerie_black">#181a21</color>
+    <color name="dark_gunmetal">#20222A</color>
+    <color name="onyx">#35383f</color>
+    <color name="platinum">#E2E2E2</color>
+    <color name="oak_brown">#87633A</color>
+    <color name="immortelle_yellow">#D4A207</color>
+    <color name="light_blue">#8FD8D8</color>
+
     <color name="white">#FFFFFFFF</color>
 </resources>
