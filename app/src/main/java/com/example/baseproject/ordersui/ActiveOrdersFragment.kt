@@ -47,6 +47,11 @@ class ActiveOrdersFragment : Fragment() {
         orderAdapter.submitList(ordersList)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
         var ordersList: ArrayList<Order> = arrayListOf<Order>(
         )

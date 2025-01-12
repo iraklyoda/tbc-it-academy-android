@@ -10,6 +10,7 @@ import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentOrdersBinding
 import com.example.baseproject.orders.Order
 import com.example.baseproject.orders.OrderStatus
+import com.example.baseproject.orders.OrderStatusAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class OrdersFragment : Fragment() {
@@ -46,6 +47,11 @@ class OrdersFragment : Fragment() {
                 1 -> tab.text = getString(R.string.completed_orders)
             }
         }.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

@@ -1,13 +1,12 @@
-package com.example.baseproject.ordersui
+package com.example.baseproject.orders
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.baseproject.orders.Order
-import com.example.baseproject.orders.OrderStatus
-import com.example.baseproject.ordersui.OrdersFragment.Companion
+import com.example.baseproject.ordersui.ActiveOrdersFragment
+import com.example.baseproject.ordersui.CompletedOrdersFragment
 
 class OrderStatusAdapter(
     fragmentManager: FragmentManager,

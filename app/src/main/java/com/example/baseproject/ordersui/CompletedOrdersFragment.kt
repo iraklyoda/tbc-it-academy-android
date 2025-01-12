@@ -58,6 +58,11 @@ class CompletedOrdersFragment : Fragment() {
         reviewBottomSheet.show(parentFragmentManager, reviewBottomSheet.tag)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
         var ordersList: ArrayList<Order> = arrayListOf<Order>(
         )
