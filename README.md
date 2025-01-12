@@ -1,7 +1,7 @@
 # Orders App (Assignment-14)
 
-![Kotlin Logo](https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.svg) ![Android Studio Logo](https://upload.wikimedia.org/wikipedia/commons/5/5e/Android_Studio_icon.svg)
-
+![Kotlin](https://img.shields.io/badge/Kotlin-1F425F?style=flat&logo=kotlin&logoColor=white)
+![Android Studio](https://img.shields.io/badge/Android_Studio-3DDC84?style=flat&logo=android-studio&logoColor=white)
 ## Overview
 
 This is a simple Android application built with Kotlin that features an orders page. 
