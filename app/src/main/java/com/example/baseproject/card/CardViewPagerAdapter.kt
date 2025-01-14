@@ -32,12 +32,15 @@ class CardViewPagerAdapter(
             expireYear: Int,
             cardType: CardType
         ) {
+
+            var month = if (expireMonth < 10) "0$expireMonth" else "$expireMonth"
             binding.apply {
                 textCardName.text = name
                 textCardNumber.text = number
                 ivCardType.setImageResource(cardType.logo)
                 ivCard.setImageResource(cardType.image)
                 ivCard.setBackgroundResource(cardType.backGround)
+                textExpire.text = "$month/$expireYear"
                 root.setOnLongClickListener {
                     onClick.invoke(adapterPosition)
                     true

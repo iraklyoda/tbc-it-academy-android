@@ -6,12 +6,13 @@ import android.os.Looper
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.card.CardViewModel
 import com.example.baseproject.card.CardViewPagerAdapter
 import com.example.baseproject.databinding.FragmentPaymentBinding
+import kotlinx.coroutines.launch
 
 class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBinding::inflate) {
     private val viewModel: CardViewModel by activityViewModels()
@@ -27,8 +28,8 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     private fun setup(view: View) {
         setCards(view)
         setAddCard(view)
-        observeCardList()
         checkDeleteCard()
+        observeCardList()
     }
 
     private fun setCards(view: View) {
@@ -37,7 +38,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
             showDeleteCardDialog(view)
         }
 
-        adapter.submitList(viewModel.cards.value)
+        adapter.submitList(viewModel.cards.value.toList())
         binding.vp2Cards.adapter = adapter
     }
 
@@ -64,12 +65,13 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
     }
 
     private fun observeCardList() {
-        viewModel.cards.observe(viewLifecycleOwner, Observer { list ->
-            adapter.submitList(list)
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.vp2Cards.setCurrentItem(0, true)
-            }, 100)
-        })
+        lifecycleScope.launch {
+            viewModel.cards.collect { list ->
+                adapter.submitList(list.toList())
+                Handler(Looper.getMainLooper()).postDelayed({
+                    binding.vp2Cards.setCurrentItem(0, true)
+                }, 100)
+            }
+        }
     }
 }

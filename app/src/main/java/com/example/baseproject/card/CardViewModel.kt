@@ -1,16 +1,16 @@
 package com.example.baseproject.card
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class CardViewModel : ViewModel() {
-    private val _cards: MutableLiveData<MutableList<Card>> = MutableLiveData(
+    private val _cards = MutableStateFlow<MutableList<Card>>(
         mutableListOf(
             Card(
                 name = "Paul Sheldon",
                 number = 4315123412341234,
-                expireMonth = 1,
+                expireMonth = 9,
                 expireYear = 28,
                 cvv = 123,
                 cardType = CardType.VISA
@@ -34,7 +34,7 @@ class CardViewModel : ViewModel() {
         )
     )
 
-    val cards: LiveData<MutableList<Card>> get() = _cards
+    val cards: StateFlow<List<Card>> get() = _cards
 
     fun createCard(
         name: String,
@@ -55,15 +55,14 @@ class CardViewModel : ViewModel() {
             cvv = cvv,
             cardType = cardType
         )
-
-        val updatedList = _cards.value?.toMutableList() ?: mutableListOf()
+        val updatedList = _cards.value.toMutableList()
         updatedList.add(0, card)
-        _cards.value = updatedList
+        _cards.value = updatedList.toMutableList()
     }
 
     fun deleteCard(position: Int) {
-        val updatedList = _cards.value?.toMutableList() ?: mutableListOf()
+        val updatedList = _cards.value.toMutableList()
         updatedList.removeAt(position)
-        _cards.value = updatedList
+        _cards.value = updatedList.toMutableList()
     }
 }
