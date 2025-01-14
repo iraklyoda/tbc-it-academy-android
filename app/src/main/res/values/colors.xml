@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="chinese_black">#121420</color>
+    <color name="jet">#343434</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="ku_crimson">#ED0006</color>
+    <color name="piction_blue">#42AAE7</color>
+    <color name="morning_blue_60">#7A869A99</color>
+    <color name="grey">#FCFCFC</color>
 </resources>

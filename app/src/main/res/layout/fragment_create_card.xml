@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".cardUI.CreateCardFragment">
+
+    <ImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="@dimen/distance_md"
+        android:layout_height="@dimen/distance_md"
+        android:layout_marginStart="@dimen/distance_md"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@drawable/circle_with_shadow"
+        android:contentDescription="@string/return_arrow_button"
+        android:elevation="4dp"
+        android:src="@drawable/ic_return_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pt_sans"
+        android:text="@string/add_new_card"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_return" />
+
+    <include
+        android:id="@+id/item_card"
+        layout="@layout/item_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_header" />
+
+    <RadioGroup
+        android:id="@+id/rg_card_type"
+        app:layout_constraintTop_toBottomOf="@id/item_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_mastercard"
+            android:text="@string/mastercard"
+            android:layout_marginEnd="@dimen/distance_md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/rb_visa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/visa"/>
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txt_cardholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm"
+        android:text="@string/cardholder_name"
+        android:textColor="@color/morning_blue_60"
+        app:layout_constraintStart_toStartOf="@id/btn_return"
+        app:layout_constraintTop_toBottomOf="@id/rg_card_type" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_lg"
+        android:background="@drawable/edit_text_bg"
+        android:hint="@string/full_name"
+        android:maxLength="30"
+        android:paddingHorizontal="@dimen/distance_sm"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintEnd_toEndOf="@id/item_card"
+        app:layout_constraintStart_toStartOf="@id/txt_cardholder"
+        app:layout_constraintTop_toBottomOf="@id/txt_cardholder" />
+
+    <TextView
+        android:id="@+id/txt_card_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="@string/card_number"
+        android:textColor="@color/morning_blue_60"
+        app:layout_constraintStart_toStartOf="@id/btn_return"
+        app:layout_constraintTop_toBottomOf="@id/et_name" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_number"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_lg"
+        android:background="@drawable/edit_text_bg"
+        android:hint="@string/empty_card"
+        android:inputType="number"
+        android:maxLength="16"
+        android:paddingHorizontal="@dimen/distance_sm"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintEnd_toEndOf="@id/item_card"
+        app:layout_constraintStart_toStartOf="@id/txt_cardholder"
+        app:layout_constraintTop_toBottomOf="@id/txt_card_number" />
+
+    <TextView
+        android:id="@+id/txt_card_expire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="@string/expires"
+        android:textColor="@color/morning_blue_60"
+        app:layout_constraintStart_toStartOf="@id/btn_return"
+        app:layout_constraintTop_toBottomOf="@id/et_number" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_expire"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_lg"
+        android:layout_marginEnd="@dimen/distance_sm"
+        android:background="@drawable/edit_text_bg"
+        android:hint="@string/expire"
+        android:maxLength="5"
+        android:inputType="number"
+        android:paddingHorizontal="@dimen/distance_sm"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintEnd_toStartOf="@id/et_cvv"
+        app:layout_constraintStart_toStartOf="@id/txt_cardholder"
+        app:layout_constraintTop_toBottomOf="@id/txt_card_expire" />
+
+    <TextView
+        android:id="@+id/txt_card_cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="@string/cvv"
+        android:textColor="@color/morning_blue_60"
+        app:layout_constraintStart_toStartOf="@id/et_cvv"
+        app:layout_constraintTop_toBottomOf="@id/et_number" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_cvv"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_lg"
+        android:layout_marginStart="@dimen/distance_sm"
+        android:background="@drawable/edit_text_bg"
+        android:hint="@string/empty_cvv"
+        android:paddingHorizontal="@dimen/distance_sm"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintEnd_toEndOf="@id/item_card"
+        app:layout_constraintStart_toEndOf="@id/et_expire"
+        app:layout_constraintTop_toBottomOf="@id/txt_card_expire" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="@font/pt_sans"
+        android:paddingHorizontal="@dimen/distance_lg"
+        android:text="@string/add_card"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_cvv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

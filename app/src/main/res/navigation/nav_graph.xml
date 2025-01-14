@@ -7,7 +7,32 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.baseproject.FirstFragment"
+        android:name="com.example.baseproject.cardUI.PaymentFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_firstFragment_to_createCardFragment"
+            app:destination="@id/createCardFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_deleteBottomSheetDialogFragment"
+            app:destination="@id/deleteBottomSheetDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCardFragment"
+        android:name="com.example.baseproject.cardUI.CreateCardFragment"
+        android:label="fragment_create_card"
+        tools:layout="@layout/fragment_create_card" >
+        <action
+            android:id="@+id/action_createCardFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteBottomSheetDialogFragment"
+        android:name="com.example.baseproject.cardUI.DeleteBottomSheetDialogFragment"
+        android:label="fragment_delete_bottom_sheet_dialog"
+        tools:layout="@layout/fragment_delete_bottom_sheet_dialog" >
+        <action
+            android:id="@+id/action_deleteBottomSheetDialogFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </dialog>
 </navigation>

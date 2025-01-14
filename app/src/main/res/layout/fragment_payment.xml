@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".cardUI.PaymentFragment">
+
+    <ImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="@dimen/distance_md"
+        android:layout_height="@dimen/distance_md"
+        android:layout_marginStart="@dimen/distance_md"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@drawable/circle_with_shadow"
+        android:contentDescription="@string/return_arrow_button"
+        android:elevation="4dp"
+        android:src="@drawable/ic_return_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pt_sans"
+        android:text="@string/payment"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_return" />
+
+    <TextView
+        android:id="@+id/txt_card_management"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_lg"
+        android:fontFamily="@font/pt_sans"
+        android:text="@string/card_management"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/btn_return"
+        app:layout_constraintTop_toBottomOf="@id/btn_return" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_add_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/distance_md"
+        android:background="@null"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/add_new"
+        android:textAllCaps="false"
+        android:textColor="@color/ku_crimson"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txt_card_management"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp2_cards"
+        android:layout_marginTop="@dimen/distance_md"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_card_management" />
+
+    <TextView
+        android:id="@+id/txt_check_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/txt_card_management"
+        app:layout_constraintTop_toBottomOf="@id/vp2_cards"
+        android:layout_marginTop="@dimen/distance_md"
+        android:text="@string/or_check_out_with"
+        android:textSize="12sp"
+        android:fontFamily="@font/pt_sans" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_check_out"
+        android:layout_marginTop="@dimen/distance_md"
+        android:src="@drawable/payments"
+        />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
