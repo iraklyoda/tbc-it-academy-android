@@ -37,7 +37,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
             showDeleteCardDialog(view)
         }
 
-        adapter.submitList(viewModel.cards.value?.toList())
+        adapter.submitList(viewModel.cards.value)
         binding.vp2Cards.adapter = adapter
     }
 
@@ -65,7 +65,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
 
     private fun observeCardList() {
         viewModel.cards.observe(viewLifecycleOwner, Observer { list ->
-            adapter.submitList(list.toList())
+            adapter.submitList(list)
 
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.vp2Cards.setCurrentItem(0, true)
