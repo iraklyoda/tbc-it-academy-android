@@ -36,6 +36,7 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
             currentPosition = position
             showDeleteCardDialog(view)
         }
+
         adapter.submitList(viewModel.cards.value?.toList())
         binding.vp2Cards.adapter = adapter
     }

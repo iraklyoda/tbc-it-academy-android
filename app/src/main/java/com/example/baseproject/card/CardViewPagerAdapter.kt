@@ -49,6 +49,7 @@ class CardViewPagerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val binding: ItemCardBinding =
             ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return CardViewHolder(binding)
     }
 
