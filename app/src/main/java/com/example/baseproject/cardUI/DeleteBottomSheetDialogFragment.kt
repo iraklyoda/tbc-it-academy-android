@@ -38,4 +38,9 @@ class DeleteBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
