@@ -9,21 +9,31 @@ import com.example.baseproject.databinding.FragmentRegisterBinding
 import com.example.baseproject.field.FieldCardAdapter
 import com.example.baseproject.field.FieldDto
 import com.example.baseproject.field.FieldViewModel
+import org.json.JSONObject
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate){
     private lateinit var adapter: FieldCardAdapter
     private val viewModel: FieldViewModel by viewModels()
+    private lateinit var jsonUser: JSONObject
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUp()
+    }
+
+    private fun setUp() {
         val fieldGroups = viewModel.getFieldGroups()
         setInputs(fieldGroups)
 
         val flattenedFields: List<FieldDto> = fieldGroups.flatten()
 
         binding.btnRegister.setOnClickListener {
-            validateFields(flattenedFields)
+            val validate: JSONObject? = validateFields(flattenedFields)
+
+            if (validate != null) {
+                jsonUser = validate
+            }
         }
     }
 
@@ -33,14 +43,18 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.rvInputCards.adapter = adapter
     }
 
-    private fun validateFields(list: List<FieldDto>): Boolean {
+    private fun validateFields(list: List<FieldDto>): JSONObject? {
+        val jsonObject: JSONObject = JSONObject()
         for (field in list) {
             if (field.value.isEmpty() && field.required) {
                 Toast.makeText(requireContext(),
                     getString(R.string.is_required, field.hint), Toast.LENGTH_SHORT).show()
-                return false
+                return null
             }
+            jsonObject.put(field.fieldId.toString(), field.value)
         }
-        return true
+        Toast.makeText(requireContext(),
+            getString(R.string.registered_successfully), Toast.LENGTH_SHORT).show()
+        return jsonObject
     }
 }
