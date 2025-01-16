@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">Base Project</string>
+    <string name="app_name">eAuth App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="e_auth">E AUTH</string>
+    <string name="register">Register</string>
+    <string name="_register"><![CDATA[Register->]]></string>
+    <string name="username">Username</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="shouldn_t_be_empty">%1$s shouldn\'t be empty</string>
+    <string name="is_required">%1$s is Required!</string>
 </resources>
