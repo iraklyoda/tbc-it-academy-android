@@ -1,5 +1,6 @@
 package com.example.baseproject.field
 
+import android.text.InputType
 import android.util.Log
 import android.util.Log.d
 import android.view.LayoutInflater
@@ -43,6 +44,11 @@ class FieldAdapter(
             binding.apply {
                 etField.hint = field.hint
                 etField.inputType = field.fieldTypeEnum.inputType
+                if(field.fieldTypeEnum == FieldType.TEXT) {
+                    etField.inputType = InputType.TYPE_CLASS_TEXT
+                } else {
+                    etField.inputType = InputType.TYPE_CLASS_NUMBER
+                }
 
                 etField.addTextChangedListener {
                     field.value = it.toString()
