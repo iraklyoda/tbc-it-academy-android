@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="electric_indigo">#700BEF</color>
+    <color name="electric_indigo_30">#4D700BEF</color>
 </resources>
