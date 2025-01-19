@@ -8,4 +8,14 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
+    <string name="hello">Hello:</string>
+    <string name="logout">logout</string>
+    <string name="user_with_similar_email_already_exists">User with similar email already exists</string>
+    <string name="username_or_password_is_incorrect">Username or Password is incorrect</string>
+    <string name="user_created_successfully">User Created successfully</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="please_enter_valid_email">Please enter valid email</string>
+    <string name="you_can_only_register_with_eve_holt_reqres_in_mail">You can only register with eve.holt@reqres.in mail</string>
+    <string name="username_is_required">Username is required</string>
+    <string name="password_is_required">Password is required</string>
 </resources>
