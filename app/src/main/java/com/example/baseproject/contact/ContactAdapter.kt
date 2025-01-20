@@ -33,7 +33,7 @@ class ContactAdapter :
                 txtMessage.text = contact.lastMessage
                 txtMsgAmount.text = contact.unreadMessages.toString()
 
-                Glide.with(itemView.context).load(contact.image).apply(
+                Glide.with(ivProfile.context).load(contact.image).apply(
                     RequestOptions().placeholder(R.drawable.profile)
                         .transform(CircleCrop())
                 ).into(ivProfile)
