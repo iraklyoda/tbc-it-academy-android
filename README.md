@@ -20,9 +20,13 @@ This repository contains assignments and quiz projects from the TBC IT Academy f
 - [Assignment 14](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-14)
 - [Assignment 15](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-15)
 - [Assignment 16](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-16)
+- [Assignment 17](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-17)
+- [Assignment 18](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-18)
+
 
 ## Quiz Projects
 
 - [Quiz Project 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-1)
 - [Quiz Project 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-2)
 - [Quiz Project 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-3)
+- [Quiz Project 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-4)
