@@ -18,4 +18,9 @@
     <string name="you_can_only_register_with_eve_holt_reqres_in_mail">You can only register with eve.holt@reqres.in mail</string>
     <string name="username_is_required">Username is required</string>
     <string name="password_is_required">Password is required</string>
+    <string name="remember_me">Remember me</string>
+    <string name="please_enter_proper_email">Please enter proper email</string>
+    <string name="please_enter_proper_password">Please enter proper password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="passwords_doesn_t_match">Passwords doesn\'t match</string>
 </resources>

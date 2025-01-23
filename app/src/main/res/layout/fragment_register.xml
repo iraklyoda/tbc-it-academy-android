@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.WelcomeFragment">
+    tools:context=".user.controllers.HomeFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_header"
@@ -25,10 +25,10 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/vector_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_header"
-        app:layout_constraintWidth_percent="0.6" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_email"
@@ -56,32 +56,6 @@
         app:layout_constraintTop_toTopOf="@id/et_email" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_username"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="@dimen/distance_md"
-        android:layout_marginTop="@dimen/distance_lg"
-        android:background="@drawable/btn_bg_light"
-        android:hint="@string/username"
-        android:inputType="text"
-        android:paddingStart="100dp"
-        android:paddingEnd="@dimen/distance_xl"
-        android:textColorHint="@color/electric_indigo_30"
-        android:textSize="@dimen/text_md"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_email" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/distance_md"
-        android:src="@drawable/ic_user"
-        app:layout_constraintBottom_toBottomOf="@id/et_username"
-        app:layout_constraintStart_toStartOf="@id/et_username"
-        app:layout_constraintTop_toTopOf="@id/et_username" />
-
-    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_password"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -96,7 +70,7 @@
         android:textSize="@dimen/text_md"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_username" />
+        app:layout_constraintTop_toBottomOf="@id/et_email" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
@@ -117,13 +91,59 @@
         app:layout_constraintEnd_toEndOf="@id/et_password"
         app:layout_constraintTop_toTopOf="@id/et_password" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_repeat_password"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="@dimen/distance_md"
+        android:layout_marginTop="@dimen/distance_lg"
+        android:background="@drawable/btn_bg_light"
+        android:hint="@string/repeat_password"
+        android:inputType="textPassword"
+        android:paddingStart="100dp"
+        android:paddingEnd="@dimen/distance_xl"
+        android:textColorHint="@color/electric_indigo_30"
+        android:textSize="@dimen/text_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/distance_md"
+        android:src="@drawable/ic_lock"
+        app:layout_constraintBottom_toBottomOf="@id/et_repeat_password"
+        app:layout_constraintStart_toStartOf="@id/et_repeat_password"
+        app:layout_constraintTop_toTopOf="@id/et_repeat_password" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_repeat_visibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/distance_md"
+        android:background="@drawable/ic_visibility"
+        app:layout_constraintBottom_toBottomOf="@id/et_repeat_password"
+        app:layout_constraintEnd_toEndOf="@id/et_repeat_password"
+        app:layout_constraintTop_toTopOf="@id/et_repeat_password" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/distance_sm"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_password"
+        app:layout_constraintTop_toBottomOf="@id/et_repeat_password"
         android:layout_marginTop="40dp"
         android:text="@string/register"
         android:textColor="@color/white"

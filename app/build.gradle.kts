@@ -38,6 +38,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    // Other Android configurations
+    packaging {
+        resources {
+            excludes += "META-INF/gradle/incremental.annotation.processors"
+        }
+    }
 }
 
 dependencies {
@@ -55,5 +61,6 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.retrofit)
     implementation(libs.okhttp)
+    implementation(libs.androidx.datastore.preferences)
 
 }
