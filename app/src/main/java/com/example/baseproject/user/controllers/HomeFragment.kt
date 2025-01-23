@@ -13,7 +13,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private lateinit var authPreferencesRepository: AuthPreferencesRepository
 
     override fun start() {
-        authPreferencesRepository = AuthPreferencesRepository(requireContext())
+        authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
 
         setEmail()
     }

@@ -25,12 +25,8 @@ import kotlinx.coroutines.withContext
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-//    val sessionRepository: SessionRepository by lazy {
-//        SessionRepository(requireContext())
-//    }
-
     val authPreferencesRepository: AuthPreferencesRepository by lazy {
-        AuthPreferencesRepository(requireContext())
+        AuthPreferencesRepository(requireContext().applicationContext)
     }
 
     private val loginViewModel: LoginViewModel by viewModels {
