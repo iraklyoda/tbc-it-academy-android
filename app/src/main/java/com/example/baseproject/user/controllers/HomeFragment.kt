@@ -1,36 +1,44 @@
 package com.example.baseproject.user.controllers
 
-import android.content.SharedPreferences
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
-import com.example.baseproject.data.SessionRepository
+import com.example.baseproject.data.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
-    private lateinit var sharedPreferences: SharedPreferences
-
-    private val navController by lazy {
-        findNavController()
-    }
-
-    private lateinit var sessionRepository: SessionRepository
-
+    private lateinit var authPreferencesRepository: AuthPreferencesRepository
 
     override fun start() {
-        sessionRepository = SessionRepository(requireContext())
-        binding.textEmail.text = sessionRepository.getEmail()
+        authPreferencesRepository = AuthPreferencesRepository(requireContext())
 
+        setEmail()
+    }
+
+    override fun listeners() {
+        logout()
+    }
+
+    private fun setEmail() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.textEmail.text = authPreferencesRepository.getEmail()
+        }
+    }
+
+    private fun logout() {
         binding.btnLogout.setOnClickListener {
-            sessionRepository.clearAttributes()
-            val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+            viewLifecycleOwner.lifecycleScope.launch {
+                val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
 
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.homeFragment, true)
-                .build()
-            sessionRepository.clearAttributes()
-            findNavController().navigate(action, navOptions)
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.homeFragment, true)
+                    .build()
+                authPreferencesRepository.clearAttributes()
+                findNavController().navigate(action, navOptions)
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.baseproject.user.controllers
 
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels

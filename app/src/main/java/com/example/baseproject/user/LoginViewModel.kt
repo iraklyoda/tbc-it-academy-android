@@ -4,21 +4,22 @@ import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.baseproject.client.RetrofitClient
-import com.example.baseproject.data.SessionRepository
+import com.example.baseproject.data.AuthPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val sessionRepository: SessionRepository
+    private val authPreferencesRepository: AuthPreferencesRepository
 ) : ViewModel() {
 
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isLoading: MutableStateFlow<Boolean> = _isLoading
 
-    fun loginUser(userDto: UserDto, rememberMe: Boolean = false,
-                  onSuccess: suspend () -> Unit,
-                  onError: suspend (error: String) -> Unit,
+    fun loginUser(
+        userDto: UserDto, rememberMe: Boolean = false,
+        onSuccess: suspend () -> Unit,
+        onError: suspend (error: String) -> Unit,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.value = true
@@ -28,9 +29,9 @@ class LoginViewModel(
                 if (response.isSuccessful) {
                     val token = response.body()?.token
                     if (rememberMe && !token.isNullOrEmpty()) {
-                        sessionRepository.saveToken(token)
+                        authPreferencesRepository.saveToken(token)
                     }
-                    sessionRepository.saveEmail(userDto.email)
+                    authPreferencesRepository.saveEmail(userDto.email)
                     onSuccess()
                     d("userRegister", "Success")
                 } else {

@@ -10,7 +10,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
-import com.example.baseproject.data.SessionRepository
+import com.example.baseproject.data.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentLoginBinding
 import com.example.baseproject.user.LoginViewModel
 import com.example.baseproject.user.UserDto
@@ -25,24 +25,30 @@ import kotlinx.coroutines.withContext
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    val sessionRepository: SessionRepository by lazy {
-        SessionRepository(requireContext())
+//    val sessionRepository: SessionRepository by lazy {
+//        SessionRepository(requireContext())
+//    }
+
+    val authPreferencesRepository: AuthPreferencesRepository by lazy {
+        AuthPreferencesRepository(requireContext())
     }
 
     private val loginViewModel: LoginViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return LoginViewModel(sessionRepository) as T
+                return LoginViewModel(authPreferencesRepository) as T
             }
         }
     }
 
     override fun onStart() {
         super.onStart()
-        val token = sessionRepository.getToken()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val token = authPreferencesRepository.getToken()
 
-        if (!token.isNullOrEmpty()) {
-            navigateToHome()
+            if (!token.isNullOrEmpty()) {
+                navigateToHome()
+            }
         }
     }
 
