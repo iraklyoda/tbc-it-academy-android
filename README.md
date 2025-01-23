@@ -60,9 +60,9 @@ The app interacts with the [ReqRes API](https://reqres.in/api) for authenticatio
 ## Screenshots
 
 <p align="center">
-    <img src="docs/images/login_01.png.png" width="200" alt="Login Screen">
-    <img src="docs/images/login_02.png.png" width="200" alt="Home Screen">
-    <img src="docs/images/login_03.png.png" width="200" alt="Register Screen">
+    <img src="docs/images/login_01.png" width="200" alt="Login Screen">
+    <img src="docs/images/login_02.png" width="200" alt="Home Screen">
+    <img src="docs/images/login_03.png" width="200" alt="Register Screen">
 </p>
 
 ## Notes
