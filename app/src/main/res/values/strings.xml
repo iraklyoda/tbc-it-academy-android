@@ -23,4 +23,7 @@
     <string name="please_enter_proper_password">Please enter proper password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="passwords_doesn_t_match">Passwords doesn\'t match</string>
+    <string name="profile_page">Profile Page</string>
+    <string name="people_you_may_know">People you may know:</string>
+    <string name="user_profile_picture">User Profile Picture</string>
 </resources>

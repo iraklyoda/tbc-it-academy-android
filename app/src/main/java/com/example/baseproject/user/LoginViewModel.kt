@@ -12,6 +12,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+data class AuthState(
+    val loader: Boolean = false,
+    val userInfo: ProfileDto? = null,
+    val error: String? = null
+)
+
 class LoginViewModel(
     private val authPreferencesRepository: AuthPreferencesRepository
 ) : ViewModel() {

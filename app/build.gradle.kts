@@ -62,5 +62,5 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.androidx.datastore.preferences)
-
+    implementation(libs.glide)
 }

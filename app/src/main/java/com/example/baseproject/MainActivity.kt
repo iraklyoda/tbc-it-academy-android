@@ -6,7 +6,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import com.example.baseproject.data.AuthPreferencesRepository
 import com.example.baseproject.databinding.ActivityMainBinding
-import com.example.baseproject.user.controllers.HomeFragmentDirections
 import com.example.baseproject.user.controllers.LoginFragmentDirections
 import kotlinx.coroutines.launch
 
@@ -25,11 +24,6 @@ class MainActivity : AppCompatActivity() {
         checkToken()
     }
 
-    private fun navigateToHome() {
-        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-        findNavController(binding.fragmentContainerView).navigate(action)
-    }
-
     private fun checkToken() {
         lifecycleScope.launch {
             val token: String? = authPreferencesRepository.getToken()
@@ -38,6 +32,11 @@ class MainActivity : AppCompatActivity() {
                 navigateToHome()
             }
         }
+    }
+
+    private fun navigateToHome() {
+        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        findNavController(binding.fragmentContainerView).navigate(action)
     }
 }
 

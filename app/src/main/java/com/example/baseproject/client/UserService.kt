@@ -3,8 +3,11 @@ package com.example.baseproject.client
 import com.example.baseproject.requests.LoginResponseDto
 import com.example.baseproject.requests.RegisterResponseDto
 import com.example.baseproject.user.ProfileDto
+import com.example.baseproject.user.UserDto
+import com.example.baseproject.user.UserResponseDto
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface UserService {
@@ -13,4 +16,7 @@ interface UserService {
 
     @POST("login")
     suspend fun loginUser(@Body user: ProfileDto): Response<LoginResponseDto>
+
+    @GET("users?page=1")
+    suspend fun getUsersData(): Response<UserResponseDto>
 }

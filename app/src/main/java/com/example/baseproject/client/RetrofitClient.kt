@@ -8,10 +8,14 @@ import retrofit2.Retrofit
 object RetrofitClient {
     private const val BASE_URL = "https://reqres.in/api/"
 
+    val json = Json {
+        ignoreUnknownKeys = true
+    }
+
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(
-            Json.asConverterFactory("application/json".toMediaType())
+            json.asConverterFactory("application/json".toMediaType())
         )
         .build()
 
