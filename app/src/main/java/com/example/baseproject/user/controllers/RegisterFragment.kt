@@ -29,7 +29,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         observeLoadingData()
     }
 
-
     private fun passwordVisibilityToggle() {
         binding.btnVisibility.makeVisibilityToggle(editText = binding.etPassword)
         binding.btnRepeatVisibility.makeVisibilityToggle(editText = binding.etRepeatPassword)
