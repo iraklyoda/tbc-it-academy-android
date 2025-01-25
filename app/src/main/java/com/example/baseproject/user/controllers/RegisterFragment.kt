@@ -10,7 +10,7 @@ import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentRegisterBinding
 import com.example.baseproject.user.RegisterViewModel
-import com.example.baseproject.user.UserDto
+import com.example.baseproject.user.ProfileDto
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
@@ -40,7 +40,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             btnRegister.setOnClickListener {
                 if (validateForm()) {
                     registerViewModel.registerUser(
-                        UserDto(
+                        ProfileDto(
                             email = etEmail.getString(),
                             password = etPassword.getString()
                         ),

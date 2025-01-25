@@ -16,12 +16,12 @@ class RegisterViewModel : ViewModel() {
     private val _registrationSuccess: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val registrationSuccess: MutableStateFlow<Boolean> = _registrationSuccess
 
-    fun registerUser(userDto: UserDto, onFailed: suspend (error: String) -> Unit) {
+    fun registerUser(profileDto: ProfileDto, onFailed: suspend (error: String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.value = true
 
             try {
-                val response = RetrofitClient.userService.registerUser(userDto)
+                val response = RetrofitClient.userService.registerUser(profileDto)
 
                 if (response.isSuccessful) {
                     d("userRegister", "Registration success")
