@@ -1,17 +1,20 @@
 package com.example.baseproject.user.controllers
 
+import android.util.Log.d
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.databinding.FragmentHomeBinding
 import com.example.baseproject.user.HomeViewModel
+import com.example.baseproject.user.UserDto
 import com.example.baseproject.user.UsersAdapter
-import com.example.baseproject.user.UsersState
 import com.example.baseproject.utils.showErrorToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,13 +27,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun start() {
-        homeViewModel.fetchUsersInfo()
         setUsersAdapter()
     }
 
     override fun listeners() {
         goToProfilePage()
-        observeUsersState()
+        observePaging()
+        listenAdapter()
     }
 
     private fun setUsersAdapter() {
@@ -38,26 +41,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.rvUsers.adapter = usersAdapter
     }
 
-    private fun observeUsersState() {
+    private fun observePaging() {
         viewLifecycleOwner.lifecycleScope.launch {
-            var previousState: UsersState? = null
-
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.usersStateFlow.collectLatest { state ->
-                    previousState?.let { previous ->
-                        if (previous.loader != state.loader) {
-                            setLoader(state.loader)
-                        }
+                homeViewModel.usersPagerFlow.collectLatest { usersData: PagingData<UserDto> ->
+                    usersAdapter.submitData(usersData)
+                }
+            }
+        }
+    }
 
-                        if (previous.usersData != state.usersData) {
-                            usersAdapter.submitList(state.usersData.toList())
-                        }
-
-                        if (previous.error != state.error) {
-                            requireContext().showErrorToast(state.error.toString())
-                        }
-                    }
-                    previousState = state
+    private fun listenAdapter() {
+        usersAdapter.addLoadStateListener { loadStates ->
+            when (loadStates.source.refresh) {
+                is LoadState.Loading -> {
+                    setLoader(true)
+                }
+                is LoadState.Error -> {
+                    requireContext().showErrorToast((loadStates.source.refresh as LoadState.Error).error.localizedMessage ?: "Error")
+                }
+                is LoadState.NotLoading -> {
+                    setLoader(false)
+                    d("UserPagingAdapter", "End of Pagination Reached: ${loadStates.append.endOfPaginationReached}")
                 }
             }
         }

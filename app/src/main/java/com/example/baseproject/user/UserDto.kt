@@ -5,6 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserResponseDto(
+    val page: Int,
+    @SerialName("per_page")
+    val perPage: Int,
+    @SerialName("total_pages")
+    val totalPages: Int,
     val data: List<UserDto>
 )
 

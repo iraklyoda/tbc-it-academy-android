@@ -3,8 +3,8 @@ package com.example.baseproject.user
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -23,25 +23,24 @@ class UserDiffUtil : DiffUtil.ItemCallback<UserDto>() {
 
 }
 
-class UsersAdapter : ListAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
+class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun onBind(
-            firstName: String,
-            lastName: String,
-            email: String,
-            avatar: String
+            user: UserDto?
         ) {
-            binding.apply {
-                textFullName.text = "$firstName $lastName"
-                textEmail.text = email
+            user?.let {
+                binding.apply {
+                    textFullName.text = "${it.firstName} ${it.lastName}"
+                    textEmail.text = it.email
 
-                Glide.with(ivProfile.context).load(avatar).apply(
-                    RequestOptions().placeholder(R.drawable.ic_launcher_background)
-                        .transform(CircleCrop())
-                ).into(ivProfile)
+                    Glide.with(ivProfile.context).load(it.avatar).apply(
+                        RequestOptions().placeholder(R.drawable.ic_launcher_background)
+                            .transform(CircleCrop())
+                    ).into(ivProfile)
+                }
             }
         }
     }
@@ -54,12 +53,6 @@ class UsersAdapter : ListAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffU
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
-
-        holder.onBind(
-            firstName = user.firstName,
-            lastName = user.lastName,
-            email = user.email,
-            avatar = user.avatar
-        )
+        holder.onBind(user)
     }
 }
