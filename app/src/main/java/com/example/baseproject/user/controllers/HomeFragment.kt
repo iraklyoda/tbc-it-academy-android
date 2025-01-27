@@ -12,7 +12,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.databinding.FragmentHomeBinding
-import com.example.baseproject.user.HomeViewModel
+import com.example.baseproject.user.viewmodels.HomeViewModel
 import com.example.baseproject.user.UserDto
 import com.example.baseproject.user.UsersAdapter
 import com.example.baseproject.utils.showErrorToast
@@ -63,8 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 is LoadState.NotLoading -> {
                     setLoader(false)
                     d("UserPagingAdapter", "End of Pagination Reached: ${loadStates.append.endOfPaginationReached}")
+
                 }
             }
+
+            val isEndOfPaginationReached =
+                loadStates.append.endOfPaginationReached && loadStates.source.append.endOfPaginationReached
+
+            usersAdapter.setEndOfPaginationReached(isEndOfPaginationReached)
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.baseproject.user
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -25,11 +26,18 @@ class UserDiffUtil : DiffUtil.ItemCallback<UserDto>() {
 
 class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
 
+    private var isEndOfPaginationReached: Boolean = false
+
+    fun setEndOfPaginationReached(isEnd: Boolean) {
+        isEndOfPaginationReached = isEnd
+    }
+
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun onBind(
-            user: UserDto?
+            user: UserDto?,
+            isLastItem: Boolean
         ) {
             user?.let {
                 binding.apply {
@@ -40,6 +48,8 @@ class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(Use
                         RequestOptions().placeholder(R.drawable.ic_launcher_background)
                             .transform(CircleCrop())
                     ).into(ivProfile)
+
+                    viewLine.visibility = if (isLastItem) View.GONE else View.VISIBLE
                 }
             }
         }
@@ -53,6 +63,7 @@ class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(Use
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
-        holder.onBind(user)
+        val isLastItem = position == itemCount - 1 && isEndOfPaginationReached
+        holder.onBind(user, isLastItem)
     }
 }

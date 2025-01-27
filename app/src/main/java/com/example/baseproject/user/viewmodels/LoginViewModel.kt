@@ -1,4 +1,4 @@
-package com.example.baseproject.user
+package com.example.baseproject.user.viewmodels
 
 import android.util.Log.d
 import androidx.lifecycle.ViewModel
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.baseproject.client.RetrofitClient
 import com.example.baseproject.data.AuthPreferencesRepository
+import com.example.baseproject.user.ProfileDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

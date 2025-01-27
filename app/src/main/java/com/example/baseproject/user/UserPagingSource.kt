@@ -4,6 +4,7 @@ import android.util.Log.d
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.baseproject.client.UserService
+import kotlinx.coroutines.delay
 
 class UserPagingSource(
     private val backend: UserService
@@ -22,7 +23,6 @@ class UserPagingSource(
             if (response.isSuccessful) {
                 val users: List<UserDto> = response.body()?.data ?: listOf()
                 val totalPages = response.body()?.totalPages ?: 1
-
                 d("UserPagingSource", "Current page: $page, Total pages: $totalPages, Users count: ${users.size}")
                 LoadResult.Page(
                     data = users,

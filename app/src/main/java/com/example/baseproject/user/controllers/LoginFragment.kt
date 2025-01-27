@@ -11,9 +11,9 @@ import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.data.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentLoginBinding
-import com.example.baseproject.user.AuthState
-import com.example.baseproject.user.LoginViewModel
-import com.example.baseproject.user.LoginViewModelFactory
+import com.example.baseproject.user.viewmodels.AuthState
+import com.example.baseproject.user.viewmodels.LoginViewModel
+import com.example.baseproject.user.viewmodels.LoginViewModelFactory
 import com.example.baseproject.user.ProfileDto
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail

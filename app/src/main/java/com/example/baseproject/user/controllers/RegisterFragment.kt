@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentRegisterBinding
-import com.example.baseproject.user.RegisterViewModel
+import com.example.baseproject.user.viewmodels.RegisterViewModel
 import com.example.baseproject.user.ProfileDto
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
