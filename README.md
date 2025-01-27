@@ -1,4 +1,4 @@
-# E-Auth Login and Registration Page 2 (Assignment-19)
+# E-Auth Login and Registration Page 3 (Paging3) (Assignment-20)
 
 <div align="center">
 
@@ -9,9 +9,9 @@
 
 ## Overview
 
-Continuation of [Assignment-18](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-18)
+Continuation of [Assignment-19](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-19)
 
-In the following tab new section on homepage was added, where you can check out list of users fetched from API
+In the following the method of which data about users are fetched have been updated using Paging3 library
 
 This Android application, built with Kotlin, provides a user authentication system where users can log in, register, and log out from the home page. The app integrates modern libraries and tools such as **DataStore**, **Kotlin Coroutines**, and **Retrofit** for efficient data management and seamless HTTP requests.
 
@@ -47,7 +47,7 @@ The app interacts with the [ReqRes API](https://reqres.in/api) for authenticatio
 - **Retrofit**: For making API requests and managing responses.
 - **DataStore**: For persistent and secure storage of the authentication token.
 - **Glide**: For fetching, decoding, and displaying images
-
+- **Paging 3**: For loading and displaying large datasets in a RecyclerView efficiently, enabling smooth scrolling and automatic loading of additional data as the user scrolls.
 ## How It Works
 
 1. **Login Process**:

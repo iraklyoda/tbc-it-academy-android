@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.baseproject.client.RetrofitClient
 
-private const val USER_PER_PAGE = 1
+private const val USER_PER_PAGE = 6
 
 class HomeViewModel : ViewModel() {
 
