@@ -1,7 +1,9 @@
 package com.example.baseproject.user.controllers
 
+import android.graphics.drawable.Drawable
 import android.util.Log.d
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,8 +11,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
+import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentHomeBinding
 import com.example.baseproject.user.viewmodels.HomeViewModel
 import com.example.baseproject.user.UserDto
@@ -37,8 +41,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setUsersAdapter() {
-        binding.rvUsers.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvUsers.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvUsers.adapter = usersAdapter
+
+        val dividerDrawable: Drawable? =
+            ContextCompat.getDrawable(requireContext(), R.drawable.item_user_divider)
+        dividerDrawable?.let {
+            val userDivider =
+                DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            userDivider.setDrawable(it)
+            binding.rvUsers.addItemDecoration(userDivider)
+        }
     }
 
     private fun observePaging() {
@@ -57,20 +71,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 is LoadState.Loading -> {
                     setLoader(true)
                 }
+
                 is LoadState.Error -> {
-                    requireContext().showErrorToast((loadStates.source.refresh as LoadState.Error).error.localizedMessage ?: "Error")
+                    requireContext().showErrorToast(
+                        (loadStates.source.refresh as LoadState.Error).error.localizedMessage
+                            ?: "Error"
+                    )
                 }
+
                 is LoadState.NotLoading -> {
                     setLoader(false)
-                    d("UserPagingAdapter", "End of Pagination Reached: ${loadStates.append.endOfPaginationReached}")
-
+                    d(
+                        "UserPagingAdapter",
+                        "End of Pagination Reached: ${loadStates.append.endOfPaginationReached}"
+                    )
                 }
             }
-
-            val isEndOfPaginationReached =
-                loadStates.append.endOfPaginationReached && loadStates.source.append.endOfPaginationReached
-
-            usersAdapter.setEndOfPaginationReached(isEndOfPaginationReached)
         }
     }
 

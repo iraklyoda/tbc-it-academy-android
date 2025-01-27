@@ -4,7 +4,6 @@ import android.util.Log.d
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.baseproject.client.UserService
-import kotlinx.coroutines.delay
 
 class UserPagingSource(
     private val backend: UserService

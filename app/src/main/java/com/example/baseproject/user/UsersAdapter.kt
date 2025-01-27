@@ -26,18 +26,11 @@ class UserDiffUtil : DiffUtil.ItemCallback<UserDto>() {
 
 class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
 
-    private var isEndOfPaginationReached: Boolean = false
-
-    fun setEndOfPaginationReached(isEnd: Boolean) {
-        isEndOfPaginationReached = isEnd
-    }
-
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun onBind(
             user: UserDto?,
-            isLastItem: Boolean
         ) {
             user?.let {
                 binding.apply {
@@ -48,8 +41,6 @@ class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(Use
                         RequestOptions().placeholder(R.drawable.ic_launcher_background)
                             .transform(CircleCrop())
                     ).into(ivProfile)
-
-                    viewLine.visibility = if (isLastItem) View.GONE else View.VISIBLE
                 }
             }
         }
@@ -63,7 +54,6 @@ class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(Use
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
-        val isLastItem = position == itemCount - 1 && isEndOfPaginationReached
-        holder.onBind(user, isLastItem)
+        holder.onBind(user)
     }
 }

@@ -38,16 +38,4 @@
         app:layout_constraintTop_toBottomOf="@id/text_full_name"
         android:fontFamily="@font/roboto_md"
         android:textSize="@dimen/text_md" />
-
-    <View
-        android:id="@+id/view_line"
-        android:layout_height="2dp"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/text_email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/distance_sm"
-        android:background="@color/electric_indigo_30"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
