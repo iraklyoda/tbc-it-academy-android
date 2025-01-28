@@ -67,6 +67,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun listenAdapter() {
         usersAdapter.addLoadStateListener { loadStates ->
+
+            if (loadStates.append is LoadState.Loading) {
+                setLoader(true)
+            }
+
             when (loadStates.source.refresh) {
                 is LoadState.Loading -> {
                     setLoader(true)
@@ -81,10 +86,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
                 is LoadState.NotLoading -> {
                     setLoader(false)
-                    d(
-                        "UserPagingAdapter",
-                        "End of Pagination Reached: ${loadStates.append.endOfPaginationReached}"
-                    )
                 }
             }
         }

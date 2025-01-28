@@ -8,6 +8,7 @@ import com.example.baseproject.client.UserService
 class UserPagingSource(
     private val backend: UserService
 ) : PagingSource<Int, UserDto>() {
+
     override fun getRefreshKey(state: PagingState<Int, UserDto>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
@@ -25,7 +26,7 @@ class UserPagingSource(
                 d("UserPagingSource", "Current page: $page, Total pages: $totalPages, Users count: ${users.size}")
                 LoadResult.Page(
                     data = users,
-                    prevKey = if (page > 1) page - 1 else null,
+                    prevKey = null,
                     nextKey = if (page < totalPages) page + 1 else null
                 )
             } else {
