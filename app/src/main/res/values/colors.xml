@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="nautical_navy">#192343</color>
+    <color name="dark_navy">#1D2545</color>
+    <color name="emerald">#50C878</color>
+    <color name="cal_poly_pomona_green">#1C4520</color>
+
+    <color name="intense_brown">#8E390B</color>
+    <color name="intense_brown_50">#808E390B</color>
+    <color name="philippine_brown">#5A1E17</color>
 </resources>

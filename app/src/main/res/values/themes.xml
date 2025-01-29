@@ -3,6 +3,11 @@
     <style name="Base.Theme.BaseProject" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@color/philippine_brown</item>
+        <item name="fontFamily">@font/smooch_sans</item>
+        <item name="android:textColorHint">@color/intense_brown_50</item> <!-- Set hint color -->
+
     </style>
 
     <style name="Theme.BaseProject" parent="Base.Theme.BaseProject" />
