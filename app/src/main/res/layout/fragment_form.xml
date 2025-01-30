@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_md"
         android:fontFamily="@font/smooch_sans_semibold"
-        android:text="Who are you?"
+        android:text="@string/who_are_you"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="48sp"

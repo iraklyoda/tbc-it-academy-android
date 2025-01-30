@@ -9,4 +9,9 @@
     <string name="read">Read</string>
     <string name="required_field">Required Field</string>
     <string name="please_enter_proper_email">Please enter proper email</string>
+    <string name="who_are_you">Who are you?</string>
+    <string name="we_know_who_you_are">We know who you are:</string>
+    <string name="you_are_saved_successfully">You are saved successfully</string>
+    <string name="you_don_t_even_exist_as_of_yet">You don\'t even exist as of yet</string>
+    <string name="you_have_been_recreated_successfully">You have been recreated successfully</string>
 </resources>

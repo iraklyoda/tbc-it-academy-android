@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.navigation.safeargs.kotlin)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -38,6 +39,20 @@ android {
         jvmTarget = "1.8"
     }
 }
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.23.4"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -47,6 +62,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.datastore)
+    implementation(libs.protoc)
+    implementation(libs.protobuf.javalite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
