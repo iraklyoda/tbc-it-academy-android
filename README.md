@@ -1,32 +1,44 @@
-# TBC IT Academy Android Development
+# User Data Storage (Assignment-21)
 
-This repository contains assignments and quiz projects from the TBC IT Academy for Android Development. Each assignment is organized into separate branches, and you can click on the links below to view the code.
+<div align="center">  
 
-## Assignments
+[![Kotlin](https://img.shields.io/badge/Kotlin-v2.1.0-1F425F?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org)  
+[![Android Studio](https://img.shields.io/badge/Android_Studio-3DDC84?style=flat&logo=android-studio&logoColor=white)](https://developer.android.com/studio)
 
-- [Assignment 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-1)
-- [Assignment 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-2)
-- [Assignment 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-3)
-- [Assignment 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-4)
-- [Assignment 5](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-5)
-- [Assignment 6](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-6)
-- [Assignment 7](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-7)
-- [Assignment 8](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-8)
-- [Assignment 9](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-9)
-- [Assignment 10](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-10)
-- [Assignment 11](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-11)
-- [Assignment 12](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-12)
-- [Assignment 13](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-13)
-- [Assignment 14](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-14)
-- [Assignment 15](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-15)
-- [Assignment 16](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-16)
-- [Assignment 17](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-17)
-- [Assignment 18](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-18)
+</div>  
 
+## Overview
 
-## Quiz Projects
+A simple Android app where users enter their **first name, last name, and email**, and the data is stored using **Proto DataStore** for persistence. The saved data is then displayed on the screen.
 
-- [Quiz Project 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-1)
-- [Quiz Project 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-2)
-- [Quiz Project 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-3)
-- [Quiz Project 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-4)
+## Note
+Currently App is not using DI, so context is passed in dataRepository trough Application class.
+This project is for practice only
+
+## Features
+
+- **User Input**: Enter first name, last name, and email.
+- **Data Persistence**: Uses Proto DataStore for saving and retrieving user data.
+
+## Libraries Used
+
+- **Proto DataStore** – Efficient and structured data storage.
+- **Kotlin Coroutines** – For asynchronous data operations.
+
+## How It Works
+
+1. **User enters data** → First name, last name, and email.
+2. **Data is saved** → Stored securely in Proto DataStore.
+3. **Displayed on screen** → User data is shown when "Read" is clicked
+
+## Screenshots
+
+<p align="center">
+    <img src="docs/images/screenshot_01.png" width="250" alt="User Input Screen">
+    <img src="docs/images/screenshot_02.png" width="250" alt="User Data Display">
+</p>  
+
+## Notes
+
+- Proto DataStore ensures structured and efficient data storage.
+- Data persists even after app restarts.  
