@@ -1,5 +1,6 @@
 package com.example.baseproject.form
 
+import android.util.Log.d
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +23,7 @@ class FormFragment : BaseFragment<FragmentFormBinding>(FragmentFormBinding::infl
     override fun start() {
         viewLifecycleOwner.lifecycleScope.launch {
             userExists = formViewModel.getUser() != null
+            d("Robot", formViewModel.getUser()?.lastName ?: "Nope")
         }
     }
 

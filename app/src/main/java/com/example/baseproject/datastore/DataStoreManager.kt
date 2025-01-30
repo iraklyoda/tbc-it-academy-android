@@ -49,7 +49,10 @@ object UserDataPreferencesRepository {
         context?.usersDataStore ?: throw IllegalStateException("Context not initialized")
     }
 
-    private var userSet: Boolean = false
+    private suspend fun isUserSet(): Boolean {
+        val preferences = userDataPreferences.data.first()
+        return preferences.firstName.isNotEmpty()
+    }
 
     suspend fun setUser(user: User) {
         userDataPreferences.updateData { preferences ->
@@ -59,12 +62,11 @@ object UserDataPreferencesRepository {
                 .setEmailAddress(user.emailAddress)
                 .build()
         }
-        userSet = true
     }
 
     suspend fun getUser(): User? {
 
-        if (!userSet) {
+        if (!isUserSet()) {
             return null
         }
 
