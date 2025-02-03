@@ -1,6 +1,5 @@
 package com.example.baseproject.data
 
-import com.example.baseproject.client.RetrofitClient
 import com.example.baseproject.client.UserService
 import kotlinx.coroutines.flow.Flow
 
