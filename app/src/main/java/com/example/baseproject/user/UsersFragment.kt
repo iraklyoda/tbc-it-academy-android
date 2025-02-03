@@ -72,6 +72,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
                 when (uiState) {
                     is UIState.Loading -> {
                         binding.pb.visibility = View.VISIBLE
+                        binding.rvUsers.visibility = View.GONE
                     }
 
                     is UIState.Success -> {
