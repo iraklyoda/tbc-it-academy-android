@@ -47,6 +47,8 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_activation"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"

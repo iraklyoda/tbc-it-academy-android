@@ -40,13 +40,13 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
 
     override fun start() {
         setUsers()
+        observeCachedUsers()
 
         if(isWifiConnected(requireContext())) {
             usersViewModel.refreshUsers()
             binding.tvStatus.text = getString(R.string.you_are_online)
             observeUsers()
         } else {
-            observeCachedUsers()
             binding.tvStatus.text = getString(R.string.you_are_offline)
         }
     }
@@ -70,13 +70,12 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
                 when (uiState) {
                     is UIState.Loading -> {
                         binding.pb.visibility = View.VISIBLE
-                        binding.rvUsers.visibility = View.GONE
                     }
 
                     is UIState.Success -> {
                         binding.pb.visibility = View.GONE
                         binding.rvUsers.visibility = View.VISIBLE
-                        uiState.users.collectLatest { users ->
+                        usersViewModel.users.collectLatest { users ->
                             usersAdapter.submitList(users)
                         }
                     }
