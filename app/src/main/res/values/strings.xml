@@ -9,4 +9,10 @@
     <string name="offline">Offline</string>
     <string name="you_are_online">You are online</string>
     <string name="you_are_offline">You are offline</string>
+    <string name="user_is_inactive">User is Inactive</string>
+    <string name="user_is_online">User is Online</string>
+    <string name="active_few_minutes_ago">Active few minutes ago</string>
+    <string name="active_few_hours_ago">Active few hours ago</string>
+    <string name="user_hasn_t_been_online_for_centuries">User hasn\'t been online for centuries</string>
+    <string name="very_active">Very Active</string>
 </resources>

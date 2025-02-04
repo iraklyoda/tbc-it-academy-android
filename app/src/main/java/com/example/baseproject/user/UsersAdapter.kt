@@ -2,6 +2,7 @@ package com.example.baseproject.user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +30,16 @@ class UsersAdapter : ListAdapter<UserEntity, UsersAdapter.UsersViewHolder>(Users
             binding.apply {
                 tvFullName.text = "${item.firstName} ${item.lastName}"
                 tvAbout.text = "${item.about}"
-                tvActivation.text = "${item.activationStatus}"
+
+                tvActivation.text = when (item.status) {
+                    ActivationStatus.INACTIVE -> itemView.context.getString(R.string.user_is_inactive)
+                    ActivationStatus.ONLINE -> itemView.context.getString(R.string.user_is_online)
+                    ActivationStatus.RECENT -> itemView.context.getString(R.string.active_few_minutes_ago)
+                    ActivationStatus.TODAY -> itemView.context.getString(R.string.active_few_hours_ago)
+                    ActivationStatus.GONE -> itemView.context.getString(R.string.user_hasn_t_been_online_for_centuries)
+                }
+
+                tvActivation.setTextColor(ContextCompat.getColor(itemView.context, item.status.statusColor))
 
                 Glide.with(itemView.context)
                     .load(item.avatar)

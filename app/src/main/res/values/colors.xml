@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="cal_poly_green">#154734</color>
+    <color name="bud_green">#79B465</color>
+    <color name="simple_gray">#676765</color>
+    <color name="glacier_gray">#C5C6C7</color>
+    <color name="casual_red">#AC1D1B</color>
+    <color name="transparent_cyan">#B4D1D0</color>
 </resources>

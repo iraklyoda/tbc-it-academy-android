@@ -19,7 +19,7 @@ class DataRepository(
                 firstName = userDto.firstName,
                 lastName = userDto.lastName,
                 about = userDto.about,
-                activationStatus = userDto.activationStatus
+                status = userDto.status
             )
             users.add(userEntity)
         }

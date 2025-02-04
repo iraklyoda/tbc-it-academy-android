@@ -1,28 +1,15 @@
 package com.example.baseproject.user
 
+import com.example.baseproject.R
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
-@Serializable
-enum class ActivationStatus(val code: Int) {
-    INACTIVE(-1),
-    ONLINE(1),
-    RECENT(2),
-    TODAY(3),
-    GONE(4);
-
-    companion object {
-        fun fromCode(code: Double): ActivationStatus {
-            return when {
-                code < 0 -> INACTIVE
-                code == 1.0 -> ONLINE
-                code == 2.0 -> RECENT
-                code in 3.00..22.00 -> TODAY
-                else -> GONE
-            }
-        }
-    }
+enum class ActivationStatus(val statusColor: Int) {
+    INACTIVE(R.color.casual_red),
+    ONLINE(R.color.bud_green),
+    RECENT(R.color.simple_gray),
+    TODAY(R.color.glacier_gray),
+    GONE(R.color.casual_red);
 }
 
 @Serializable
@@ -36,7 +23,16 @@ data class UserDto(
     val about: String,
     @SerialName("activation_status")
     val activationStatus: Double
-)
+) {
+    val status: ActivationStatus
+        get() = when  {
+            activationStatus  <= 0.0 -> ActivationStatus.INACTIVE
+            activationStatus == 1.0 -> ActivationStatus.ONLINE
+            activationStatus == 2.0 -> ActivationStatus.RECENT
+            activationStatus > 2.0 && activationStatus < 23 -> ActivationStatus.TODAY
+            else -> ActivationStatus.GONE
+        }
+}
 
 @Serializable
 data class UserResponse(

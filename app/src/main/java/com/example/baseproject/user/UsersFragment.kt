@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
     private val usersAdapter: UsersAdapter by lazy {
         UsersAdapter()
     }
+
     private val usersViewModel: UserViewModel by viewModels() {
         UserViewModel.Factory(
             dataRepository = DataRepository(
@@ -30,25 +32,41 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
         )
     }
 
-    private fun isWifiConnected(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+    private var userStatus = UserStatus.OFFLINE
+
+
+    override fun start() {
+        setUserStatus()
+        setUsers()
+        observeCachedUsers()
+
+        updateUserData()
+    }
+
+    private fun updateUserData() {
+        if(userStatus == UserStatus.ONLINE) {
+            usersViewModel.refreshUsers()
+            observeUsers()
+        }
+    }
+
+    private fun isWifiConnected(): Boolean {
+        val connectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
         return connectivityManager?.run {
             val networkCapabilities = activeNetwork?.let { getNetworkCapabilities(it) }
             networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
         } ?: false
     }
 
-    override fun start() {
-        setUsers()
-        observeCachedUsers()
-
-        if(isWifiConnected(requireContext())) {
-            usersViewModel.refreshUsers()
+    private fun setUserStatus() {
+        userStatus = if (isWifiConnected()) {
             binding.tvStatus.text = getString(R.string.you_are_online)
-            observeUsers()
+            UserStatus.ONLINE
         } else {
             binding.tvStatus.text = getString(R.string.you_are_offline)
+            UserStatus.OFFLINE
         }
+        binding.tvStatus.setTextColor(ContextCompat.getColor(requireContext(), userStatus.statusColor))
     }
 
     private fun setUsers() {
@@ -82,7 +100,6 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
 
                     is UIState.Error -> {
                         binding.pb.visibility = View.GONE
-                        binding.rvUsers.visibility = View.GONE
                         Toast.makeText(context, "Error: ${uiState.message}", Toast.LENGTH_SHORT)
                             .show()
                     }
