@@ -44,8 +44,7 @@ class UsersAdapter : ListAdapter<UserEntity, UsersAdapter.UsersViewHolder>(Users
                 Glide.with(itemView.context)
                     .load(item.avatar)
                     .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_background)
-                    .circleCrop()
+                    .error(R.drawable.image_error)
                     .into(ivProfile)
             }
         }
