@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="cultured">#F5F5F5</color>
+
+    <color name="philippine_gray">#8E8E93</color>
+    <color name="lime_green">#32D74B</color>
 </resources>
