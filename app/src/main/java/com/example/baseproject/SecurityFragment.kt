@@ -16,7 +16,6 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(FragmentSecurityB
     private var failedAttempts = 0
     private var isSuspended = false
 
-
     override fun start() {
         setKeys()
     }
@@ -79,23 +78,23 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(FragmentSecurityB
                 failedAttempts++
 
                 if (failedAttempts <= 2) {
-                    requireContext().showToast("Wrong Bro")
+                    requireContext().showToast(getString(R.string.wrong_bro))
                 } else if (failedAttempts == 3) {
-                    requireContext().showToast("That's enough bro")
+                    requireContext().showToast(getString(R.string.that_s_enough_bro))
                 } else if (failedAttempts == 4) {
-                    requireContext().showToast("Try it one more time. I dare you!")
+                    requireContext().showToast(getString(R.string.try_it_one_more_time_i_dare_you))
                 } else {
-                    requireContext().showToast("You have been suspended for 30 seconds 😒")
+                    requireContext().showToast(getString(R.string.you_have_been_suspended_for_30_seconds))
                     suspendUser()
                 }
             }
+
         } else if (enteredPasscode.length == 4) {
-            requireContext().showToast("Bro is suspended 🤣")
+            requireContext().showToast(getString(R.string.bro_is_suspended))
             enteredPasscode = ""
             setProgress()
         }
     }
-
 
     private fun setOvalStatus(oval: View, active: Boolean) {
         if (active)

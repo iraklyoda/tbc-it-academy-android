@@ -5,4 +5,9 @@
     <string name="security_screen">Security screen</string>
     <string name="enter_your_passcode">Enter your passcode</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="wrong_bro">Wrong Bro</string>
+    <string name="that_s_enough_bro">That\'s enough bro</string>
+    <string name="try_it_one_more_time_i_dare_you">Try it one more time. I dare you!</string>
+    <string name="you_have_been_suspended_for_30_seconds">You have been suspended for 30 seconds 😒</string>
+    <string name="bro_is_suspended">Bro is suspended 🤣</string>
 </resources>
