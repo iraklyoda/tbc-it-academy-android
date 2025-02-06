@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cultured"
-    tools:context=".SecurityFragment">
+    tools:context=".presentation.SecurityFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_header"
@@ -127,6 +127,7 @@
             android:text="9" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_fingerprint"
             style="@style/key_btn"
             android:background="@drawable/key_bg"
             android:src="@drawable/ic_fingerprint" />

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Base Project</string>
+    <string name="app_name">SecurityApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="security_screen">Security screen</string>
@@ -10,4 +10,6 @@
     <string name="try_it_one_more_time_i_dare_you">Try it one more time. I dare you!</string>
     <string name="you_have_been_suspended_for_30_seconds">You have been suspended for 30 seconds 😒</string>
     <string name="bro_is_suspended">Bro is suspended 🤣</string>
+    <string name="success">Success!</string>
+    <string name="you_have_been_suspended_for_60_seconds">You have been suspended for 60 seconds</string>
 </resources>
