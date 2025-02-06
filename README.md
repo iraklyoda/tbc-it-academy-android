@@ -23,7 +23,6 @@ This project is for practice only. Currently, the app does not implement Depende
 ## Libraries Used
 
 - **Preferences DataStore** – For storing user suspension data and ensuring persistence across app restarts.
-- **Kotlin Coroutines** – For managing asynchronous operations.
 
 ## How It Works
 
