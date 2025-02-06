@@ -1,37 +1,45 @@
-# TBC IT Academy Android Development
+# Security Pin App (Assignment-22)
 
-This repository contains assignments and quiz projects from the TBC IT Academy for Android Development. Each assignment is organized into separate branches, and you can click on the links below to view the code.
+<div align="center">  
 
-## Assignments
+[![Kotlin](https://img.shields.io/badge/Kotlin-v2.1.0-1F425F?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org)  
+[![Android Studio](https://img.shields.io/badge/Android_Studio-3DDC84?style=flat&logo=android-studio&logoColor=white)](https://developer.android.com/studio)
 
-- [Assignment 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-1)
-- [Assignment 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-2)
-- [Assignment 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-3)
-- [Assignment 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-4)
-- [Assignment 5](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-5)
-- [Assignment 6](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-6)
-- [Assignment 7](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-7)
-- [Assignment 8](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-8)
-- [Assignment 9](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-9)
-- [Assignment 10](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-10)
-- [Assignment 11](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-11)
-- [Assignment 12](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-12)
-- [Assignment 13](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-13)
-- [Assignment 14](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-14)
-- [Assignment 15 - Payment App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-15)
-- [Assignment 16](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-16)
-- [Assignment 17](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-17)
-- [Assignment 18](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-18)
-- [Assignment 19](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-19)
-- [Assignment 20 - E-Auth Login and Registration Page 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-20)
-- [Assignment 21 - User Data Storage](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-21)
+</div>  
 
+## Overview
 
-## Quiz Projects
+A simple Android app that allows users to input a 4-digit PIN using buttons 0-9, a return button, and a fingerprint option. The hardcoded PIN is "0934." The app provides feedback through Toast messages, indicating success or failure based on user input.
 
-- [Quiz Project 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-1)
-- [Quiz Project 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-2)
-- [Quiz Project 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-3)
-- [Quiz Project 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-4)
-- [Quiz Project 5 - Room User's List](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-5)
-- [Quiz Project 5 - Room User's List (Revisited)](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-5-revisited)
+## Note
+This project is for practice only. Currently, the app does not implement Dependency Injection (DI).
+
+## Features
+
+- **User Input**: Enter PIN using buttons 0-9.
+- **Feedback System**: Toast messages indicate success or failure of PIN entry.
+- **User Suspension**: After 5 incorrect attempts, the user is temporarily suspended for 30 or 60 seconds, depending on the chosen duration.
+
+## Libraries Used
+
+- **Preferences DataStore** – For storing user suspension data and ensuring persistence across app restarts.
+- **Kotlin Coroutines** – For managing asynchronous operations.
+
+## How It Works
+
+1. **User enters PIN** → Inputs 0-9 to form a 4-digit PIN.
+2. **Validation** → If the entered PIN is "0934," a "Success" Toast message appears.
+3. **Feedback on attempts** → If incorrect, a message is shown based on the number of attempts.
+4. **Suspension** → After 5 incorrect attempts, the user is suspended for either 30 or 60 seconds.
+
+## Screenshots
+
+<p align="center">
+    <img src="docs/images/screenshot_01.png" width="250" alt="PIN Input Screen">
+    <img src="docs/images/screenshot_02.png" width="250" alt="Suspension message">
+</p>  
+
+## Notes
+
+- The app utilizes Preferences DataStore for storing suspension data, ensuring it persists across app restarts.
+- User experience is enhanced with immediate feedback through Toast messages.
