@@ -23,7 +23,7 @@ class SecurityViewModel(
         userPreferencesRepository.setSuspensionTime(suspendedUntil)
     }
 
-    suspend fun checkSuspend(): Boolean {
+    suspend fun isSuspended(): Boolean {
         return userPreferencesRepository.isUserSuspended()
     }
     

@@ -12,4 +12,5 @@
     <string name="bro_is_suspended">Bro is suspended 🤣</string>
     <string name="success">Success!</string>
     <string name="you_have_been_suspended_for_60_seconds">You have been suspended for 60 seconds</string>
+    <string name="wrong_finger">Wrong Finger</string>
 </resources>

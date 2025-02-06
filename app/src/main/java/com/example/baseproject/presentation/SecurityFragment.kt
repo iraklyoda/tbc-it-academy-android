@@ -1,7 +1,6 @@
 package com.example.baseproject.presentation
 
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.baseproject.BaseFragment
@@ -61,29 +60,30 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(FragmentSecurityB
 
     private fun handlePasscode() {
         viewLifecycleOwner.lifecycleScope.launch {
-            if (enteredPasscode.length == 4 && !securityViewModel.checkSuspend()) {
-                if (securityViewModel.checkPasscode(enteredPasscode)) {
-                    handleSuccessAttempt()
-                } else {
-                    handleFailedAttempt()
-                }
+            if (enteredPasscode.length == 4) {
+                if (!securityViewModel.isSuspended()) {
+                    if (securityViewModel.checkPasscode(enteredPasscode)) {
+                        handleSuccessAttempt()
+                    } else {
+                        handleFailedAttempt()
+                    }
 
-            } else if (enteredPasscode.length == 4) {
-                requireContext().showToast(getString(R.string.bro_is_suspended))
-                resetState()
+                } else {
+                    requireContext().showToast(getString(R.string.bro_is_suspended))
+                    resetState()
+                }
             }
         }
     }
 
     private fun handleSuccessAttempt() {
-        Toast.makeText(requireContext(), getString(R.string.success), Toast.LENGTH_SHORT).show()
-        failedAttempts = 0
-
         viewLifecycleOwner.lifecycleScope.launch {
             securityViewModel.clearUserBeenSuspended()
             securityViewModel.clearSuspension()
         }
 
+        requireContext().showToast(getString(R.string.success))
+        failedAttempts = 0
         resetState()
     }
 
@@ -134,10 +134,12 @@ class SecurityFragment : BaseFragment<FragmentSecurityBinding>(FragmentSecurityB
 
     private fun handleFingerprint() {
         binding.btnFingerprint.setOnLongClickListener {
-            requireContext().showToast("Wrong Finger")
+            requireContext().showToast(getString(R.string.wrong_finger))
             true
         }
     }
+
+//    Handle Input Progress Circles
 
     private fun setProgressStatus(oval: View, active: Boolean) {
         if (active)
