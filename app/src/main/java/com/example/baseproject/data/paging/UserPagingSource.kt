@@ -1,9 +1,10 @@
-package com.example.baseproject.user
+package com.example.baseproject.data.paging
 
 import android.util.Log.d
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.baseproject.client.UserService
+import com.example.baseproject.data.remote.api.UserService
+import com.example.baseproject.data.remote.dto.UserDto
 
 class UserPagingSource(
     private val backend: UserService

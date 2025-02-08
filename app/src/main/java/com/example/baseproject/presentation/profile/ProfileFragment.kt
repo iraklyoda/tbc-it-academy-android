@@ -1,9 +1,9 @@
-package com.example.baseproject.user.controllers
+package com.example.baseproject.presentation.profile
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
-import com.example.baseproject.data.AuthPreferencesRepository
+import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentProfileBinding
 import kotlinx.coroutines.launch
 

@@ -1,4 +1,4 @@
-package com.example.baseproject.user.controllers
+package com.example.baseproject.presentation.authentication.auth
 
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
@@ -9,12 +9,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
-import com.example.baseproject.data.AuthPreferencesRepository
+import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentLoginBinding
-import com.example.baseproject.user.viewmodels.AuthState
-import com.example.baseproject.user.viewmodels.LoginViewModel
-import com.example.baseproject.user.viewmodels.LoginViewModelFactory
-import com.example.baseproject.user.ProfileDto
+import com.example.baseproject.data.remote.dto.ProfileDto
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
@@ -30,7 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(authPreferencesRepository)
+        LoginViewModel.Factory(authPreferencesRepository)
     }
 
     override fun listeners() {

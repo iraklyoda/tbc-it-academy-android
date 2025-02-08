@@ -1,8 +1,7 @@
-package com.example.baseproject.user
+package com.example.baseproject.presentation.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.example.baseproject.R
+import com.example.baseproject.data.remote.dto.UserDto
 import com.example.baseproject.databinding.ItemUserBinding
 
 class UserDiffUtil : DiffUtil.ItemCallback<UserDto>() {

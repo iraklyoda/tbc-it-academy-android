@@ -1,10 +1,10 @@
-package com.example.baseproject.user.viewmodels
+package com.example.baseproject.presentation.authentication.register
 
 import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.baseproject.client.RetrofitClient
-import com.example.baseproject.user.ProfileDto
+import com.example.baseproject.data.remote.api.RetrofitClient
+import com.example.baseproject.data.remote.dto.ProfileDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

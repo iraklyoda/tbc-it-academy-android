@@ -1,12 +1,14 @@
-package com.example.baseproject.user.viewmodels
+package com.example.baseproject.presentation.authentication.auth
 
 import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.baseproject.client.RetrofitClient
-import com.example.baseproject.data.AuthPreferencesRepository
-import com.example.baseproject.user.ProfileDto
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.baseproject.data.remote.api.RetrofitClient
+import com.example.baseproject.data.local.AuthPreferencesRepository
+import com.example.baseproject.data.remote.dto.ProfileDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -55,15 +57,12 @@ class LoginViewModel(
             }
         }
     }
-}
 
-class LoginViewModelFactory(
-    private val authPreferencesRepository: AuthPreferencesRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(authPreferencesRepository) as T
+    companion object {
+        fun Factory(authPreferencesRepository: AuthPreferencesRepository): ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                LoginViewModel(authPreferencesRepository)
+            }
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

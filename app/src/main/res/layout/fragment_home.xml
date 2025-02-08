@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.controllers.HomeFragment">
+    tools:context=".presentation.home.HomeFragment">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_profile"

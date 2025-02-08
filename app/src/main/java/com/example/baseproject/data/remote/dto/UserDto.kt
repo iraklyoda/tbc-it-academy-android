@@ -1,4 +1,4 @@
-package com.example.baseproject.user
+package com.example.baseproject.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

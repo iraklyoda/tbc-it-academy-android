@@ -1,10 +1,9 @@
-package com.example.baseproject.client
+package com.example.baseproject.data.remote.api
 
-import com.example.baseproject.requests.LoginResponseDto
-import com.example.baseproject.requests.RegisterResponseDto
-import com.example.baseproject.user.ProfileDto
-import com.example.baseproject.user.UserDto
-import com.example.baseproject.user.UserResponseDto
+import com.example.baseproject.data.remote.dto.LoginResponseDto
+import com.example.baseproject.data.remote.dto.RegisterResponseDto
+import com.example.baseproject.data.remote.dto.ProfileDto
+import com.example.baseproject.data.remote.dto.UserResponseDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

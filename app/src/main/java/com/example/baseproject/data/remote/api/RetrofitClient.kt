@@ -1,4 +1,4 @@
-package com.example.baseproject.client
+package com.example.baseproject.data.remote.api
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json

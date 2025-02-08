@@ -1,7 +1,6 @@
-package com.example.baseproject.user.controllers
+package com.example.baseproject.presentation.home
 
 import android.graphics.drawable.Drawable
-import android.util.Log.d
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -16,9 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentHomeBinding
-import com.example.baseproject.user.viewmodels.HomeViewModel
-import com.example.baseproject.user.UserDto
-import com.example.baseproject.user.UsersAdapter
+import com.example.baseproject.data.remote.dto.UserDto
 import com.example.baseproject.utils.showErrorToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
