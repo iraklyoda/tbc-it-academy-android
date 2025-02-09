@@ -74,7 +74,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         }
 
                         if (previous.error != state.error) {
-                            requireContext().showErrorToast(state.error.toString())
+                            state.error?.let {
+                                requireContext().showErrorToast(state.error.toString())
+                            }
                         }
 
                     }

@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 object RetrofitClient {
     private const val BASE_URL = "https://reqres.in/api/"
 
-    val json = Json {
+    private val json = Json {
         ignoreUnknownKeys = true
     }
 

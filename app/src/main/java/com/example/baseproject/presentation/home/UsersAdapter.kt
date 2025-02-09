@@ -13,30 +13,29 @@ import com.example.baseproject.R
 import com.example.baseproject.data.remote.dto.UserDto
 import com.example.baseproject.databinding.ItemUserBinding
 
-class UserDiffUtil : DiffUtil.ItemCallback<UserDto>() {
-    override fun areItemsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
+class UserDiffUtil : DiffUtil.ItemCallback<UserUI>() {
+    override fun areItemsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
+    override fun areContentsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
         return oldItem == newItem
     }
 }
 
-class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
+class UsersAdapter : PagingDataAdapter<UserUI, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            user: UserDto?,
+            user: UserUI?,
         ) {
             user?.let {
                 binding.apply {
-                    textFullName.text =
-                        itemView.context.getString(R.string.full_name, it.firstName, it.lastName)
+                    textFullName.text = it.fullName
                     textEmail.text = it.email
 
-                    Glide.with(ivProfile.context).load(it.avatar).apply(
+                    Glide.with(ivProfile.context).load(it.avatarUrl).apply(
                         RequestOptions().placeholder(R.drawable.ic_launcher_background)
                             .transform(CircleCrop())
                     ).into(ivProfile)

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentHomeBinding
-import com.example.baseproject.data.remote.dto.UserDto
+import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun observePaging() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.usersPagerFlow.collectLatest { usersData: PagingData<UserDto> ->
+                homeViewModel.usersPagerFlow.collectLatest { usersData: PagingData<UserUI> ->
                     usersAdapter.submitData(usersData)
                 }
             }
@@ -66,12 +66,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         usersAdapter.addLoadStateListener { loadStates ->
 
             if (loadStates.append is LoadState.Loading) {
-                setLoader(true)
+                binding.pbUsers.setLoaderState(true)
             }
 
             when (loadStates.source.refresh) {
                 is LoadState.Loading -> {
-                    setLoader(true)
+                    binding.pbUsers.setLoaderState(true)
                 }
 
                 is LoadState.Error -> {
@@ -82,7 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
 
                 is LoadState.NotLoading -> {
-                    setLoader(false)
+                    binding.pbUsers.setLoaderState(false)
                 }
             }
         }
@@ -92,16 +92,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.btnProfile.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
             findNavController().navigate(action)
-        }
-    }
-
-    private fun setLoader(loading: Boolean) {
-        binding.apply {
-            if (loading) {
-                pbLogin.visibility = View.VISIBLE
-            } else {
-                pbLogin.visibility = View.GONE
-            }
         }
     }
 }

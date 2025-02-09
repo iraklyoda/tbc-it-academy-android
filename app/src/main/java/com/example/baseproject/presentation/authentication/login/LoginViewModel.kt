@@ -30,7 +30,7 @@ class LoginViewModel(
         rememberMe: Boolean = false,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            _loginStateFlow.update { it.copy(loader = true) }
+            _loginStateFlow.update { it.copy(loader = true, error = null) }
             val result =
                 ApiHelper.handleHttpRequest { RetrofitClient.userService.loginUser(profileDto) }
             when (result) {

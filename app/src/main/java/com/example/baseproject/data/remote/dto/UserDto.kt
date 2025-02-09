@@ -1,5 +1,6 @@
 package com.example.baseproject.data.remote.dto
 
+import com.example.baseproject.presentation.home.UserUI
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,3 +24,12 @@ data class UserDto(
     val lastName: String,
     val avatar: String
 )
+
+fun UserDto.toUserUI(): UserUI {
+    return UserUI(
+        id = id,
+        fullName = "$firstName $lastName",
+        email = email,
+        avatarUrl = avatar
+    )
+}
