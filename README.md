@@ -1,4 +1,4 @@
-# E-Auth Login and Registration Page 3 (Paging3) (Assignment-20)
+# E-Auth Login and Registration Page 4 (Paging3) (Assignment-23)
 
 <div align="center">
 
@@ -9,7 +9,10 @@
 
 ## Overview
 
-Continuation of [Assignment-19](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-19)
+Continuation of [Assignment-20](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-20)
+
+(Functionality wise same project, code was updated, where single handleHttpRequest is created, and now app)
+code tries to match Single Responsibility Principle better)
 
 In the following the method of which data about users are fetched have been updated using Paging3 library
 
