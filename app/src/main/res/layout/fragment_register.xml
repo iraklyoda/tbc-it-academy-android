@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@id/et_repeat_password" />
 
     <ProgressBar
-        android:id="@+id/pb"
+        android:id="@+id/pb_register"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/btn_register"
         android:layout_width="wrap_content"

@@ -6,7 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.ActivityMainBinding
-import com.example.baseproject.presentation.authentication.auth.LoginFragmentDirections
+import com.example.baseproject.presentation.authentication.login.LoginFragmentDirections
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {

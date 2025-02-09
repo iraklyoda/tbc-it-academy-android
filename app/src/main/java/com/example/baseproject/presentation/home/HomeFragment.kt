@@ -98,9 +98,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setLoader(loading: Boolean) {
         binding.apply {
             if (loading) {
-                pb.visibility = View.VISIBLE
+                pbLogin.visibility = View.VISIBLE
             } else {
-                pb.visibility = View.GONE
+                pbLogin.visibility = View.GONE
             }
         }
     }

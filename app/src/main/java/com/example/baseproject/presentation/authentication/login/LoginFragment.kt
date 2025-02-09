@@ -1,4 +1,4 @@
-package com.example.baseproject.presentation.authentication.auth
+package com.example.baseproject.presentation.authentication.login
 
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
@@ -12,9 +12,11 @@ import com.example.baseproject.R
 import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentLoginBinding
 import com.example.baseproject.data.remote.dto.ProfileDto
+import com.example.baseproject.presentation.authentication.AuthState
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
+import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,23 +33,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     override fun listeners() {
-        observeAuthState()
+        observeLoginState()
         registerFragmentListener()
         passwordVisibilityToggle()
         login()
         navigateToRegister()
     }
 
-    private fun observeAuthState() {
+    private fun observeLoginState() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 var previousState: AuthState? = null
 
-                loginViewModel.authStateFlow.collectLatest { state ->
+                loginViewModel.loginStateFlow.collectLatest { state ->
                     previousState?.let { previous ->
 
                         if (previous.loader != state.loader) {
-                            setLoader(state.loader)
+                            binding.pbLogin.setLoaderState(
+                                loading = state.loader,
+                                actionBtn = binding.btnLogin
+                            )
                         }
 
                         if (previous.userInfo != state.userInfo) {
@@ -113,18 +118,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 return requireContext().showErrorToast(getString(R.string.please_enter_proper_password))
         }
         return true
-    }
-
-    private fun setLoader(loading: Boolean) {
-        binding.apply {
-            if (loading) {
-                pb.visibility = View.VISIBLE
-                btnLogin.isEnabled = false
-            } else {
-                pb.visibility = View.GONE
-                btnLogin.isEnabled = true
-            }
-        }
     }
 
     private fun passwordVisibilityToggle() {

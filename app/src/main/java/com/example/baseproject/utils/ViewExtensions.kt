@@ -1,8 +1,11 @@
 package com.example.baseproject.utils
 
 import android.text.InputType
+import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 
 // Takes EditText View as a parameter and updates InputType based on condition
 // Best suited for password types
@@ -23,4 +26,14 @@ fun ImageButton.makeVisibilityToggle(editText: EditText) {
 
 fun EditText.getString(): String {
     return this.text.toString().trim()
+}
+
+fun ProgressBar.setLoaderState(loading: Boolean, actionBtn: Button? = null) {
+    if (loading) {
+        this.visibility = View.VISIBLE
+        actionBtn?.isEnabled = false
+    } else {
+        this.visibility = View.GONE
+        actionBtn?.isEnabled = true
+    }
 }

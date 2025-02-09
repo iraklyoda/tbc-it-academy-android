@@ -3,43 +3,38 @@ package com.example.baseproject.presentation.authentication.register
 import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.baseproject.common.ApiHelper
+import com.example.baseproject.common.Resource
 import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.data.remote.dto.ProfileDto
+import com.example.baseproject.presentation.authentication.AuthState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
 
-    private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isLoading: MutableStateFlow<Boolean> = _isLoading
+    private val _registerStateFlow: MutableStateFlow<AuthState> =
+        MutableStateFlow<AuthState>(AuthState())
+    val registerStateFlow: StateFlow<AuthState> get() = _registerStateFlow
 
-    private val _registrationSuccess: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val registrationSuccess: MutableStateFlow<Boolean> = _registrationSuccess
+    fun registerUser(profileDto: ProfileDto) {
 
-    fun registerUser(profileDto: ProfileDto, onFailed: suspend (error: String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            _isLoading.value = true
+            _registerStateFlow.update { it.copy(loader = true) }
+            val result = ApiHelper.handleHttpRequest { RetrofitClient.userService.registerUser(profileDto) }
 
-            try {
-                val response = RetrofitClient.userService.registerUser(profileDto)
-
-                if (response.isSuccessful) {
-                    d("userRegister", "Registration success")
-                    _registrationSuccess.value = true
-                } else {
-                    _registrationSuccess.value = false
-                    onFailed(response.errorBody().toString())
-                    d("userRegister", "Error ${response.errorBody()}")
+            when (result) {
+                is Resource.Success -> {
+                    _registerStateFlow.update { it.copy(userInfo = profileDto) }
                 }
-
-            } catch (e: Exception) {
-                d("userRegister", e.message.toString())
-                onFailed(e.message.toString())
-                _registrationSuccess.value = false
-            } finally {
-                _isLoading.value = false
+                is Resource.Error -> {
+                    _registerStateFlow.update { it.copy(error = result.errorMessage) }
+                }
             }
+            _registerStateFlow.update { it.copy(loader = false) }
         }
     }
 

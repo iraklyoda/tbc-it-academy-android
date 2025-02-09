@@ -21,20 +21,19 @@ class UserDiffUtil : DiffUtil.ItemCallback<UserDto>() {
     override fun areContentsTheSame(oldItem: UserDto, newItem: UserDto): Boolean {
         return oldItem == newItem
     }
-
 }
 
 class UsersAdapter : PagingDataAdapter<UserDto, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
         fun onBind(
             user: UserDto?,
         ) {
             user?.let {
                 binding.apply {
-                    textFullName.text = "${it.firstName} ${it.lastName}"
+                    textFullName.text =
+                        itemView.context.getString(R.string.full_name, it.firstName, it.lastName)
                     textEmail.text = it.email
 
                     Glide.with(ivProfile.context).load(it.avatar).apply(

@@ -1,22 +1,24 @@
 package com.example.baseproject.presentation.authentication.register
 
-import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentRegisterBinding
 import com.example.baseproject.data.remote.dto.ProfileDto
+import com.example.baseproject.presentation.authentication.AuthState
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
+import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
     private val registerViewModel: RegisterViewModel by viewModels()
@@ -24,8 +26,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     override fun listeners() {
         passwordVisibilityToggle()
         register()
-        observeRegistration()
-        observeLoadingData()
+        observeRegistrationState()
     }
 
     private fun passwordVisibilityToggle() {
@@ -41,44 +42,43 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         ProfileDto(
                             email = etEmail.getString(),
                             password = etPassword.getString()
-                        ),
-                        onFailed = { error ->
-                            withContext(Dispatchers.Main) {
-                                requireContext().showErrorToast(error)
-                            }
-                        }
+                        )
                     )
                 }
             }
         }
     }
 
-    private fun observeLoadingData() {
+    private fun observeRegistrationState() {
         viewLifecycleOwner.lifecycleScope.launch {
-            registerViewModel.isLoading.collect() { loading ->
-                binding.apply {
-                    if (loading) {
-                        pb.visibility = View.VISIBLE
-                        btnRegister.isEnabled = false
-                    } else {
-                        pb.visibility = View.GONE
-                        btnRegister.isEnabled = true
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                var previousState: AuthState? = null
+
+                registerViewModel.registerStateFlow.collectLatest { state ->
+                    previousState?.let { previous ->
+                        if (previous.loader != state.loader) {
+                            binding.pbRegister.setLoaderState(
+                                loading = state.loader,
+                                actionBtn = binding.btnRegister
+                            )
+                        }
+
+                        if (previous.userInfo != state.userInfo) {
+                            setFragmentResult(
+                                "credentials", bundleOf(
+                                    "email" to state.userInfo?.email,
+                                    "password" to state.userInfo?.password
+                                )
+                            )
+                            findNavController().navigateUp()
+                        }
+
+                        if (previous.error != state.error) {
+                            requireContext().showErrorToast(state.error.toString())
+                        }
+
                     }
-                }
-            }
-        }
-    }
-
-    private fun observeRegistration() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            registerViewModel.registrationSuccess.collect() { success ->
-                if (success) {
-                    setFragmentResult("credentials", bundleOf(
-                        "email" to binding.etEmail.getString(),
-                        "password" to binding.etPassword.getString()
-                    ))
-
-                    findNavController().navigateUp()
+                    previousState = state
                 }
             }
         }
