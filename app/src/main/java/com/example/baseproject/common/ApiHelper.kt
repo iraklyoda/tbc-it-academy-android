@@ -20,7 +20,8 @@ object ApiHelper {
                     emit(Resource.Success(data = it))
                 } ?: emit(Resource.Error(errorMessage = "Something is wrong"))
             } else {
-                emit(Resource.Error(errorMessage = response.message()))
+                val errorMessage = response.message().ifEmpty { "error: ${response.code()}" }
+                emit(Resource.Error(errorMessage = errorMessage))
             }
         } catch (throwable: Throwable) {
             when (throwable) {

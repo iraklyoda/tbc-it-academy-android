@@ -1,5 +1,6 @@
 package com.example.baseproject.presentation.authentication.login
 
+import android.util.Log.d
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -59,6 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             navigateToHome()
                         }
                         is Resource.Error -> {
+                            d("LoginError", "$resource")
                             requireContext().showErrorToast(resource.errorMessage)
                         }
                     }
