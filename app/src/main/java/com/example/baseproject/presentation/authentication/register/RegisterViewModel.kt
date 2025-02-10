@@ -1,41 +1,47 @@
 package com.example.baseproject.presentation.authentication.register
 
-import android.util.Log.d
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.baseproject.common.ApiHelper
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.baseproject.common.Resource
-import com.example.baseproject.data.remote.api.RetrofitClient
-import com.example.baseproject.data.remote.dto.ProfileDto
-import com.example.baseproject.presentation.authentication.AuthState
+import com.example.baseproject.data.remote.AuthRepository
+import com.example.baseproject.domain.model.Profile
+import com.example.baseproject.presentation.authentication.login.LoginViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
-    private val _registerStateFlow: MutableStateFlow<AuthState> =
-        MutableStateFlow<AuthState>(AuthState())
-    val registerStateFlow: StateFlow<AuthState> get() = _registerStateFlow
+    private val _registerStateFlow: MutableStateFlow<Resource<Profile>> =
+        MutableStateFlow<Resource<Profile>>(Resource.Loading(false))
 
-    fun registerUser(profileDto: ProfileDto) {
+    val registerStateFlow: StateFlow<Resource<Profile>> get() = _registerStateFlow
 
+    fun register(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _registerStateFlow.update { it.copy(loader = true) }
-            val result = ApiHelper.handleHttpRequest { RetrofitClient.userService.registerUser(profileDto) }
+            authRepository.register(
+                email = email,
+                password = password
+            ).collectLatest { resource ->
+                _registerStateFlow.value = resource
+            }
+        }
+    }
 
-            when (result) {
-                is Resource.Success -> {
-                    _registerStateFlow.update { it.copy(userInfo = profileDto) }
-                }
-                is Resource.Error -> {
-                    _registerStateFlow.update { it.copy(error = result.errorMessage) }
+    companion object {
+        fun Factory(authRepository: AuthRepository): ViewModelProvider.Factory =
+            viewModelFactory {
+                initializer {
+                    RegisterViewModel(authRepository)
                 }
             }
-            _registerStateFlow.update { it.copy(loader = false) }
-        }
     }
 
 }

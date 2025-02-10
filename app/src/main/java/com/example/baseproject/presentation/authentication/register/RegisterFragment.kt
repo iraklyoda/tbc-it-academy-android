@@ -9,9 +9,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
+import com.example.baseproject.common.Resource
+import com.example.baseproject.data.local.AuthPreferencesRepository
+import com.example.baseproject.data.remote.AuthRepository
+import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.databinding.FragmentRegisterBinding
-import com.example.baseproject.data.remote.dto.ProfileDto
-import com.example.baseproject.presentation.authentication.AuthState
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
@@ -21,7 +23,17 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
-    private val registerViewModel: RegisterViewModel by viewModels()
+
+    private val authRepository: AuthRepository by lazy {
+        AuthRepository(
+            apiService = RetrofitClient.authService,
+            authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
+        )
+    }
+
+    private val registerViewModel: RegisterViewModel by viewModels() {
+        RegisterViewModel.Factory(authRepository)
+    }
 
     override fun listeners() {
         passwordVisibilityToggle()
@@ -38,11 +50,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.apply {
             btnRegister.setOnClickListener {
                 if (validateForm()) {
-                    registerViewModel.registerUser(
-                        ProfileDto(
-                            email = etEmail.getString(),
-                            password = etPassword.getString()
-                        )
+                    registerViewModel.register(
+                        email = etEmail.getString(),
+                        password = etPassword.getString()
                     )
                 }
             }
@@ -52,35 +62,31 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private fun observeRegistrationState() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                var previousState: AuthState? = null
 
-                registerViewModel.registerStateFlow.collectLatest { state ->
-                    previousState?.let { previous ->
-                        if (previous.loader != state.loader) {
+                registerViewModel.registerStateFlow.collectLatest { resource ->
+
+                    when (resource) {
+                        is Resource.Loading -> {
                             binding.pbRegister.setLoaderState(
-                                loading = state.loader,
+                                loading = resource.loading,
                                 actionBtn = binding.btnRegister
                             )
                         }
 
-                        if (previous.userInfo != state.userInfo) {
+                        is Resource.Success -> {
                             setFragmentResult(
                                 "credentials", bundleOf(
-                                    "email" to state.userInfo?.email,
-                                    "password" to state.userInfo?.password
+                                    "email" to resource.data.email,
+                                    "password" to resource.data.password
                                 )
                             )
                             findNavController().navigateUp()
                         }
 
-                        if (previous.error != state.error) {
-                            state.error?.let {
-                                requireContext().showErrorToast(state.error.toString())
-                            }
+                        is Resource.Error -> {
+                            requireContext().showErrorToast(resource.errorMessage)
                         }
-
                     }
-                    previousState = state
                 }
             }
         }

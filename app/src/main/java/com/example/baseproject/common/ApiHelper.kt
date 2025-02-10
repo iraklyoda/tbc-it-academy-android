@@ -1,5 +1,7 @@
 package com.example.baseproject.common
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
@@ -7,35 +9,40 @@ import java.io.IOException
 object ApiHelper {
     suspend fun <T> handleHttpRequest(
         apiCall: suspend () -> Response<T>
-    ): Resource<T> {
-        return try {
+    ): Flow<Resource<T>> = flow {
+        emit(Resource.Loading(true))
+
+        try {
             val response = apiCall.invoke()
 
             if (response.isSuccessful) {
                 response.body()?.let {
-                    Resource.Success(data = it)
-                } ?: Resource.Error(errorMessage = "Something iss wrong")
+                    emit(Resource.Success(data = it))
+                } ?: emit(Resource.Error(errorMessage = "Something is wrong"))
             } else {
-                Resource.Error(errorMessage = response.message())
+                emit(Resource.Error(errorMessage = response.message()))
             }
         } catch (throwable: Throwable) {
             when (throwable) {
                 is IOException -> {
-                    Resource.Error(errorMessage = throwable.message ?: "IO")
+                    emit(Resource.Error(errorMessage = throwable.message ?: "IO"))
                 }
 
                 is HttpException -> {
-                    Resource.Error(errorMessage = throwable.message ?: "Http")
+                    emit(Resource.Error(errorMessage = throwable.message ?: "Http"))
                 }
 
                 is IllegalStateException -> {
-                    Resource.Error(errorMessage = throwable.message ?: "Illegal")
+                    emit(Resource.Error(errorMessage = throwable.message ?: "Illegal"))
                 }
 
                 else -> {
-                    Resource.Error(errorMessage = throwable.message ?: "Other")
+                    emit(Resource.Error(errorMessage = throwable.message ?: "Other"))
                 }
             }
+        } finally {
+            emit(Resource.Loading(false))
         }
+
     }
 }

@@ -1,6 +1,5 @@
 package com.example.baseproject.presentation.authentication.login
 
-import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -9,10 +8,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
+import com.example.baseproject.common.Resource
 import com.example.baseproject.data.local.AuthPreferencesRepository
+import com.example.baseproject.data.remote.AuthRepository
+import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.databinding.FragmentLoginBinding
-import com.example.baseproject.data.remote.dto.ProfileDto
-import com.example.baseproject.presentation.authentication.AuthState
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
@@ -24,12 +24,15 @@ import kotlinx.coroutines.launch
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private val authPreferencesRepository: AuthPreferencesRepository by lazy {
-        AuthPreferencesRepository(requireContext().applicationContext)
+    private val authRepository: AuthRepository by lazy {
+        AuthRepository(
+            apiService = RetrofitClient.authService,
+            authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
+        )
     }
 
     private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModel.Factory(authPreferencesRepository)
+        LoginViewModel.Factory(authRepository)
     }
 
     override fun listeners() {
@@ -43,30 +46,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun observeLoginState() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                var previousState: AuthState? = null
 
-                loginViewModel.loginStateFlow.collectLatest { state ->
-                    previousState?.let { previous ->
-
-                        if (previous.loader != state.loader) {
-                            binding.pbLogin.setLoaderState(
-                                loading = state.loader,
-                                actionBtn = binding.btnLogin
-                            )
+                loginViewModel.loginStateFlow.collectLatest { resource ->
+                    when (resource) {
+                        is Resource.Loading -> {
+                                binding.pbLogin.setLoaderState(
+                                    loading = resource.loading,
+                                    actionBtn = binding.btnLogin
+                                )
                         }
-
-                        if (previous.userInfo != state.userInfo) {
+                        is Resource.Success -> {
                             navigateToHome()
                         }
-
-                        if (previous.error != state.error) {
-                            state.error?.let {
-                                requireContext().showErrorToast(state.error.toString())
-                            }
+                        is Resource.Error -> {
+                            requireContext().showErrorToast(resource.errorMessage)
                         }
-
                     }
-                    previousState = state
                 }
             }
         }
@@ -76,11 +71,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.apply {
             btnLogin.setOnClickListener {
                 if (validateForm()) {
-                    loginViewModel.loginUser(
-                        ProfileDto(
-                            email = etEmail.getString(),
-                            password = etPassword.getString()
-                        ),
+                    loginViewModel.login(
+                        email = etEmail.getString(),
+                        password = etPassword.getString(),
                         rememberMe = cbRemember.isChecked
                     )
                 }

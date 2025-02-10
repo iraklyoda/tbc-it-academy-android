@@ -1,7 +1,6 @@
 package com.example.baseproject.presentation.home
 
 import android.graphics.drawable.Drawable
-import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -79,6 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         (loadStates.source.refresh as LoadState.Error).error.localizedMessage
                             ?: "Error"
                     )
+                    binding.pbUsers.setLoaderState(false)
                 }
 
                 is LoadState.NotLoading -> {

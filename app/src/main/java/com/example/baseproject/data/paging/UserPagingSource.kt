@@ -5,12 +5,15 @@ import androidx.paging.PagingState
 import com.example.baseproject.common.ApiHelper
 import com.example.baseproject.common.Resource
 import com.example.baseproject.data.remote.api.UserService
-import com.example.baseproject.data.remote.dto.toUserUI
 import com.example.baseproject.data.remote.dto.UserDto
+import com.example.baseproject.data.remote.dto.toUserUI
 import com.example.baseproject.presentation.home.UserUI
+import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.single
+import retrofit2.HttpException
 
 class UserPagingSource(
-    private val backend: UserService
+    private val apiService: UserService
 ) : PagingSource<Int, UserUI>() {
 
     override fun getRefreshKey(state: PagingState<Int, UserUI>): Int? {
@@ -21,25 +24,22 @@ class UserPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserUI> {
-
         return try {
             val page = params.key ?: 1
-            val result = ApiHelper.handleHttpRequest {  backend.getUsersData(page) }
+            val response = apiService.getUsersData(page)
 
-            when (result) {
-                is Resource.Success -> {
-                    val users: List<UserDto> = result.data.data
-                    val usersUI: List<UserUI> = users.map { it.toUserUI() }
-                    val totalPages = result.data.totalPages
+            if (response.isSuccessful) {
+                response.body()?.let { data ->
+                    val usersUI: List<UserUI> = data.data.map { it.toUserUI() }
+                    val totalPages = data.totalPages
                     LoadResult.Page(
                         data = usersUI,
-                        prevKey = null,
+                        prevKey = if (page == 1) null else page - 1,
                         nextKey = if (page < totalPages) page + 1 else null
                     )
-                }
-                is Resource.Error -> {
-                    LoadResult.Error(Exception("Error: ${result.errorMessage}"))
-                }
+                } ?: LoadResult.Error(NullPointerException("Empty response body"))
+            } else {
+                LoadResult.Error(HttpException(response))
             }
         } catch (e: Exception) {
             LoadResult.Error(e)
