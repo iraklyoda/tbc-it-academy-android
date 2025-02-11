@@ -26,7 +26,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private val authRepository: AuthRepository by lazy {
         AuthRepository(
-            apiService = RetrofitClient.authService,
             authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
         )
     }

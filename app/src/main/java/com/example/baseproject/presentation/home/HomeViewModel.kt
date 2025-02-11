@@ -1,23 +1,25 @@
 package com.example.baseproject.presentation.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.paging.cachedIn
-import com.example.baseproject.data.remote.api.RetrofitClient
-import com.example.baseproject.data.paging.UserPagingSource
+import com.example.baseproject.data.UserRepository
 
-private const val USER_PER_PAGE = 6
+class HomeViewModel(
+    userRepository: UserRepository
+) : ViewModel() {
 
-class HomeViewModel : ViewModel() {
+    val usersPagingFlow = userRepository.getUsers().cachedIn(viewModelScope)
 
-    val usersPagerFlow = Pager(
-        config = PagingConfig(
-            pageSize = USER_PER_PAGE,
-            prefetchDistance = 1
-        )
-    ) {
-        UserPagingSource(RetrofitClient.userService)
-    }.flow.cachedIn(viewModelScope)
+    companion object {
+        fun Factory(userRepository: UserRepository): ViewModelProvider.Factory =
+            viewModelFactory {
+                initializer {
+                    HomeViewModel(userRepository)
+                }
+            }
+    }
 }

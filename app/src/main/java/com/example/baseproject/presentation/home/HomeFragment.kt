@@ -13,14 +13,27 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
+import com.example.baseproject.data.UserRepository
+import com.example.baseproject.data.local.db.AppDatabase
+import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.databinding.FragmentHomeBinding
+import com.example.baseproject.domain.model.User
 import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val userRepository: UserRepository by lazy {
+        UserRepository(
+            database = AppDatabase.getDatabase(requireContext().applicationContext),
+            networkService = RetrofitClient.userService
+        )
+    }
+
+    private val homeViewModel: HomeViewModel by viewModels() {
+        HomeViewModel.Factory(userRepository)
+    }
 
     private val usersAdapter by lazy {
         UsersAdapter()
@@ -54,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun observePaging() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.usersPagerFlow.collectLatest { usersData: PagingData<UserUI> ->
+                homeViewModel.usersPagingFlow.collectLatest { usersData: PagingData<User> ->
                     usersAdapter.submitData(usersData)
                 }
             }

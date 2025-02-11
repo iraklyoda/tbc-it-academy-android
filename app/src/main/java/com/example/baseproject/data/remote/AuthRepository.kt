@@ -4,6 +4,7 @@ import com.example.baseproject.common.ApiHelper
 import com.example.baseproject.common.Resource
 import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.data.remote.api.AuthService
+import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.data.remote.dto.ProfileDto
 import com.example.baseproject.domain.model.Profile
 import com.example.baseproject.domain.model.ProfileSession
@@ -11,9 +12,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class AuthRepository(
-    private val apiService: AuthService,
     private val authPreferencesRepository: AuthPreferencesRepository
 ) {
+    private val apiService: AuthService = RetrofitClient.authService
+
     suspend fun login(
         email: String,
         password: String,

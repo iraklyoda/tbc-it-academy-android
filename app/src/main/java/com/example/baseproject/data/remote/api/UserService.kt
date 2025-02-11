@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface UserService {
     @GET("users")
-    suspend fun getUsersData(@Query("page") nextPageNumber: Int = 1): Response<UserResponseDto>
+    suspend fun getUsers(@Query("page") nextPageNumber: Int): Response<UserResponseDto>
 }

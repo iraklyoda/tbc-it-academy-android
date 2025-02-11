@@ -12,7 +12,6 @@ import com.example.baseproject.R
 import com.example.baseproject.common.Resource
 import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.data.remote.AuthRepository
-import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.databinding.FragmentLoginBinding
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
@@ -27,7 +26,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private val authRepository: AuthRepository by lazy {
         AuthRepository(
-            apiService = RetrofitClient.authService,
             authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
         )
     }

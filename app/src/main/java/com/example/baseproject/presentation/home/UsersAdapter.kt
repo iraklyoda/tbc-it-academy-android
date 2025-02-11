@@ -12,23 +12,24 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.baseproject.R
 import com.example.baseproject.data.remote.dto.UserDto
 import com.example.baseproject.databinding.ItemUserBinding
+import com.example.baseproject.domain.model.User
 
-class UserDiffUtil : DiffUtil.ItemCallback<UserUI>() {
-    override fun areItemsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
+class UserDiffUtil : DiffUtil.ItemCallback<User>() {
+    override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
+    override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem == newItem
     }
 }
 
-class UsersAdapter : PagingDataAdapter<UserUI, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
+class UsersAdapter : PagingDataAdapter<User, UsersAdapter.UserViewHolder>(UserDiffUtil()) {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            user: UserUI?,
+            user: User?,
         ) {
             user?.let {
                 binding.apply {
