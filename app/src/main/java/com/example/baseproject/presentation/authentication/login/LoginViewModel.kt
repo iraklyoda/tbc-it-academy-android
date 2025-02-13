@@ -37,7 +37,7 @@ class LoginViewModel @Inject constructor(
                 password = password,
                 rememberMe = rememberMe
             ).collectLatest { resource ->
-                _loginStateFlow.value = resource
+                _loginStateFlow.emit(resource)
             }
         }
     }
