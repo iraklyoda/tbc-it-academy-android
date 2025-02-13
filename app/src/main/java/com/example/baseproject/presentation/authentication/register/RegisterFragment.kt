@@ -24,16 +24,7 @@ import kotlinx.coroutines.launch
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-    private val authRepository: AuthRepository by lazy {
-        AuthRepository(
-            authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
-        )
-    }
-
-    private val registerViewModel: RegisterViewModel by viewModels() {
-        RegisterViewModel.Factory(authRepository)
-    }
-
+    private val registerViewModel: RegisterViewModel by viewModels()
     override fun listeners() {
         passwordVisibilityToggle()
         register()

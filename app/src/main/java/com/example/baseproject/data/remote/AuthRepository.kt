@@ -4,26 +4,26 @@ import com.example.baseproject.common.ApiHelper
 import com.example.baseproject.common.Resource
 import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.data.remote.api.AuthService
-import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.data.remote.dto.ProfileDto
 import com.example.baseproject.domain.model.Profile
 import com.example.baseproject.domain.model.ProfileSession
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class AuthRepository(
-    private val authPreferencesRepository: AuthPreferencesRepository
+class AuthRepository @Inject constructor(
+    private val apiHelper: ApiHelper,
+    private val authPreferencesRepository: AuthPreferencesRepository,
+    private val authService: AuthService
 ) {
-    private val apiService: AuthService = RetrofitClient.authService
-
     suspend fun login(
         email: String,
         password: String,
         rememberMe: Boolean
     ): Flow<Resource<ProfileSession>> {
         val profileDto: ProfileDto = Profile(email = email, password = password).toDto()
-        return ApiHelper.handleHttpRequest {
-            apiService.loginUser(profileDto)
+        return apiHelper.handleHttpRequest {
+            authService.loginUser(profileDto)
         }.map { resource ->
             when (resource) {
                 is Resource.Success -> {
@@ -47,8 +47,8 @@ class AuthRepository(
 
     suspend fun register(email: String, password: String): Flow<Resource<Profile>> {
         val profileDto: ProfileDto = Profile(email = email, password = password).toDto()
-        return ApiHelper.handleHttpRequest {
-            apiService.registerUser(profileDto)
+        return apiHelper.handleHttpRequest {
+            authService.registerUser(profileDto)
         }.map { resource ->
             when (resource) {
                 is Resource.Success -> {

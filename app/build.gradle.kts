@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.androidx.navigation.safeargs.kotlin)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -69,5 +71,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
 }

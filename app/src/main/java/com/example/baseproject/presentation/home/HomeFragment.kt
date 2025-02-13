@@ -24,16 +24,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
-    private val userRepository: UserRepository by lazy {
-        UserRepository(
-            database = AppDatabase.getDatabase(requireContext().applicationContext),
-            networkService = RetrofitClient.userService
-        )
-    }
 
-    private val homeViewModel: HomeViewModel by viewModels() {
-        HomeViewModel.Factory(userRepository)
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private val usersAdapter by lazy {
         UsersAdapter()

@@ -7,13 +7,16 @@ import androidx.navigation.Navigation.findNavController
 import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.ActivityMainBinding
 import com.example.baseproject.presentation.authentication.login.LoginFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity @Inject constructor() : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val authPreferencesRepository by lazy {
-        AuthPreferencesRepository(applicationContext)
-    }
+
+    @Inject
+    lateinit var authPreferencesRepository: AuthPreferencesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

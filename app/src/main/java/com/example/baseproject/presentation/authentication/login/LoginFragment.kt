@@ -24,15 +24,7 @@ import kotlinx.coroutines.launch
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private val authRepository: AuthRepository by lazy {
-        AuthRepository(
-            authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
-        )
-    }
-
-    private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModel.Factory(authRepository)
-    }
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun listeners() {
         observeLoginState()

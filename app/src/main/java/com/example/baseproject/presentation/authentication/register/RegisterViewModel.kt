@@ -9,13 +9,16 @@ import com.example.baseproject.common.Resource
 import com.example.baseproject.data.remote.AuthRepository
 import com.example.baseproject.domain.model.Profile
 import com.example.baseproject.presentation.authentication.login.LoginViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel(
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 

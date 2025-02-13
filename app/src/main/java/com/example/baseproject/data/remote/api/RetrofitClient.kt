@@ -1,24 +1,29 @@
 package com.example.baseproject.data.remote.api
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
+@Module
+@InstallIn(SingletonComponent::class)
 object RetrofitClient {
-    private const val BASE_URL = "https://reqres.in/api/"
 
-    private val json = Json {
-        ignoreUnknownKeys = true
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://reqres.in/api/")
+            .addConverterFactory(
+                Json {
+                    ignoreUnknownKeys = true
+                }.asConverterFactory("application/json".toMediaType())
+            )
+            .build()
     }
 
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(
-            json.asConverterFactory("application/json".toMediaType())
-        )
-        .build()
-
-    val userService: UserService = retrofit.create(UserService::class.java)
-    val authService: AuthService = retrofit.create(AuthService::class.java)
 }
+
+//val userService: UserService = retrofit.create(UserService::class.java)
+//val authService: AuthService = retrofit.create(AuthService::class.java)

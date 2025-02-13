@@ -12,12 +12,14 @@ import com.example.baseproject.domain.model.User
 import com.example.baseproject.utils.toUser
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 private const val USER_PER_PAGE = 6
 
-class UserRepository(
+
+class UserRepository @Inject constructor(
     private val database: AppDatabase,
-    private val networkService: UserService
+    private val userService: UserService
 ) {
     @OptIn(ExperimentalPagingApi::class)
     fun getUsers(): Flow<PagingData<User>> {
@@ -27,7 +29,7 @@ class UserRepository(
                 enablePlaceholders = false,
                 prefetchDistance = 2
             ),
-            remoteMediator = UserRemoteMediator(database = database, networkService = networkService),
+            remoteMediator = UserRemoteMediator(database = database, networkService = userService),
             pagingSourceFactory = { database.userDao().pagingSource() }
         ).flow.map { entity ->
             entity.map { it.toUser() }

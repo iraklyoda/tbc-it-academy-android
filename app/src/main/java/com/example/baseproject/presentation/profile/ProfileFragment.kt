@@ -1,18 +1,17 @@
 package com.example.baseproject.presentation.profile
 
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
-import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.FragmentProfileBinding
 import kotlinx.coroutines.launch
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
-    private lateinit var authPreferencesRepository: AuthPreferencesRepository
+
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun start() {
-        authPreferencesRepository = AuthPreferencesRepository(requireContext().applicationContext)
-
         setEmail()
     }
 
@@ -22,14 +21,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun setEmail() {
         viewLifecycleOwner.lifecycleScope.launch {
-            binding.textEmail.text = authPreferencesRepository.getEmail()
+            binding.textEmail.text = profileViewModel.getEmail()
         }
     }
 
     private fun logout() {
         binding.btnLogout.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                authPreferencesRepository.clearAttributes()
+                profileViewModel.clearPreferencesAttributes()
 
                 val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
                 findNavController().navigate(action)

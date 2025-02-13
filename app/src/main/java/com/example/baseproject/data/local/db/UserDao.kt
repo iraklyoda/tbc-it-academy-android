@@ -10,7 +10,7 @@ interface UserDao {
     @Upsert
     suspend fun upsertAll(users: List<UserEntity>)
 
-    @Query("SELECT * FROM users")
+    @Query("SELECT * FROM users ORDER BY id ASC")
     fun pagingSource(): PagingSource<Int, UserEntity>
 
     @Query("DELETE FROM users")

@@ -8,13 +8,16 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.baseproject.common.Resource
 import com.example.baseproject.data.remote.AuthRepository
 import com.example.baseproject.domain.model.ProfileSession
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
@@ -37,14 +40,5 @@ class LoginViewModel(
                 _loginStateFlow.value = resource
             }
         }
-    }
-
-    companion object {
-        fun Factory(authRepository: AuthRepository): ViewModelProvider.Factory =
-            viewModelFactory {
-                initializer {
-                    LoginViewModel(authRepository)
-                }
-            }
     }
 }
