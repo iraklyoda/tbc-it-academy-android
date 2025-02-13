@@ -13,16 +13,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
-import com.example.baseproject.data.UserRepository
-import com.example.baseproject.data.local.db.AppDatabase
-import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.databinding.FragmentHomeBinding
 import com.example.baseproject.domain.model.User
 import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val homeViewModel: HomeViewModel by viewModels()

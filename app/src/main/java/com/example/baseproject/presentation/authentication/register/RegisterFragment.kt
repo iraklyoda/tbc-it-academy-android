@@ -10,18 +10,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.common.Resource
-import com.example.baseproject.data.local.AuthPreferencesRepository
-import com.example.baseproject.data.remote.AuthRepository
-import com.example.baseproject.data.remote.api.RetrofitClient
 import com.example.baseproject.databinding.FragmentRegisterBinding
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
 import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     private val registerViewModel: RegisterViewModel by viewModels()

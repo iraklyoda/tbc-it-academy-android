@@ -10,18 +10,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.common.Resource
-import com.example.baseproject.data.local.AuthPreferencesRepository
-import com.example.baseproject.data.remote.AuthRepository
 import com.example.baseproject.databinding.FragmentLoginBinding
 import com.example.baseproject.utils.getString
 import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
 import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val loginViewModel: LoginViewModel by viewModels()
