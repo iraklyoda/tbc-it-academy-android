@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/statisticsFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.example.baseproject.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.baseproject.presentation.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
 </navigation>
