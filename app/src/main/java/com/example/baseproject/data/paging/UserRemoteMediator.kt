@@ -12,11 +12,12 @@ import com.example.baseproject.data.remote.api.UserService
 import com.example.baseproject.utils.toEntity
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class UserRemoteMediator(
+class UserRemoteMediator @Inject constructor(
     private val database: AppDatabase,
-    private val networkService: UserService
+    private val userService: UserService
 ) : RemoteMediator<Int, UserEntity>() {
 
     override suspend fun load(
@@ -41,7 +42,7 @@ class UserRemoteMediator(
                 }
             }
 
-            val response = networkService.getUsers(loadKey)
+            val response = userService.getUsers(loadKey)
             if (!response.isSuccessful) throw IOException("HTTP ${response.code()}")
 
             val users = response.body()?.data ?: emptyList()

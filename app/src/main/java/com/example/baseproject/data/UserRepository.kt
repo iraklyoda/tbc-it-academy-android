@@ -19,7 +19,8 @@ private const val USER_PER_PAGE = 6
 
 class UserRepository @Inject constructor(
     private val database: AppDatabase,
-    private val userService: UserService
+    private val userService: UserService,
+    private val userRemoteMediator: UserRemoteMediator,
 ) {
     @OptIn(ExperimentalPagingApi::class)
     fun getUsers(): Flow<PagingData<User>> {
@@ -29,7 +30,7 @@ class UserRepository @Inject constructor(
                 enablePlaceholders = false,
                 prefetchDistance = 2
             ),
-            remoteMediator = UserRemoteMediator(database = database, networkService = userService),
+            remoteMediator = userRemoteMediator,
             pagingSourceFactory = { database.userDao().pagingSource() }
         ).flow.map { entity ->
             entity.map { it.toUser() }
