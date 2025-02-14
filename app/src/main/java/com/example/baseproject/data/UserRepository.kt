@@ -19,7 +19,6 @@ private const val USER_PER_PAGE = 6
 
 class UserRepository @Inject constructor(
     private val database: AppDatabase,
-    private val userService: UserService,
     private val userRemoteMediator: UserRemoteMediator,
 ) {
     @OptIn(ExperimentalPagingApi::class)

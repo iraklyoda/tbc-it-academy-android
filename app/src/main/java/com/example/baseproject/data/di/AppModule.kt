@@ -94,12 +94,18 @@ object AppModule {
     }
 
     @Provides
-    fun provideUserRepository(database: AppDatabase, userService: UserService): UserRepository {
-        return UserRepository(database = database, userService = userService)
+    fun provideUserRepository(
+        database: AppDatabase,
+        userRemoteMediator: UserRemoteMediator
+    ): UserRepository {
+        return UserRepository(database = database, userRemoteMediator = userRemoteMediator)
     }
 
     @Provides
-    fun provideUserRemoteMediator(database: AppDatabase, userService: UserService): UserRemoteMediator {
+    fun provideUserRemoteMediator(
+        database: AppDatabase,
+        userService: UserService
+    ): UserRemoteMediator {
         return UserRemoteMediator(database = database, userService = userService)
     }
 }
