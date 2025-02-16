@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@id/favouritesFragment"
+        android:title="Liked"
+        android:icon="@drawable/ic_menu_heart"
+        />
+
+    <item android:id="@id/statisticsFragment"
+        android:title="home"
+        android:icon="@drawable/ic_menu_home"
+        />
+
+    <item
+        android:id="@id/messagesFragment"
+        android:title="message"
+        android:icon="@drawable/ic_menu_messenger" />
+
+</menu>

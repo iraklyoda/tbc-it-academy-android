@@ -10,4 +10,14 @@
         android:name="com.example.baseproject.presentation.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.example.baseproject.presentation.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" />
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.example.baseproject.presentation.MessagesFragment"
+        android:label="fragment_messages"
+        tools:layout="@layout/fragment_messages" />
 </navigation>
