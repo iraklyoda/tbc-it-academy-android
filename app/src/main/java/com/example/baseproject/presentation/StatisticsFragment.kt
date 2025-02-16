@@ -1,10 +1,13 @@
 package com.example.baseproject.presentation
 
+import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.baseproject.BaseFragment
+import com.example.baseproject.common.Resource
 import com.example.baseproject.databinding.FragmentStatisticsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -24,13 +27,30 @@ class StatisticsFragment :
     }
 
     override fun listeners() {
-        getStatistics()
+        observeStatistics()
     }
 
-    private fun getStatistics() {
+    private fun observeStatistics() {
         viewLifecycleOwner.lifecycleScope.launch {
-            statisticsViewModel.statistics.collectLatest { statisticsList ->
-                viewPagerAdapter.submitList(statisticsList)
+            statisticsViewModel.statisticsStateFlow.collectLatest { resource ->
+                when (resource) {
+                    is Resource.Loading -> {
+                        if (resource.loading) {
+                            binding.pbStatistics.visibility = View.VISIBLE
+                        } else {
+                            binding.pbStatistics.visibility = View.GONE
+                        }
+                    }
+
+                    is Resource.Success -> {
+                        viewPagerAdapter.submitList(resource.data)
+                    }
+
+                    is Resource.Error -> {
+                        Toast.makeText(requireContext(), resource.errorMessage, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
             }
         }
     }

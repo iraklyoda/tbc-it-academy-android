@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_prod_bold"
-        android:text="Statistics"
+        android:text="@string/statistics"
         android:layout_marginStart="50dp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/vp2"
@@ -31,8 +31,17 @@
         app:layout_constraintBottom_toTopOf="@id/iv_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         />
+
+    <ProgressBar
+        android:id="@+id/pb_statistics"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/vp2"
+        app:layout_constraintEnd_toEndOf="@id/vp2"
+        app:layout_constraintStart_toStartOf="@id/vp2"
+        app:layout_constraintBottom_toBottomOf="@id/vp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
     <androidx.appcompat.widget.AppCompatImageView

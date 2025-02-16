@@ -1,5 +1,6 @@
 package com.example.baseproject.data.di
 
+import com.example.baseproject.common.ApiHelper
 import com.example.baseproject.data.remote.api.StatisticsService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -10,10 +11,15 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
+private const val BASE_URL = "https://run.mocky.io/v3/"
+
+private fun json() = Json {
+    ignoreUnknownKeys = true
+}
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    private const val BASE_URL = "https://run.mocky.io/v3/"
 
     @Provides
     fun provideRetrofit(): Retrofit {
@@ -25,13 +31,14 @@ object AppModule {
             .build()
     }
 
-    private fun json() = Json {
-        ignoreUnknownKeys = true
-    }
-
     @Provides
     fun provideStatisticsService(retrofit: Retrofit): StatisticsService {
         return retrofit.create(StatisticsService::class.java)
+    }
+
+    @Provides
+    fun provideApiHelper(): ApiHelper {
+        return ApiHelper()
     }
 
 }
