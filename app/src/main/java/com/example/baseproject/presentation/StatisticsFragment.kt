@@ -56,8 +56,6 @@ class StatisticsFragment :
     }
 
     private fun setAdapter() {
-        binding.vp2.adapter = viewPagerAdapter
-
         val transformer = CompositePageTransformer().apply {
             addTransformer(MarginPageTransformer(40))
             addTransformer { page, position ->
@@ -70,9 +68,6 @@ class StatisticsFragment :
             adapter = viewPagerAdapter
             setPageTransformer(transformer)
             offscreenPageLimit = 3
-            clipToPadding = false
-            clipChildren = false
-            setPadding(80, 0, 80, 0)
         }
     }
 

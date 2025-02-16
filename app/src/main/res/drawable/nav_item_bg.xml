@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true">
-        <inset android:drawable="@drawable/nav_selected_circle" android:insetLeft="30dp" android:insetTop="10dp" android:insetRight="30dp" android:insetBottom="10dp" />
+        <inset
+            android:drawable="@drawable/nav_selected_circle"
+            android:insetLeft="36dp"
+            android:insetTop="16dp"
+            android:insetRight="36dp"
+            android:insetBottom="16dp"
+            />
     </item>
     <item android:drawable="@android:color/transparent" />
 </selector>
