@@ -23,7 +23,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://reqres.in/api/\"")
+        }
         release {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://reqres.in/api/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -33,6 +37,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -73,5 +78,6 @@ dependencies {
     implementation(libs.androidx.room.paging)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.squareup.logging.interceptor)
 
 }
