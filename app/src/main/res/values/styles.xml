@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="errorTextColor">@color/mountain_lake_green</item>
+        <item name="errorIconTint">@color/mountain_lake_green</item>
+    </style>
+</resources>

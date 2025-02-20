@@ -2,7 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BaseProject" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/gray_asparagus</item>
+        <item name="fontFamily">@font/roboto_regular_400</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:windowBackground">@color/gray_asparagus</item>
     </style>
 
     <style name="Theme.BaseProject" parent="Base.Theme.BaseProject" />
