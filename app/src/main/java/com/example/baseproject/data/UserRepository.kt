@@ -5,11 +5,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.example.baseproject.data.UserMapper.toUser
 import com.example.baseproject.data.local.db.AppDatabase
 import com.example.baseproject.data.paging.UserRemoteMediator
-import com.example.baseproject.data.remote.api.UserService
-import com.example.baseproject.domain.model.User
-import com.example.baseproject.utils.toUser
+import com.example.baseproject.presentation.home.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

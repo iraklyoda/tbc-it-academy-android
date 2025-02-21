@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.baseproject.BaseFragment
 import com.example.baseproject.R
 import com.example.baseproject.databinding.FragmentHomeBinding
-import com.example.baseproject.domain.model.User
 import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
 import dagger.hilt.android.AndroidEntryPoint

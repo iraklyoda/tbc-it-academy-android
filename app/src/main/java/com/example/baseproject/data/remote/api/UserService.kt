@@ -1,6 +1,6 @@
 package com.example.baseproject.data.remote.api
 
-import com.example.baseproject.data.remote.dto.UserResponseDto
+import com.example.baseproject.data.remote.dto.user.UserResponseDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

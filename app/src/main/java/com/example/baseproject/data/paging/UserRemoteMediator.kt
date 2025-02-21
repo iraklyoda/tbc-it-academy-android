@@ -6,10 +6,10 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.example.baseproject.data.UserMapper.toEntity
 import com.example.baseproject.data.local.db.AppDatabase
 import com.example.baseproject.data.local.db.UserEntity
 import com.example.baseproject.data.remote.api.UserService
-import com.example.baseproject.utils.toEntity
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject

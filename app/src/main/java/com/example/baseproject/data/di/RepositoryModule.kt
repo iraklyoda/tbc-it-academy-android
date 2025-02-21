@@ -12,10 +12,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
+    @Singleton
     @Provides
     fun provideAuthRepository(
         apiHelper: ApiHelper,
@@ -29,6 +31,7 @@ object RepositoryModule {
         )
     }
 
+    @Singleton
     @Provides
     fun provideUserRepository(
         database: AppDatabase,
@@ -37,6 +40,7 @@ object RepositoryModule {
         return UserRepository(database = database, userRemoteMediator = userRemoteMediator)
     }
 
+    @Singleton
     @Provides
     fun provideUserRemoteMediator(
         database: AppDatabase,
