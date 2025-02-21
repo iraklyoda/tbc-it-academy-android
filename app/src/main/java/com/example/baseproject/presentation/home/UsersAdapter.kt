@@ -36,10 +36,9 @@ class UsersAdapter : PagingDataAdapter<User, UsersAdapter.UserViewHolder>(UserDi
                     textFullName.text = it.fullName
                     textEmail.text = it.email
 
-                    Glide.with(ivProfile.context).load(it.avatarUrl).apply(
-                        RequestOptions().placeholder(R.drawable.ic_launcher_background)
-                            .transform(CircleCrop())
-                    ).into(ivProfile)
+                    Glide.with(ivProfile.context).load(it.avatarUrl)
+                        .transform(CircleCrop())
+                        .into(ivProfile)
                 }
             }
         }
