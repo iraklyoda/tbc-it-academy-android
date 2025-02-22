@@ -7,5 +7,6 @@ class FirstFragment : BaseFragment<FragmentFirstBinding>(FragmentFirstBinding::i
     }
 
     override fun listeners() {
+        
     }
 }
