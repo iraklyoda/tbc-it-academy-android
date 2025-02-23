@@ -64,7 +64,6 @@
             android:layout_width="0dp"
             android:layout_height="154dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="13dp"
             android:scaleType="centerCrop"
             android:src="@drawable/post_image_01"
             app:layout_constraintEnd_toStartOf="@+id/iv_post_02"
@@ -76,6 +75,7 @@
             android:id="@+id/iv_post_02"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="13dp"
             android:scaleType="centerCrop"
             android:src="@drawable/post_image_02"
             app:layout_constraintBottom_toTopOf="@id/iv_post_03"
@@ -185,13 +185,13 @@
             app:shapeAppearanceOverlay="@style/Circle" />
 
         <TextView
-            app:layout_constraintTop_toTopOf="@id/iv_user_profile"
-            app:layout_constraintBottom_toBottomOf="@id/iv_user_profile"
-            app:layout_constraintStart_toStartOf="@id/iv_user_profile"
-            app:layout_constraintEnd_toEndOf="@id/iv_user_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🥷🏻" />
+            android:text="🥷🏻"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_profile"
+            app:layout_constraintEnd_toEndOf="@id/iv_user_profile"
+            app:layout_constraintStart_toStartOf="@id/iv_user_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_user_profile" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_comment"

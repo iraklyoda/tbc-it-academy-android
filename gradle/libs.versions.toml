@@ -15,6 +15,7 @@ navigation = "2.8.7"
 hilt = "2.55"
 okhttp = "5.0.0"
 okhttpVersion = "4.12.0"
+ksp = "2.1.0-1.0.29"
 retrofit = "2.11.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 
@@ -43,6 +44,7 @@ retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit
 android-application = { id = "com.android.application", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id ="com.google.devtools.ksp", version.ref = "ksp"}
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
