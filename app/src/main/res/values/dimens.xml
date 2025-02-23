@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_horizontal_md">28dp</dimen>
+    <dimen name="margin_top_md">24dp</dimen>
+    <dimen name="recycler_view_height">200dp</dimen>
+    <dimen name="margin_horizontal_sm">19dp</dimen>
+</resources>

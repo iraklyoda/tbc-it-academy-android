@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_horizontal_md"
+    android:backgroundTint="@color/charcoal"
+    app:cardCornerRadius="25dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_horizontal_md">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_author_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/margin_horizontal_md"
+            android:layout_marginTop="@dimen/margin_top_md"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Circle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/fira_bold"
+            android:text="John Doe"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/iv_author_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_author_profile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 April at 4:20 PM"
+            android:textColor="@color/cadet_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_author_profile"
+            app:layout_constraintStart_toStartOf="@id/tv_full_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_md"
+            android:layout_marginTop="9dp"
+            android:fontFamily="@font/fira_regular"
+            android:lineSpacingExtra="8dp"
+            android:text="We’re interested in your ideas and would be glad to build something bigger out of it. "
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_author_profile" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_post_01"
+            android:layout_width="0dp"
+            android:layout_height="154dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="13dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/post_image_01"
+            app:layout_constraintEnd_toStartOf="@+id/iv_post_02"
+            app:layout_constraintStart_toStartOf="@id/tv_body"
+            app:layout_constraintTop_toBottomOf="@id/tv_body"
+            app:shapeAppearanceOverlay="@style/RoundedCorners" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_post_02"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/post_image_02"
+            app:layout_constraintBottom_toTopOf="@id/iv_post_03"
+            app:layout_constraintEnd_toEndOf="@id/tv_body"
+            app:layout_constraintStart_toEndOf="@id/iv_post_01"
+            app:layout_constraintTop_toTopOf="@id/iv_post_01"
+            app:shapeAppearanceOverlay="@style/RoundedCorners" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_post_03"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/post_img_03"
+            app:layout_constraintBottom_toBottomOf="@id/iv_post_01"
+            app:layout_constraintEnd_toEndOf="@id/iv_post_02"
+            app:layout_constraintStart_toStartOf="@id/iv_post_02"
+            app:layout_constraintTop_toBottomOf="@id/iv_post_02"
+            app:shapeAppearanceOverlay="@style/RoundedCorners" />
+
+        <View
+            android:id="@+id/view_line_01"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/cadet_gray"
+            app:layout_constraintTop_toBottomOf="@id/iv_post_01" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_comment_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_comment"
+            app:layout_constraintStart_toStartOf="@id/tv_body"
+            app:layout_constraintTop_toBottomOf="@id/view_line_01" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:text="7 comments"
+            android:textColor="@color/cadet_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_comment_icon"
+            app:layout_constraintStart_toEndOf="@id/iv_comment_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_heart_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="9dp"
+            android:src="@drawable/ic_heart"
+            app:layout_constraintBottom_toBottomOf="@id/iv_comment_icon"
+            app:layout_constraintEnd_toStartOf="@id/tv_likes"
+            app:layout_constraintTop_toTopOf="@id/iv_comment_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="49 Likes"
+            android:textColor="@color/cadet_gray"
+            app:layout_constraintBottom_toBottomOf="@id/iv_comment_icon"
+            app:layout_constraintEnd_toStartOf="@id/tv_share"
+            app:layout_constraintStart_toEndOf="@id/tv_comments"
+            app:layout_constraintTop_toTopOf="@id/iv_comment_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_share_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="9dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="@id/iv_comment_icon"
+            app:layout_constraintEnd_toStartOf="@id/tv_share"
+            app:layout_constraintTop_toTopOf="@id/iv_comment_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share"
+            android:textColor="@color/cadet_gray"
+            app:layout_constraintBottom_toBottomOf="@id/iv_comment_icon"
+            app:layout_constraintEnd_toEndOf="@id/tv_body"
+            app:layout_constraintTop_toTopOf="@id/iv_comment_icon" />
+
+        <View
+            android:id="@+id/view_line_02"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/cadet_gray"
+            app:layout_constraintTop_toBottomOf="@id/iv_comment_icon" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_profile"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/eucalyptus"
+            app:layout_constraintStart_toStartOf="@id/tv_body"
+            app:layout_constraintTop_toBottomOf="@id/view_line_02"
+            app:shapeAppearanceOverlay="@style/Circle" />
+
+        <TextView
+            app:layout_constraintTop_toTopOf="@id/iv_user_profile"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_profile"
+            app:layout_constraintStart_toStartOf="@id/iv_user_profile"
+            app:layout_constraintEnd_toEndOf="@id/iv_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🥷🏻" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_comment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/input_bg"
+            android:hint="@string/write_comment"
+            android:paddingHorizontal="16dp"
+            android:paddingEnd="42dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/cadet_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_profile"
+            app:layout_constraintEnd_toEndOf="@id/tv_body"
+            app:layout_constraintStart_toEndOf="@id/iv_user_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_user_profile"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:scaleX="-1"
+            android:src="@drawable/attach_file_ic"
+            app:layout_constraintBottom_toBottomOf="@id/et_comment"
+            app:layout_constraintEnd_toEndOf="@id/et_comment"
+            app:layout_constraintTop_toTopOf="@id/et_comment" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

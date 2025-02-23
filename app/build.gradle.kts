@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidx.navigation.safeargs.kotlin)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -21,7 +22,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://run.mocky.io/v3/\"")
+        }
         release {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://run.mocky.io/v3/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -31,6 +36,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -54,6 +60,13 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.kotlinx.serialization.json.v180)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.glide)
+    kapt(libs.github.compiler)
 }
 
 kapt {

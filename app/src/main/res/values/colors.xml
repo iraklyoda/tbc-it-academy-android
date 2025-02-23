@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="gunmetal">#22343c</color>
+    <color name="charcoal">#30444E</color>
+    <color name="cadet_gray">#96A7AF</color>
+    <color name="eucalyptus">#3ED598</color>
+    <color name="japanese_indigo">#2A3C44</color>
 </resources>
