@@ -3,7 +3,6 @@ package com.example.baseproject.utils
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.TimeZone
 
 object DateHelper {
 
@@ -12,9 +11,6 @@ object DateHelper {
 
         val dateFormat = SimpleDateFormat("d MMMM 'at' h:mm a", Locale.getDefault())
 
-        dateFormat.timeZone = TimeZone.getDefault()
-
         return dateFormat.format(date)
     }
-
 }
