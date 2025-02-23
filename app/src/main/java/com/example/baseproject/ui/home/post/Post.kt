@@ -12,6 +12,6 @@ data class Post(
     data class Owner(
         val fullName: String,
         val profile: String?,
-        val postDate: Int
+        val postDate: String
     )
 }

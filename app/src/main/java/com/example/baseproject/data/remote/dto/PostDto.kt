@@ -18,6 +18,6 @@ data class PostDto(
         @SerialName("first_name") val firstName: String,
         @SerialName("last_name") val lastName: String,
         @SerialName("profile") val profile: String?,
-        @SerialName("post_date") val postDate: Int
+        @SerialName("post_date") val postDate: Long
     )
 }

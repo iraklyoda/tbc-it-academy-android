@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_md"
-            app:layout_scrollFlags="scroll|snap|enterAlways" />
+            app:layout_scrollFlags="scroll|snap" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:translationZ="2dp"
         app:layout_anchor="@id/rv_posts"
         app:layout_anchorGravity="center" />
 

@@ -73,6 +73,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         locationAdapter.submitList(resource.data)
                     }
                     is Resource.Error -> {
+                        binding.rvLocations.visibility = View.GONE
                         Toast.makeText(requireContext(), resource.errorMessage, Toast.LENGTH_SHORT).show()
                         d("LocationError", resource.errorMessage)
                     }

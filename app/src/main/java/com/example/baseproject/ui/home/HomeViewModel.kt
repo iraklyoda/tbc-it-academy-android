@@ -32,7 +32,9 @@ class HomeViewModel @Inject constructor(
             locationRepository.getLocations().collectLatest { resource ->
                 _locationsStateFlow.emit(resource)
             }
+        }
 
+        viewModelScope.launch {
             postRepository.getPosts().collectLatest { resource ->
                 _postsStateFlow.emit(resource)
             }

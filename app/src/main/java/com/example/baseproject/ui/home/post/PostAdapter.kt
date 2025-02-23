@@ -31,6 +31,7 @@ class PostAdapter : ListAdapter<Post, PostAdapter.PostViewHolder>(PostDiffUtil()
                 tvLikes.text = post.likes.toString()
                 tvComments.text = post.comments.toString()
                 tvFullName.text = post.owner.fullName
+                tvDate.text = post.owner.postDate
 
                 Glide.with(ivAuthorProfile.context)
                     .load(post.owner.profile)
@@ -54,6 +55,8 @@ class PostAdapter : ListAdapter<Post, PostAdapter.PostViewHolder>(PostDiffUtil()
                             .into(ivPost03)
                     }
                     2 -> {
+                        ivPost03.visibility = View.GONE
+
                         Glide.with(ivPost01.context)
                             .load(images[0])
                             .into(ivPost01)
@@ -61,18 +64,23 @@ class PostAdapter : ListAdapter<Post, PostAdapter.PostViewHolder>(PostDiffUtil()
                         Glide.with(ivPost02.context)
                             .load(images[1])
                             .into(ivPost02)
-                        ivPost03.visibility = View.GONE
                     }
 
-                    else -> {
+                    1 -> {
                         ivPost02.visibility = View.GONE
                         ivPost03.visibility = View.GONE
 
                         Glide.with(ivPost01.context)
-                            .load(images?.get(0) ?: "")
+                            .load(images[0])
                             .placeholder(R.drawable.ic_launcher_background)
                             .error(R.drawable.ic_launcher_foreground)
                             .into(ivPost01)
+                    }
+
+                    else -> {
+                        ivPost01.visibility = View.GONE
+                        ivPost02.visibility = View.GONE
+                        ivPost03.visibility = View.GONE
                     }
                 }
             }

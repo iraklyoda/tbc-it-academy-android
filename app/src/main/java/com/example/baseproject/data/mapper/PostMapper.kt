@@ -2,6 +2,7 @@ package com.example.baseproject.data.mapper
 
 import com.example.baseproject.data.remote.dto.PostDto
 import com.example.baseproject.ui.home.post.Post
+import com.example.baseproject.utils.DateHelper
 
 fun PostDto.toPostUi(): Post {
     return Post(
@@ -14,7 +15,7 @@ fun PostDto.toPostUi(): Post {
         owner = Post.Owner(
             fullName = "${this.owner.firstName} ${this.owner.lastName}",
             profile = this.owner.profile,
-            postDate = this.owner.postDate
+            postDate = DateHelper.convertEpochToReadableFormat(this.owner.postDate)
         )
     )
 }
