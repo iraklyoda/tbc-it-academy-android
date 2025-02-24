@@ -14,9 +14,12 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        resourceConfigurations.add("en")
+        resourceConfigurations.add("ka")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {

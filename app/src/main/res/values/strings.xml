@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Base Project</string>
+    <string name="app_name">TrichoLog</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="trich_info_02">Trichotillomania affects both adults and children, though it often begins in childhood or adolescence. It is estimated to affect about 1-2% of the population</string>
+    <string name="trich_info_02">Trichotillomania affects both adults and children, though it often begins in childhood or adolescence. It is estimated to affect about 1–2% of the population</string>
     <string name="trich_info_01">Trichotillomania is a mental health disorder characterized by the compulsive urge to pull out one’s hair, leading to noticeable hair loss.</string>
     <string name="trich_info_03">Increasing awareness and understanding of trichotillomania can help reduce stigma and encourage individuals to seek help.</string>
     <string name="login">Login</string>
@@ -17,4 +17,11 @@
     <string name="password_should_have_more_than_4_characters">Password should have more than 4 characters</string>
     <string name="field_is_empty">Field is empty</string>
     <string name="password_do_not_match">Password do not match</string>
+    <string name="hello_friend">Hello Friend</string>
+    <string name="trich_intro_01">Welcome to Trichlog. Congratulations for taking first steps in this journey. We are here to raise awareness regarding trichotillomania and guide you</string>
+    <string name="trich_intro_02">Our goal is to help you identify triggers and help you overcome the urges. If you are ready to start the journey please go On!</string>
+    <string name="did_you_know">Did you know?</string>
+    <string name="in_order_to_proceed_you_need_to_have_an_account">In order to proceed you need to have an account:</string>
+    <string name="password">password</string>
+    <string name="repeat_password">repeat password</string>
 </resources>

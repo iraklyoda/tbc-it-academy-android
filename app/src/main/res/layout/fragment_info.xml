@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_lg"
-        android:text="Did you know?"
+        android:text="@string/did_you_know"
         android:textSize="@dimen/text_lg"
         app:fontFamily="@font/roboto_bold_700"
         app:layout_constraintEnd_toEndOf="parent"

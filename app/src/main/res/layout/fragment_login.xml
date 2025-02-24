@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/distance_md"
         android:layout_marginBottom="@dimen/distance_md"
-        android:hint="password"
+        android:hint="@string/password"
         app:errorIconDrawable="@null"
         app:errorIconTint="@color/desire"
         app:errorTextColor="@color/desire"

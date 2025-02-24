@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_lg"
         android:paddingHorizontal="@dimen/distance_lg"
-        android:text="In order to proceed you need to have an account:"
+        android:text="@string/in_order_to_proceed_you_need_to_have_an_account"
         android:textAlignment="center"
         android:textSize="@dimen/text_md"
         app:fontFamily="@font/roboto_bold_700"
