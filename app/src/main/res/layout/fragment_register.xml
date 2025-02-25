@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.authentication.register.RegisterFragment">
+    tools:context="com.example.tricholog.ui.authentication.register.RegisterFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_header"
@@ -124,6 +124,17 @@
         android:textSize="@dimen/text_md"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressBackgroundTint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tl_password_repeat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tl_username" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

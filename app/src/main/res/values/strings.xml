@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TrichoLog</string>
+    <string name="app_name">Tricho Log</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="trich_info_02">Trichotillomania affects both adults and children, though it often begins in childhood or adolescence. It is estimated to affect about 1–2% of the population</string>
@@ -24,4 +24,9 @@
     <string name="in_order_to_proceed_you_need_to_have_an_account">In order to proceed you need to have an account:</string>
     <string name="password">password</string>
     <string name="repeat_password">repeat password</string>
+    <string name="email_already_exists">Email already exists</string>
+    <string name="network_issues">Network issues</string>
+    <string name="password_is_too_weak">Password is too weak</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="wrong_email_or_password">Wrong email or password</string>
 </resources>

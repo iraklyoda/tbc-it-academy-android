@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Base Project"
+rootProject.name = "Tricho Log"
 include(":app")
  

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TrichoLog</string>
+    <string name="app_name">Tricho Log</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">სალამი ცარიელ ფრაგმენტს</string>
     <string name="trich_info_02">ტრიქოტილომანია ვლინდება როგორც ბავშვებში ასევე ზრდასრულებში, თუმცა ხშირად ის ბავშვობაში ან მოზარდობისას იწყება. ნავარაუდებია, რომ ის მოსახლეობის 1–2% - შია გამოვლენილი</string>
     <string name="trich_info_01">ტრიქოტილომანია არის მენტალური დაავადება, დახასიათებული კომპულსიური სურვილით ინდივიდმა ამოიგლიჯოს თმა, რაც იწვევს მკაფიო თმის შეთხელებას</string>
     <string name="trich_info_03">ცნობიერების ამაღება და საგნის სიღრმისეულად გააზრებას შეუძლია სტიგმის შემცირება და ინდივიდების წახალისება მოიძიონ დახმარება</string>
@@ -28,4 +28,9 @@
     <string name="in_order_to_proceed_you_need_to_have_an_account">რომ განაგრძოთ, თქვენ გჭირდებათ ანგარიში:</string>
     <string name="password">პაროლი</string>
     <string name="repeat_password">გაიმეორეთ პაროლი</string>
+    <string name="email_already_exists">მსგავსი ელ-ფოსტა უკვე არსებობს</string>
+    <string name="network_issues">ინტერნეტთან კავშირის პრობლემა</string>
+    <string name="password_is_too_weak">პაროლი სუსტია</string>
+    <string name="unknown_error">მოხდა შეცდომა</string>
+    <string name="wrong_email_or_password">არასწორი მეილი ან პაროლი</string>
 </resources>

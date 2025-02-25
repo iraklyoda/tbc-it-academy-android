@@ -2,14 +2,17 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.navigation.safeargs.kotlin)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    namespace = "com.example.baseproject"
+    namespace = "com.example.tricholog"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.baseproject"
+        applicationId = "com.example.tricholog"
         minSdk = 25
         targetSdk = 34
         versionCode = 1
@@ -18,8 +21,6 @@ android {
         resourceConfigurations.add("ka")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-
 
     buildTypes {
         release {
@@ -53,4 +54,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }

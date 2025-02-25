@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743295872074",
+    "project_id": "tricho-log",
+    "storage_bucket": "tricho-log.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743295872074:android:05a4714646809fb5ce8ab3",
+        "android_client_info": {
+          "package_name": "com.example.tricholog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVlNXW4k1HSEeehbzsXN7VgZdOjC0oGgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

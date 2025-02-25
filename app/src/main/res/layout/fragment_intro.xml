@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.landing.pager.IntroFragment">
+    tools:context="com.example.tricholog.ui.landing.pager.IntroFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_header"
@@ -38,7 +38,7 @@
         android:alpha="0"
         android:paddingHorizontal="@dimen/distance_sm"
         android:text="@string/trich_intro_01"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_kodee_greeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_kodee_greeting"

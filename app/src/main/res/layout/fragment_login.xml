@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.authentication.login.LoginFragment">
+    tools:context="com.example.tricholog.ui.authentication.login.LoginFragment">
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -83,5 +83,22 @@
         android:textSize="@dimen/text_md"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ProgressBar
+
+        android:translationZ="2dp"
+        android:visibility="gone"
+        android:id="@+id/pb_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tl_email"
+        app:layout_constraintStart_toStartOf="@id/btn_login" />
+
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.landing.pager.InfoFragment">
+    tools:context="com.example.tricholog.ui.landing.pager.InfoFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_header"
