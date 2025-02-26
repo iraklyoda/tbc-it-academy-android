@@ -1,7 +1,7 @@
 package com.example.tricholog.data.di
 
-import com.example.tricholog.data.repositories.auth.AuthRepository
 import com.example.tricholog.data.repositories.auth.AuthRepositoryImpl
+import com.example.tricholog.domain.repository.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

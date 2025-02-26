@@ -2,8 +2,8 @@ package com.example.tricholog.ui.authentication.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tricholog.data.common.Resource
-import com.example.tricholog.data.repositories.auth.AuthRepository
+import com.example.tricholog.domain.common.Resource
+import com.example.tricholog.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

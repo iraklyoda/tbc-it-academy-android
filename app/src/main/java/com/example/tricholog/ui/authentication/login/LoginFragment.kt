@@ -9,14 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.tricholog.BaseFragment
 import com.example.tricholog.R
 import com.example.tricholog.databinding.FragmentLoginBinding
+import com.example.tricholog.domain.error.AuthError
 import com.example.tricholog.utils.clearError
 import com.example.tricholog.utils.getString
 import com.example.tricholog.utils.isEmail
 import com.example.tricholog.utils.showToast
-import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -51,20 +48,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 loginViewModel.loginStateFlow.collectLatest { state ->
                     when (state) {
                         is LoginUiState.Loading -> {
-                            binding.pbLogin.visibility = View.VISIBLE
-                            binding.btnLogin.isActivated = false
+                            handleLoadingState(true)
                         }
+
                         is LoginUiState.Success -> {
-                            binding.pbLogin.visibility = View.GONE
-                            binding.btnLogin.isActivated = true
-                            navigateToHome()
+                            handleLoginSuccess()
                         }
+
                         is LoginUiState.Error -> {
-                            binding.pbLogin.visibility = View.GONE
-                            binding.btnLogin.isActivated = true
-                            requireContext().showToast(handleFirebaseErrors(state.message))
+                            handleAuthErrors(state.error)
                         }
-                        else -> {
+
+                        is LoginUiState.Idle -> {
 
                         }
                     }
@@ -73,25 +68,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun handleFirebaseErrors(e: Exception): String {
-        return when (e) {
-            is FirebaseNetworkException -> getString(R.string.network_issues)
-            is FirebaseAuthInvalidCredentialsException -> getString(R.string.wrong_email_or_password)
-            else -> getString(R.string.unknown_error)
+    private fun handleAuthErrors(error: AuthError) {
+        handleLoadingState(false)
+        when (error) {
+            is AuthError.NetworkError -> requireContext().showToast(getString(R.string.network_issues))
+            is AuthError.InvalidCredentials -> requireContext().showToast(getString(R.string.wrong_email_or_password))
+            else -> requireContext().showToast(getString(R.string.unknown_error))
         }
     }
 
-    private fun navigateToHome() {
+    private fun handleLoginSuccess() {
+        handleLoadingState(false)
+
         val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
         findNavController().navigate(action)
+    }
+
+    private fun handleLoadingState(isLoading: Boolean) {
+        binding.pbLogin.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.btnLogin.isActivated = !isLoading
     }
 
     private fun validateForm(): Boolean {
         var isValid = true
 
         with(binding) {
-            tlEmail.clearError()
-            tlPassword.clearError()
+            listOf(tlEmail, tlPassword)
+                .forEach { it.clearError() }
 
             if (etEmail.getString().isEmpty()) {
                 isValid = false

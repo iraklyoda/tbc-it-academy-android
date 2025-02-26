@@ -1,6 +1,5 @@
 package com.example.tricholog.ui.authentication.register
 
-import android.util.Log.d
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -10,13 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.tricholog.BaseFragment
 import com.example.tricholog.R
 import com.example.tricholog.databinding.FragmentRegisterBinding
+import com.example.tricholog.domain.error.AuthError
 import com.example.tricholog.utils.clearError
 import com.example.tricholog.utils.getString
 import com.example.tricholog.utils.isEmail
 import com.example.tricholog.utils.showToast
-import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,7 +24,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val registerViewModel: RegisterViewModel by viewModels()
 
     override fun start() {
-
     }
 
     override fun listeners() {
@@ -41,26 +37,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 registerViewModel.registerStateFlow.collectLatest { state ->
                     when (state) {
                         is RegisterUiState.Loading -> {
-                            binding.pbSignUp.visibility = View.VISIBLE
-                            binding.btnRegister.isActivated = false
+                            handleLoadingState(true)
                         }
 
                         is RegisterUiState.Success -> {
-                            binding.pbSignUp.visibility = View.GONE
-                            binding.btnRegister.isActivated = true
-                            d("RegisterStatus", "Success")
-                            registerSuccess()
+                            handleRegisterSuccess()
                         }
 
                         is RegisterUiState.Error -> {
-                            binding.pbSignUp.visibility = View.GONE
-                            binding.btnRegister.isActivated = true
-                            d("RegisterStatus", "Error ${state.message}")
-                            requireContext().showToast(handleFirebaseErrors(state.message))
+                            handleAuthErrors(state.error)
                         }
 
-                        else -> {
-
+                        is RegisterUiState.Idle -> {
+                            handleLoadingState(false)
                         }
                     }
                 }
@@ -68,12 +57,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         }
     }
 
-    private fun handleFirebaseErrors(e: Exception): String {
-        return when (e) {
-            is FirebaseAuthUserCollisionException -> getString(R.string.email_already_exists)
-            is FirebaseNetworkException -> getString(R.string.network_issues)
-            is FirebaseAuthWeakPasswordException -> getString(R.string.password_is_too_weak)
-            else -> getString(R.string.unknown_error)
+    private fun handleAuthErrors(error: AuthError) {
+        handleLoadingState(false)
+
+        when (error) {
+            is AuthError.EmailAlreadyExists -> handleEmailExistsError()
+            is AuthError.NetworkError -> requireContext().showToast(getString(R.string.network_issues))
+            else -> requireContext().showToast(getString(R.string.unknown_error))
         }
     }
 
@@ -88,19 +78,24 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         }
     }
 
-    private fun registerSuccess() {
+    private fun handleRegisterSuccess() {
+        handleLoadingState(false)
+
         val action = RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
         findNavController().navigate(action)
+    }
+
+    private fun handleLoadingState(isLoading: Boolean) {
+        binding.pbSignUp.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.btnRegister.isActivated = !isLoading
     }
 
 
     private fun validateForm(): Boolean {
         var isValid: Boolean = true
         with(binding) {
-            tlUsername.clearError()
-            tlEmail.clearError()
-            tlPassword.clearError()
-            tlPasswordRepeat.clearError()
+            listOf(tlUsername, tlEmail, tlPassword, tlPasswordRepeat)
+                .forEach { it.clearError() }
 
             if (etUsername.getString().isEmpty()) {
                 isValid = false
@@ -135,5 +130,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             }
         }
         return isValid
+    }
+
+    private fun handleEmailExistsError() {
+        binding.tlEmail.error = getString(R.string.email_already_exists)
     }
 }
