@@ -20,9 +20,9 @@ class RegisterViewModel @Inject constructor(
         MutableStateFlow(RegisterUiState.Idle)
     val registerStateFlow: StateFlow<RegisterUiState> get() = _registerStateFlow
 
-    fun signUp(email: String, password: String) {
+    fun signUp(email: String, username: String, password: String) {
         viewModelScope.launch {
-            authRepository.signUp(email, password).collectLatest { resource ->
+            authRepository.signUp(email, username, password).collectLatest { resource ->
                 when(resource) {
                     is Resource.Loading -> {
                         _registerStateFlow.value = RegisterUiState.Loading

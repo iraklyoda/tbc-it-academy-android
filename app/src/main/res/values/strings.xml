@@ -29,4 +29,5 @@
     <string name="password_is_too_weak">Password is too weak</string>
     <string name="unknown_error">Unknown error</string>
     <string name="wrong_email_or_password">Wrong email or password</string>
+    <string name="register_successful">Register Successful!</string>
 </resources>

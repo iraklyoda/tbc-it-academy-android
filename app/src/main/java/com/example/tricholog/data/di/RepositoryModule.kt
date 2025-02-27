@@ -1,7 +1,9 @@
 package com.example.tricholog.data.di
 
 import com.example.tricholog.data.repositories.auth.AuthRepositoryImpl
+import com.example.tricholog.data.repositories.auth.UserRepositoryImpl
 import com.example.tricholog.domain.repository.AuthRepository
+import com.example.tricholog.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,4 +15,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindAuthRepository(authRepositoryImpl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 }

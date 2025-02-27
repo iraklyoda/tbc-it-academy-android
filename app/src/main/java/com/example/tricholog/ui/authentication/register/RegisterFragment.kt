@@ -71,6 +71,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         binding.btnRegister.setOnClickListener {
             if (validateForm()) {
                 registerViewModel.signUp(
+                    username = binding.etUsername.getString(),
                     email = binding.etEmail.getString(),
                     password = binding.etPassword.getString()
                 )
@@ -80,8 +81,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun handleRegisterSuccess() {
         handleLoadingState(false)
+        requireContext().showToast(getString(R.string.register_successful))
 
-        val action = RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
+        val action = RegisterFragmentDirections.actionRegisterFragmentToDashboardFragment()
         findNavController().navigate(action)
     }
 

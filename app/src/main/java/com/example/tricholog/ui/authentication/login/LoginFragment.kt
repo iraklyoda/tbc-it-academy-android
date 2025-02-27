@@ -80,7 +80,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun handleLoginSuccess() {
         handleLoadingState(false)
 
-        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        val action = LoginFragmentDirections.actionLoginFragmentToDashboardFragment()
         findNavController().navigate(action)
     }
 

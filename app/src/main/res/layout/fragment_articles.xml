@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tricholog.ui.dashboard.home.HomeFragment">
+    tools:context=".ui.dashboard.articles.ArticlesFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/tv_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Salam toms sazgvrebi ukidegano" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

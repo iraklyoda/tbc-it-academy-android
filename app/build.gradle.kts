@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore.ktx)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 }

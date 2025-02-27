@@ -1,10 +1,11 @@
 package com.example.tricholog.data.repositories.auth
 
-import android.util.Log.d
 import com.example.tricholog.data.mapper.FirebaseAuthExceptionMapper
 import com.example.tricholog.domain.common.Resource
 import com.example.tricholog.domain.error.AuthError
+import com.example.tricholog.domain.model.User
 import com.example.tricholog.domain.repository.AuthRepository
+import com.example.tricholog.domain.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,7 +15,8 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val userRepository: UserRepository
 ) : AuthRepository {
 
     override suspend fun login(email: String, password: String): Flow<Resource<Boolean, AuthError>> {
@@ -31,17 +33,23 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signUp(email: String, password: String): Flow<Resource<Boolean, AuthError>> = flow {
+    override suspend fun signUp(email: String, username: String, password: String): Flow<Resource<Boolean, AuthError>> = flow {
         emit(Resource.Loading)
         try {
             val authResult =
                 firebaseAuth.createUserWithEmailAndPassword(email, password).await()
 
-            d("FirebaseAuthProgress", "User: ${authResult.user}")
+            val uid = authResult.user?.uid
+            uid?.let {
 
-            authResult.user?.let {
+                userRepository.saveUser(User(
+                    uid = uid,
+                    email = email,
+                    username = username
+                ))
+
                 emit(Resource.Success(true))
-            }
+            } ?: emit(Resource.Error(AuthError.UnknownError))
 
         } catch (exception: Exception) {
             emit(Resource.Error(FirebaseAuthExceptionMapper.mapException(exception)))
