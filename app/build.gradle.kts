@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.androidx.navigation.safeargs.kotlin)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.secrets.gradle)
 }
 
 android {
@@ -54,6 +56,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.secrets.gradle)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.android.maps.utils)
 }
 
 kapt {
