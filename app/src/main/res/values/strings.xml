@@ -30,4 +30,7 @@
     <string name="unknown_error">Unknown error</string>
     <string name="wrong_email_or_password">Wrong email or password</string>
     <string name="register_successful">Register Successful!</string>
+    <string name="articles">Articles</string>
+    <string name="home">Home</string>
+    <string name="logs">Logs</string>
 </resources>

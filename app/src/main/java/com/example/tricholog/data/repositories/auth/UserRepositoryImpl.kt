@@ -35,13 +35,10 @@ class UserRepositoryImpl @Inject constructor(
                 .await()
 
             val user = documentSnapshot.toObject(User::class.java)
-
-            Log.d("HomeFragmentUserRepository", "$user")
             user?.let {
                 return it
             } ?: return null
         } catch (e: Exception) {
-            Log.d("HomeFragmentUserRepository", "$e")
             return null
         }
     }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.kapt)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -23,7 +24,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://67c0c478b9d02a9f224ae172.mockapi.io/api/\"")
+        }
         release {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://67c0c478b9d02a9f224ae172.mockapi.io/api/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -33,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -60,4 +66,8 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.okhttp) // Check for the latest version
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
 }

@@ -60,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         }
 
                         is LoginUiState.Idle -> {
-
+                            handleLoadingState(false)
                         }
                     }
                 }

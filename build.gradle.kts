@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.dagger.hilt) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
