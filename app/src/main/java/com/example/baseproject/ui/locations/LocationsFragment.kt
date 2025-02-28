@@ -203,7 +203,6 @@ class LocationsFragment : BaseFragment<FragmentLocationsBinding>(FragmentLocatio
         }
     }
 
-
     private fun observeMarkers() {
         viewLifecycleOwner.lifecycleScope.launch {
             locationsViewModel.locationsStateFlow.collectLatest { state ->
@@ -226,7 +225,7 @@ class LocationsFragment : BaseFragment<FragmentLocationsBinding>(FragmentLocatio
                     is LocationsUiState.Error -> {
                         Toast.makeText(
                             requireContext(),
-                            "Error fetching locations",
+                            getString(R.string.error_fetching_locations),
                             Toast.LENGTH_LONG
                         ).show()
                     }

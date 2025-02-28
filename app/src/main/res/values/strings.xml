@@ -10,4 +10,5 @@
     <string name="failed_to_get_location">Failed to get location: %1$s</string>
     <string name="location_services_still_disabled">Location services still disabled</string>
     <string name="location_permission_required">Location permission required</string>
+    <string name="error_fetching_locations">Error fetching locations</string>
 </resources>
