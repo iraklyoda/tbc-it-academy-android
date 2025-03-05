@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ArticleDto(
     @SerialName("id") val id: String,
-    @SerialName("created_at") val createdAt: String,
+    @SerialName("created_at") val createdAt: Long,
     @SerialName("title") val title: String,
     @SerialName("content") val content: String,
     @SerialName("author") val author: String,

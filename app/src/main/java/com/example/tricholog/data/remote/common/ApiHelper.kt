@@ -8,6 +8,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
+import android.util.Log
 
 class ApiHelper @Inject constructor() {
     suspend fun <T> handleHttpRequest(
@@ -21,11 +22,16 @@ class ApiHelper @Inject constructor() {
             if (response.isSuccessful) {
                 response.body()?.let {
                     emit(Resource.Success(data = it))
-                } ?: emit(Resource.Error(ApiError.UnknownError))
+                } ?: run {
+//                    Log.d("ApiError", "${response.errorBody()}")
+                    emit(Resource.Error(ApiError.UnknownError))
+                }
             } else {
+//                Log.d("ApiError", "${response.errorBody()}")
                 emit(Resource.Error(ApiError.UnknownError))
             }
         } catch (throwable: Throwable) {
+//            Log.d("ApiError", "${throwable.message}")
             when (throwable) {
                 is IOException -> {
                     emit(Resource.Error(error = ApiError.NetworkError))

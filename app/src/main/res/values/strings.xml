@@ -33,4 +33,18 @@
     <string name="articles">Articles</string>
     <string name="home">Home</string>
     <string name="logs">Logs</string>
+    <string name="min">min</string>
+    <string name="read_more">Read more</string>
+    <string name="helpful_articles">Helpful Articles</string>
+    <string name="add">add</string>
+    <string name="create_log">Create log</string>
+    <string name="add_log">Add Log</string>
+    <string name="what_was_the_trigger">What was the trigger?</string>
+    <string name="trigger">trigger</string>
+    <string name="describe_your_feelings">Describe your feelings</string>
+    <string name="i_will_prevent_this_by">I will prevent this by...</string>
+    <string name="trigger_field_is_empty">Trigger field is empty</string>
+    <string name="body_field_is_empty">Body field is empty</string>
+    <string name="you_don_t_have_logs_yet">You don\'t have logs yet</string>
+    <string name="timer_format">%1$d day %2$02d:%3$02d:%4$02d</string>
 </resources>

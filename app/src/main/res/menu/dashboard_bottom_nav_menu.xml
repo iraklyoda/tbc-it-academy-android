@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@id/articlesFragment"
+        android:id="@+id/articlesNestedGraph"
         android:title="@string/articles"
         android:icon="@drawable/ic_articles"
         />
 
     <item
-        android:id="@id/homeFragment"
+        android:id="@id/homeNestedGraph"
         android:title="@string/home"
         android:icon="@drawable/ic_home"
         />
 
     <item
-        android:id="@id/logsFragment"
+        android:id="@id/logsNestedGraph"
         android:title="@string/logs"
         android:icon="@drawable/ic_hand"
         />

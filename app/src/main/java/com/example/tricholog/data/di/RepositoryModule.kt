@@ -1,10 +1,12 @@
 package com.example.tricholog.data.di
 
-import com.example.tricholog.data.repositories.article.ArticleRepositoryImpl
+import com.example.tricholog.data.repositories.ArticleRepositoryImpl
+import com.example.tricholog.data.repositories.TrichoLogRepositoryImpl
 import com.example.tricholog.data.repositories.auth.AuthRepositoryImpl
 import com.example.tricholog.data.repositories.auth.UserRepositoryImpl
 import com.example.tricholog.domain.repository.ArticleRepository
 import com.example.tricholog.domain.repository.AuthRepository
+import com.example.tricholog.domain.repository.TrichoLogRepository
 import com.example.tricholog.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -23,4 +25,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindArticleRepository(articleRepositoryImpl: ArticleRepositoryImpl): ArticleRepository
+
+    @Binds
+    abstract fun bindTrichoLogRepository(trichoLogRepositoryImpl: TrichoLogRepositoryImpl): TrichoLogRepository
 }

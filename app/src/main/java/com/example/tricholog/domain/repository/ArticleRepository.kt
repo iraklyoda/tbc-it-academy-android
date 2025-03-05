@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
     suspend fun getArticles(): Flow<Resource<List<Article>, ApiError>>
+    suspend fun getArticle(id: String): Flow<Resource<Article, ApiError>>
 }

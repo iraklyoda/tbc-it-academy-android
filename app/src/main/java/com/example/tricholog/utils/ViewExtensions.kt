@@ -2,6 +2,8 @@ package com.example.tricholog.utils
 
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
+import androidx.transition.Visibility
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.delay
 
@@ -20,4 +22,12 @@ fun EditText.getString(): String {
 fun TextInputLayout.clearError() {
     this.error = null
     this.isErrorEnabled = false
+}
+
+fun ProgressBar.toggle(state: Boolean) {
+    if (state) {
+        this.visibility = View.VISIBLE
+    } else {
+        this.visibility = View.GONE
+    }
 }

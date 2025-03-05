@@ -37,4 +37,18 @@
     <string name="articles">სტატიები</string>
     <string name="home">სახლი</string>
     <string name="logs">ლოგები</string>
+    <string name="min">წუთი</string>
+    <string name="read_more">ნახეთ სრულად</string>
+    <string name="helpful_articles">სასარგებლო სტატიები</string>
+    <string name="add">დამატება</string>
+    <string name="create_log">ლოგირება</string>
+    <string name="add_log">ლოგის დამატება</string>
+    <string name="what_was_the_trigger">რა იყო გამომწვევი მიზეზი</string>
+    <string name="trigger">გამომწვევი მიზეზი</string>
+    <string name="describe_your_feelings">აღწერეთ თქვენი გრძნობები</string>
+    <string name="i_will_prevent_this_by">მე ამას ავირიდებ</string>
+    <string name="trigger_field_is_empty">მიზეზის ველი ცარიელია</string>
+    <string name="body_field_is_empty">ველი ცარიელია</string>
+    <string name="you_don_t_have_logs_yet">ჯერ ლოგირება არ გაგიკეთებიათ</string>
+    <string name="timer_format">%1$d დღე %2$02d:%3$02d:%4$02d</string>
 </resources>

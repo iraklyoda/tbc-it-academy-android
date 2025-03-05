@@ -7,5 +7,6 @@
     <dimen name="text_lg">48sp</dimen>
     <dimen name="text_md">24sp</dimen>
 
+    <dimen name="radius_sm">8dp</dimen>
     <dimen name="radius_md">16dp</dimen>
 </resources>

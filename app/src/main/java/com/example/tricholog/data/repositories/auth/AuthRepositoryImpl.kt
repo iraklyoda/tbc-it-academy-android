@@ -1,5 +1,6 @@
 package com.example.tricholog.data.repositories.auth
 
+import android.util.Log
 import com.example.tricholog.data.mapper.FirebaseAuthExceptionMapper
 import com.example.tricholog.domain.common.Resource
 import com.example.tricholog.domain.error.AuthError
@@ -56,8 +57,11 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-
     override suspend fun logout() {
-
+        try {
+            firebaseAuth.signOut()
+        } catch (e: Exception) {
+            Log.e("Auth", "Logout failed: ${e.message}")
+        }
     }
 }

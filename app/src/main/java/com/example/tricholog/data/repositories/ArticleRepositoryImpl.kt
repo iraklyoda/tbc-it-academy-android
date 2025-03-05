@@ -1,12 +1,10 @@
-package com.example.tricholog.data.repositories.article
+package com.example.tricholog.data.repositories
 
 import com.example.tricholog.data.mapper.toArticleDomain
 import com.example.tricholog.data.remote.api.ArticleService
 import com.example.tricholog.data.remote.common.ApiHelper
-import com.example.tricholog.data.remote.dto.ArticleDto
 import com.example.tricholog.domain.common.Resource
 import com.example.tricholog.domain.error.ApiError
-import com.example.tricholog.domain.error.AuthError
 import com.example.tricholog.domain.model.Article
 import com.example.tricholog.domain.repository.ArticleRepository
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +21,17 @@ class ArticleRepositoryImpl @Inject constructor(
             .map { resource ->
                 when (resource) {
                     is Resource.Success -> Resource.Success(resource.data.map { it.toArticleDomain() })
+                    is Resource.Error -> Resource.Error(resource.error)
+                    is Resource.Loading -> Resource.Loading
+                }
+            }
+    }
+
+    override suspend fun getArticle(id: String): Flow<Resource<Article, ApiError>> {
+        return apiHelper.handleHttpRequest { apiService.getArticle(id) }
+            .map { resource ->
+                when (resource) {
+                    is Resource.Success -> Resource.Success(resource.data.toArticleDomain())
                     is Resource.Error -> Resource.Error(resource.error)
                     is Resource.Loading -> Resource.Loading
                 }

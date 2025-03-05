@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/distance_md"
+    tools:context=".ui.dashboard.logs.create.CreateLogFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:text="@string/create_log"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_header" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_trigger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:text="@string/what_was_the_trigger"
+        android:textSize="@dimen/text_md"
+        app:layout_constraintStart_toStartOf="@id/tl_trigger"
+        app:layout_constraintTop_toBottomOf="@id/tv_header" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_trigger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm"
+        android:hint="@string/trigger"
+        app:errorIconTint="@color/desire"
+        app:errorTextColor="@color/desire"
+        app:layout_constraintTop_toBottomOf="@id/tv_trigger">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_trigger"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_background"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:text="@string/describe_your_feelings"
+        android:textSize="@dimen/text_md"
+        app:layout_constraintStart_toStartOf="@id/tl_trigger"
+        app:layout_constraintTop_toBottomOf="@id/tl_trigger" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_sm"
+        android:hint="@string/i_will_prevent_this_by"
+        app:errorIconTint="@color/desire"
+        app:errorTextColor="@color/desire"
+        app:layout_constraintTop_toBottomOf="@id/tv_body">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_body"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_background"
+            android:inputType="textMultiLine"
+            android:minLines="3" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_create_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tl_body" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/distance_md"
+        android:background="@drawable/btn_background"
+        android:text="@string/add_log"
+        android:textAllCaps="false"
+        android:textColor="@color/mountain_lake_green"
+        android:textSize="@dimen/text_md"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
