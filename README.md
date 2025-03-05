@@ -9,17 +9,28 @@
 
 ## Overview
 
-Tricholog is an Android application designed to help individuals struggling with trichotillomania and raise awareness about this condition. The app provides a platform where users can log in or register, navigate to articles about trichotillomania, add logs when they experience hair-pulling moments, and check a timer to see the elapsed time since their last log.
+Tricholog is an Android application designed to help individuals struggling with trichotillomania
+and raise awareness about this condition. The app provides a platform where users can log in or
+register, navigate to articles about trichotillomania, add logs when they experience hair-pulling
+moments, and check a timer to see the elapsed time since their last log.
 
-This application is built using modern libraries and tools, including **Firebase Authentication**, **View Binding**, **Navigation Graph**, **ViewModels**, **Clean Architecture**, **Hilt** for dependency injection, and **Retrofit** for networking.
+This application is built using modern libraries and tools, including **Firebase Authentication**, *
+*View Binding**, **Navigation Graph**, **ViewModels**, **Clean Architecture**, **Hilt** for
+dependency injection, and **Retrofit** for networking. The app also features **Georgian language
+localization** to cater to local users.
 
 ## Features
 
 - **User Authentication**: Users can log in and register to access the app's features.
-- **Article Navigation**: Users can explore articles related to trichotillomania to gain insights and support.
-- **Log Management**: Users can add logs to record their hair-pulling episodes, fostering self-awareness.
-- **Timer Functionality**: Displays the elapsed time since the last log entry, helping users track their progress.
-- **Modern Architecture**: Implements Clean Architecture principles for maintainable and testable code.
+- **Article Navigation**: Users can explore articles related to trichotillomania to gain insights
+  and support.
+- **Log Management**: Users can add logs to record their hair-pulling episodes, fostering
+  self-awareness.
+- **Timer Functionality**: Displays the elapsed time since the last log entry, helping users track
+  their progress.
+- **Modern Architecture**: Implements Clean Architecture principles for maintainable and testable
+  code.
+- **Georgian Language Localization**: Supports the Georgian language for better accessibility.
 
 ## Libraries Used
 
@@ -37,23 +48,27 @@ This application is built using modern libraries and tools, including **Firebase
     - Upon successful login or registration, users are directed to the main features of the app.
 
 2. **Navigating Articles**:
-    - Users can navigate to a dedicated section to read articles related to trichotillomania, offering education and support.
+    - Users can navigate to a dedicated section to read articles related to trichotillomania,
+      offering education and support.
 
 3. **Logging Episodes**:
-    - Users can add logs whenever they experience hair-pulling moments, helping to build self-awareness.
+    - Users can add logs whenever they experience hair-pulling moments, helping to build
+      self-awareness.
 
 4. **Timer Functionality**:
-    - A timer displays the elapsed time since the last log entry, encouraging users to track their progress.
+    - A timer displays the elapsed time since the last log entry, encouraging users to track their
+      progress.
 
 ## Screenshots
 
 <p align="center">
-    <img src="docs/images/screenshot_01.png" width="200" alt="Timer">
     <img src="docs/images/screenshot_02.png" width="200" alt="Articles">
     <img src="docs/images/screenshot_03.png" width="200" alt="Auth Page">
+    <img src="docs/images/screenshot_04.png" width="200" alt="Georgian">
 </p>
 
 ## Notes
 
 - This app aims to provide support and raise awareness about trichotillomania.
 - User authentication is managed through Firebase for enhanced security.
+- The app includes Georgian language localization to improve accessibility for local users.

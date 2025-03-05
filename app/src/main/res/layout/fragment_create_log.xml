@@ -48,6 +48,7 @@
         android:layout_marginTop="@dimen/distance_sm"
         android:hint="@string/trigger"
         app:errorIconTint="@color/desire"
+        android:textColor="@color/black"
         app:errorTextColor="@color/desire"
         app:layout_constraintTop_toBottomOf="@id/tv_trigger">
 
@@ -78,6 +79,7 @@
         android:layout_marginTop="@dimen/distance_sm"
         android:hint="@string/i_will_prevent_this_by"
         app:errorIconTint="@color/desire"
+        android:textColor="@color/black"
         app:errorTextColor="@color/desire"
         app:layout_constraintTop_toBottomOf="@id/tv_body">
 

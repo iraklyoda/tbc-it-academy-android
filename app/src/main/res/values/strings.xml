@@ -47,4 +47,6 @@
     <string name="body_field_is_empty">Body field is empty</string>
     <string name="you_don_t_have_logs_yet">You don\'t have logs yet</string>
     <string name="timer_format">%1$d day %2$02d:%3$02d:%4$02d</string>
+    <string name="time_since_your_last_log">Time since your last log:</string>
+    <string name="log_out">Log Out</string>
 </resources>

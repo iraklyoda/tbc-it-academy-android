@@ -66,6 +66,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_read"
         android:layout_width="wrap_content"
+        android:paddingHorizontal="@dimen/distance_md"
         android:layout_height="30dp"
         android:background="@drawable/btn_background"
         android:text="@string/read_more"
