@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-v1.5.31-1F425F?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org)  
+[![Kotlin](https://img.shields.io/badge/Kotlin-v2.1.0-1F425F?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org)  
 [![Android Studio](https://img.shields.io/badge/Android_Studio-3DDC84?style=flat&logo=android-studio&logoColor=white)](https://developer.android.com/studio)
 
 </div>
