@@ -1,41 +1,59 @@
-# TBC IT Academy Android Development
+# Tricholog: Trichotillomania Support App
 
-This repository contains assignments and quiz projects from the TBC IT Academy for Android Development. Each assignment is organized into separate branches, and you can click on the links below to view the code.
+<div align="center">
 
-## Assignments
+[![Kotlin](https://img.shields.io/badge/Kotlin-v1.5.31-1F425F?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org)  
+[![Android Studio](https://img.shields.io/badge/Android_Studio-3DDC84?style=flat&logo=android-studio&logoColor=white)](https://developer.android.com/studio)
 
-- [Assignment 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-1)
-- [Assignment 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-2)
-- [Assignment 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-3)
-- [Assignment 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-4)
-- [Assignment 5](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-5)
-- [Assignment 6](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-6)
-- [Assignment 7](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-7)
-- [Assignment 8](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-8)
-- [Assignment 9](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-9)
-- [Assignment 10](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-10)
-- [Assignment 11](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-11)
-- [Assignment 12](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-12)
-- [Assignment 13](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-13)
-- [Assignment 14](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-14)
-- [Assignment 15 - Payment App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-15)
-- [Assignment 16](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-16)
-- [Assignment 17](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-17)
-- [Assignment 18](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-18)
-- [Assignment 19](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-19)
-- [Assignment 20 - E-Auth Login and Registration Page 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-20)
-- [Assignment 21 - User Data Storage](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-21)
-- [Assignment 22 - Security Pin App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-22)
-- [Assignment 23 - E-Auth Login and Registration Page 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-23)
+</div>
 
+## Overview
 
+Tricholog is an Android application designed to help individuals struggling with trichotillomania and raise awareness about this condition. The app provides a platform where users can log in or register, navigate to articles about trichotillomania, add logs when they experience hair-pulling moments, and check a timer to see the elapsed time since their last log.
 
+This application is built using modern libraries and tools, including **Firebase Authentication**, **View Binding**, **Navigation Graph**, **ViewModels**, **Clean Architecture**, **Hilt** for dependency injection, and **Retrofit** for networking.
 
-## Quiz Projects
+## Features
 
-- [Quiz Project 1](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-1)
-- [Quiz Project 2](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-2)
-- [Quiz Project 3](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-3)
-- [Quiz Project 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-4)
-- [Quiz Project 5 - Room User's List](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-5)
-- [Quiz Project 5 - Room User's List (Revisited)](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-5-revisited)
+- **User Authentication**: Users can log in and register to access the app's features.
+- **Article Navigation**: Users can explore articles related to trichotillomania to gain insights and support.
+- **Log Management**: Users can add logs to record their hair-pulling episodes, fostering self-awareness.
+- **Timer Functionality**: Displays the elapsed time since the last log entry, helping users track their progress.
+- **Modern Architecture**: Implements Clean Architecture principles for maintainable and testable code.
+
+## Libraries Used
+
+- **Firebase Authentication**: For managing user authentication securely.
+- **View Binding**: For easier and safer view access within the app.
+- **Navigation Component**: For seamless navigation between fragments and activities.
+- **ViewModels**: To handle UI-related data in a lifecycle-conscious way.
+- **Hilt**: For dependency injection, simplifying the management of app components.
+- **Retrofit**: For making API requests and managing responses.
+
+## How It Works
+
+1. **Login/Registration Process**:
+    - Users can either log in with their existing credentials or register a new account.
+    - Upon successful login or registration, users are directed to the main features of the app.
+
+2. **Navigating Articles**:
+    - Users can navigate to a dedicated section to read articles related to trichotillomania, offering education and support.
+
+3. **Logging Episodes**:
+    - Users can add logs whenever they experience hair-pulling moments, helping to build self-awareness.
+
+4. **Timer Functionality**:
+    - A timer displays the elapsed time since the last log entry, encouraging users to track their progress.
+
+## Screenshots
+
+<p align="center">
+    <img src="docs/images/screenshot_01.png" width="200" alt="Timer">
+    <img src="docs/images/screenshot_02.png" width="200" alt="Articles">
+    <img src="docs/images/screenshot_03.png" width="200" alt="Auth Page">
+</p>
+
+## Notes
+
+- This app aims to provide support and raise awareness about trichotillomania.
+- User authentication is managed through Firebase for enhanced security.
