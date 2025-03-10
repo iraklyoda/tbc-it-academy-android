@@ -27,8 +27,7 @@ This repository contains assignments and quiz projects from the TBC IT Academy f
 - [Assignment 21 - User Data Storage](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-21)
 - [Assignment 22 - Security Pin App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-22)
 - [Assignment 23 - E-Auth Login and Registration Page 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-23)
-
-
+- [Assignment 24 - Travel Social App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-24)
 
 
 ## Quiz Projects
@@ -39,3 +38,10 @@ This repository contains assignments and quiz projects from the TBC IT Academy f
 - [Quiz Project 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-4)
 - [Quiz Project 5 - Room User's List](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-5)
 - [Quiz Project 5 - Room User's List (Revisited)](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-5-revisited)
+- [Quiz Project 6](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-6)
+- [Quiz Project 6 (Revisited)](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-6-revisited)
+- [Quiz Project 7](https://github.com/iraklyoda/tbc-it-academy-android/tree/quiz-project-7)
+
+## Midterm Project
+
+- [TrichoLog (50/100)](https://github.com/iraklyoda/tbc-it-academy-android/tree/TrichoLog)
