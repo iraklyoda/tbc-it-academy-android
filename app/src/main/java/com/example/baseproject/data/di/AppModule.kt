@@ -3,7 +3,7 @@ package com.example.baseproject.data.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.example.baseproject.data.UserRepository
+import com.example.baseproject.data.repository.UserRepository
 import com.example.baseproject.data.local.db.AppDatabase
 import com.example.baseproject.data.paging.UserRemoteMediator
 import com.example.baseproject.data.remote.api.UserService

@@ -2,26 +2,18 @@ package com.example.baseproject.ui.authentication.login
 
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.baseproject.ui.BaseFragment
-import com.example.baseproject.R
 import com.example.baseproject.domain.common.Resource
 import com.example.baseproject.databinding.FragmentLoginBinding
 import com.example.baseproject.ui.utils.FieldErrorMapper
 import com.example.baseproject.ui.utils.collect
 import com.example.baseproject.ui.utils.collectLatest
-import com.example.baseproject.utils.getString
-import com.example.baseproject.utils.isEmail
 import com.example.baseproject.utils.makeVisibilityToggle
 import com.example.baseproject.utils.onTextChanged
 import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
@@ -36,7 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun listeners() {
         registerFragmentListener()
         loginBtnListener()
-        navigateToRegister()
+        registerBtnListener()
     }
 
     override fun observers() {
@@ -114,7 +106,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         findNavController().navigate(action)
     }
 
-    private fun navigateToRegister() {
+    private fun registerBtnListener() {
         binding.btnRegister.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             findNavController().navigate(action)

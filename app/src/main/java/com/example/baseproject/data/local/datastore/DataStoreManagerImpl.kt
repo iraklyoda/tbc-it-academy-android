@@ -1,6 +1,5 @@
 package com.example.baseproject.data.local.datastore
 
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -8,7 +7,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.baseproject.domain.preferences.PreferenceKey
-import com.example.baseproject.domain.preferences.PreferenceType
 import com.example.baseproject.domain.preferences.PreferencesStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -40,10 +38,10 @@ class DataStoreManagerImpl @Inject constructor(
 
     @Suppress("UNCHECKED_CAST")
     private fun <T> createDataStoreKey(key: PreferenceKey<T>): Preferences.Key<T> {
-        return when (key.type) {
-            PreferenceType.STRING -> stringPreferencesKey(key.keyName)
-            PreferenceType.INT -> intPreferencesKey(key.keyName)
-            PreferenceType.BOOLEAN -> booleanPreferencesKey(key.keyName)
+        return when (key) {
+            is PreferenceKey.StringKey -> stringPreferencesKey(key.keyName)
+            is PreferenceKey.IntKey -> intPreferencesKey(key.keyName)
+            is PreferenceKey.BooleanKey -> booleanPreferencesKey(key.keyName)
         } as Preferences.Key<T>
     }
 }

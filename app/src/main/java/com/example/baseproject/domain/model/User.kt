@@ -1,4 +1,4 @@
-package com.example.baseproject.ui.home
+package com.example.baseproject.domain.model
 
 data class User(
     val id: Int,
