@@ -2,7 +2,7 @@ package com.example.baseproject.data
 
 import com.example.baseproject.data.local.db.UserEntity
 import com.example.baseproject.data.remote.dto.user.UserDto
-import com.example.baseproject.presentation.home.User
+import com.example.baseproject.ui.home.User
 
 object UserMapper {
     fun UserEntity.toUser(): User {

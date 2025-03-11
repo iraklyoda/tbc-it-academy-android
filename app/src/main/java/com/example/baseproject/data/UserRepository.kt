@@ -8,7 +8,7 @@ import androidx.paging.map
 import com.example.baseproject.data.UserMapper.toUser
 import com.example.baseproject.data.local.db.AppDatabase
 import com.example.baseproject.data.paging.UserRemoteMediator
-import com.example.baseproject.presentation.home.User
+import com.example.baseproject.ui.home.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

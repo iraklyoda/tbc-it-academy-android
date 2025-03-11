@@ -1,6 +1,8 @@
 package com.example.baseproject.utils
 
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -31,9 +33,19 @@ fun EditText.getString(): String {
 fun ProgressBar.setLoaderState(loading: Boolean, actionBtn: Button? = null) {
     if (loading) {
         this.visibility = View.VISIBLE
-        actionBtn?.isEnabled = false
     } else {
         this.visibility = View.GONE
-        actionBtn?.isEnabled = true
     }
+}
+
+fun EditText.onTextChanged(action: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            action(s.toString())
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+    })
 }

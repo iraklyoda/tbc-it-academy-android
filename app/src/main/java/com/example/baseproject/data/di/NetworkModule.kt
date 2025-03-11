@@ -1,7 +1,8 @@
 package com.example.baseproject.data.di
 
 import com.example.baseproject.BuildConfig
-import com.example.baseproject.data.remote.api.AuthService
+import com.example.baseproject.data.remote.api.RegisterService
+import com.example.baseproject.data.remote.api.LoginService
 import com.example.baseproject.data.remote.api.UserService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -50,12 +51,17 @@ object NetworkModule {
 
 
     @Provides
-    fun provideAuthService(retrofit: Retrofit): AuthService {
-        return retrofit.create(AuthService::class.java)
+    fun provideAuthService(retrofit: Retrofit): RegisterService {
+        return retrofit.create(RegisterService::class.java)
     }
 
     @Provides
     fun provideUserService(retrofit: Retrofit): UserService {
         return retrofit.create(UserService::class.java)
+    }
+
+    @Provides
+    fun provideLoginService(retrofit: Retrofit): LoginService {
+        return retrofit.create(LoginService::class.java)
     }
 }

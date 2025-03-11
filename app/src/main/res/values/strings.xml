@@ -27,4 +27,9 @@
     <string name="people_you_may_know">People you may know:</string>
     <string name="user_profile_picture">User Profile Picture</string>
     <string name="full_name">%1$s %2$s</string>
+    <string name="field_is_empty">Field is empty</string>
+    <string name="too_short">Too Short</string>
+    <string name="invalid_format">Invalid format</string>
+    <string name="password_do_not_match">Password do not match</string>
+    <string name="irakli">irakli</string>
 </resources>

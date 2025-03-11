@@ -1,51 +1,27 @@
 package com.example.baseproject.data.di
 
-import com.example.baseproject.common.ApiHelper
-import com.example.baseproject.data.UserRepository
-import com.example.baseproject.data.local.AuthPreferencesRepository
-import com.example.baseproject.data.local.db.AppDatabase
-import com.example.baseproject.data.paging.UserRemoteMediator
-import com.example.baseproject.data.remote.AuthRepository
-import com.example.baseproject.data.remote.api.AuthService
-import com.example.baseproject.data.remote.api.UserService
+import com.example.baseproject.data.repository.LogInRepositoryImpl
+import com.example.baseproject.data.repository.LogOutRepositoryImpl
+import com.example.baseproject.data.repository.SignUpRepositoryImpl
+import com.example.baseproject.domain.repository.LogInRepository
+import com.example.baseproject.domain.repository.LogOutRepository
+import com.example.baseproject.domain.repository.SignUpRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
-    @Singleton
-    @Provides
-    fun provideAuthRepository(
-        apiHelper: ApiHelper,
-        authPreferencesRepository: AuthPreferencesRepository,
-        authService: AuthService
-    ): AuthRepository {
-        return AuthRepository(
-            apiHelper = apiHelper,
-            authPreferencesRepository = authPreferencesRepository,
-            authService = authService
-        )
-    }
+abstract class RepositoryModule {
 
-    @Singleton
-    @Provides
-    fun provideUserRepository(
-        database: AppDatabase,
-        userRemoteMediator: UserRemoteMediator
-    ): UserRepository {
-        return UserRepository(database = database, userRemoteMediator = userRemoteMediator)
-    }
+    @Binds
+    abstract fun bindLoginRepository(loginRepositoryImpl: LogInRepositoryImpl): LogInRepository
 
-    @Singleton
-    @Provides
-    fun provideUserRemoteMediator(
-        database: AppDatabase,
-        userService: UserService
-    ): UserRemoteMediator {
-        return UserRemoteMediator(database = database, userService = userService)
-    }
+    @Binds
+    abstract fun bindRegisterRepository(registerRepositoryImpl: SignUpRepositoryImpl): SignUpRepository
+
+    @Binds
+    abstract fun bindLogOutRepository(logOutRepositoryImpl: LogOutRepositoryImpl): LogOutRepository
+
 }
