@@ -55,6 +55,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         binding.pbLogin.setLoaderState(
                             loading = false,
                         )
+                        loginViewModel.saveAuthPreferences(token = it.token, email = it.email)
                         navigateToHome()
                     }
                 }

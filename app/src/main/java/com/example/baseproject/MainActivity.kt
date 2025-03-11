@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
-import com.example.baseproject.data.local.AuthPreferencesRepository
 import com.example.baseproject.databinding.ActivityMainBinding
+import com.example.baseproject.domain.preferences.AppPreferenceKeys
+import com.example.baseproject.domain.use_case.preferences.ReadPreferenceValueUseCase
 import com.example.baseproject.ui.authentication.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +18,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     @Inject
-    lateinit var authPreferencesRepository: AuthPreferencesRepository
-
+    lateinit var readPreferenceValueUseCase: ReadPreferenceValueUseCase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +30,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
 
     private fun checkToken() {
         lifecycleScope.launch {
-            val token: String? = authPreferencesRepository.getToken()
+            val token: String? = readPreferenceValueUseCase(key = AppPreferenceKeys.TOKEN_KEY)?.firstOrNull()
 
             if (!token.isNullOrEmpty()) {
                 navigateToHome()

@@ -1,6 +1,5 @@
 package com.example.baseproject.data.repository
 
-import com.example.baseproject.data.local.datastore.DataStoreManager
 import com.example.baseproject.data.local.datastore.DataStorePreferenceKeys
 import com.example.baseproject.data.remote.api.LoginService
 import com.example.baseproject.data.remote.common.ApiHelper
@@ -14,7 +13,6 @@ import javax.inject.Inject
 
 class LogInRepositoryImpl @Inject constructor(
     private val apiHelper: ApiHelper,
-    private val dataStoreManager: DataStoreManager,
     private val loginService: LoginService
 ) : LogInRepository {
     override suspend fun login(
@@ -28,26 +26,8 @@ class LogInRepositoryImpl @Inject constructor(
                 when (resource) {
                     is Resource.Loading -> Resource.Loading
                     is Resource.Error -> Resource.Error(resource.errorMessage)
-                    is Resource.Success -> {
-                        saveLoginPreferences(
-                            email = email,
-                            rememberMe = rememberMe,
-                            token = resource.data.token
-                        )
-                        Resource.Success(ProfileSession(email = email, token = resource.data.token))
-                    }
+                    is Resource.Success -> { Resource.Success(ProfileSession(email = email, token = resource.data.token)) }
                 }
             }
-    }
-
-    override suspend fun saveLoginPreferences(email: String, rememberMe: Boolean, token: String) {
-        try {
-            if (rememberMe) {
-                dataStoreManager.saveValue(DataStorePreferenceKeys.TOKEN_KEY, token)
-            }
-            dataStoreManager.saveValue(DataStorePreferenceKeys.EMAIL_KEY, email)
-        } catch (e: Exception) {
-            throw RuntimeException("Failed to save login data: ${e.message}")
-        }
     }
 }

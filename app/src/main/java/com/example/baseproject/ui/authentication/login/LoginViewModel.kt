@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.baseproject.domain.common.Resource
 import com.example.baseproject.domain.model.ProfileSession
+import com.example.baseproject.domain.preferences.AppPreferenceKeys
 import com.example.baseproject.domain.use_case.auth.LogInUserUseCase
+import com.example.baseproject.domain.use_case.preferences.SavePreferenceValueUseCase
 import com.example.baseproject.domain.use_case.validation.ValidateEmailUseCase
 import com.example.baseproject.domain.use_case.validation.ValidatePasswordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +23,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val logInUserUseCase: LogInUserUseCase,
     private val validateEmailUseCase: ValidateEmailUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase
+    private val validatePasswordUseCase: ValidatePasswordUseCase,
+    private val savePreferenceValueUseCase: SavePreferenceValueUseCase
 ) : ViewModel() {
 
     private val _loginFormState = MutableStateFlow(LoginFormState())
@@ -85,6 +88,13 @@ class LoginViewModel @Inject constructor(
             ).collectLatest { resource ->
                 _loginStateFlow.value = resource
             }
+        }
+    }
+
+    fun saveAuthPreferences(token: String, email: String) {
+        viewModelScope.launch {
+            savePreferenceValueUseCase(key = AppPreferenceKeys.TOKEN_KEY, value = token)
+            savePreferenceValueUseCase(key = AppPreferenceKeys.EMAIL_KEY, value = email)
         }
     }
 

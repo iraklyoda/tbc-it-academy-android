@@ -4,13 +4,12 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.baseproject.data.local.datastore.DataStoreManager
 import com.example.baseproject.data.local.datastore.DataStoreManagerImpl
+import com.example.baseproject.domain.preferences.PreferencesStorage
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-
 
 private const val AUTH_PREFERENCES_NAME = "auth_preferences"
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = AUTH_PREFERENCES_NAME)
@@ -19,5 +18,5 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = AUT
 @InstallIn(SingletonComponent::class)
 abstract class PreferencesModule {
     @Binds
-    abstract fun bindDataStoreManager(dataStoreManagerImpl: DataStoreManagerImpl): DataStoreManager
+    abstract fun bindDataStoreManager(dataStoreManagerImpl: DataStoreManagerImpl): PreferencesStorage
 }

@@ -10,6 +10,4 @@ interface LogInRepository {
         password: String,
         rememberMe: Boolean
     ): Flow<Resource<ProfileSession>>
-
-    suspend fun saveLoginPreferences(email: String, rememberMe: Boolean, token: String)
 }

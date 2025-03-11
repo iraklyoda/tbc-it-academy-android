@@ -1,10 +1,8 @@
 package com.example.baseproject.data.di
 
 import com.example.baseproject.data.repository.LogInRepositoryImpl
-import com.example.baseproject.data.repository.LogOutRepositoryImpl
 import com.example.baseproject.data.repository.SignUpRepositoryImpl
 import com.example.baseproject.domain.repository.LogInRepository
-import com.example.baseproject.domain.repository.LogOutRepository
 import com.example.baseproject.domain.repository.SignUpRepository
 import dagger.Binds
 import dagger.Module
@@ -20,8 +18,4 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindRegisterRepository(registerRepositoryImpl: SignUpRepositoryImpl): SignUpRepository
-
-    @Binds
-    abstract fun bindLogOutRepository(logOutRepositoryImpl: LogOutRepositoryImpl): LogOutRepository
-
 }

@@ -1,12 +1,11 @@
 package com.example.baseproject.ui.profile
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.baseproject.ui.BaseFragment
 import com.example.baseproject.databinding.FragmentProfileBinding
+import com.example.baseproject.ui.BaseFragment
+import com.example.baseproject.ui.utils.viewLifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
@@ -18,23 +17,26 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     override fun listeners() {
-        logout()
+        logoutBtnListener()
     }
 
     private fun setEmail() {
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleScope {
             binding.textEmail.text = profileViewModel.getEmail()
         }
     }
 
-    private fun logout() {
+    private fun logoutBtnListener() {
         binding.btnLogout.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                profileViewModel.clearPreferencesAttributes()
+            handleLogout()
+        }
+    }
 
-                val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
-                findNavController().navigate(action)
-            }
+    private fun handleLogout() {
+        viewLifecycleScope {
+            profileViewModel.clearSession()
+            val action = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
+            findNavController().navigate(action)
         }
     }
 }
