@@ -44,9 +44,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
                 is Resource.Success -> {
                     resource.data?.let {
-                        binding.pbLogin.setLoaderState(
-                            loading = false,
-                        )
+                        binding.pbLogin.setLoaderState(loading = false)
                         loginViewModel.saveAuthPreferences(token = it.token, email = it.email)
                         navigateToHome()
                     }

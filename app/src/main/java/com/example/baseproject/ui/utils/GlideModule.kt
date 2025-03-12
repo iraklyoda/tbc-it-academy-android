@@ -1,4 +1,4 @@
-package com.example.baseproject.data.di
+package com.example.baseproject.ui.utils
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder
