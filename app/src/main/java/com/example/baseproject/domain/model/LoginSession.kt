@@ -1,6 +1,5 @@
 package com.example.baseproject.domain.model
 
-data class ProfileSession(
+data class LoginSession(
     val token: String,
-    val email: String
 )

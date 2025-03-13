@@ -1,6 +1,6 @@
 package com.example.baseproject.domain.model
 
 data class RegisterSession(
-    val email: String,
-    val password: String
+    val id: Int,
+    val token: String
 )

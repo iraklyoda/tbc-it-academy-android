@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class ValidateRepeatedPasswordUseCase @Inject constructor() {
     operator fun invoke(password: String, repeatedPassword: String): ValidationResult {
-        if (password.isBlank())
+        if (repeatedPassword.isBlank())
             return ValidationResult(error = AuthFieldErrorType.EMPTY)
 
         if (password != repeatedPassword)

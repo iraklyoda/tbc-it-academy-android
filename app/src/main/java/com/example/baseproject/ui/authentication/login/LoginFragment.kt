@@ -1,17 +1,15 @@
 package com.example.baseproject.ui.authentication.login
-
+import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.baseproject.ui.BaseFragment
-import com.example.baseproject.domain.common.Resource
 import com.example.baseproject.databinding.FragmentLoginBinding
-import com.example.baseproject.ui.utils.FieldErrorMapper
+import com.example.baseproject.ui.BaseFragment
+import com.example.baseproject.ui.utils.AuthFieldErrorMapper
 import com.example.baseproject.ui.utils.collect
 import com.example.baseproject.ui.utils.collectLatest
 import com.example.baseproject.utils.makeVisibilityToggle
 import com.example.baseproject.utils.onTextChanged
-import com.example.baseproject.utils.setLoaderState
 import com.example.baseproject.utils.showErrorToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,8 +19,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private val loginViewModel: LoginViewModel by viewModels()
 
     override fun start() {
-        setPasswordVisibilityToggle()
         setUpInputEvents()
+        setPasswordVisibilityToggle()
     }
 
     override fun listeners() {
@@ -32,49 +30,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     override fun observers() {
-        observeLoginState()
-        observeFormValidationErrors()
-        observeValidationEvents()
+        observeUiState()
+        observeLoginEvents()
     }
 
-    private fun observeLoginState() {
-        collectLatest(loginViewModel.loginStateFlow) { resource ->
-            when (resource) {
-                is Resource.Loading -> binding.pbLogin.setLoaderState(loading = true)
-
-                is Resource.Success -> {
-                    resource.data?.let {
-                        binding.pbLogin.setLoaderState(loading = false)
-                        loginViewModel.saveAuthPreferences(token = it.token, email = it.email)
-                        navigateToHome()
-                    }
-                }
-
-                is Resource.Error -> {
-                    binding.pbLogin.setLoaderState(loading = false)
-                    requireContext().showErrorToast(resource.errorMessage)
-                }
-            }
-        }
-    }
-
-    private fun observeFormValidationErrors() {
-        collect(flow = loginViewModel.loginFormState) { state ->
+    private fun observeUiState() {
+        collectLatest(flow = loginViewModel.uiState) { state ->
             binding.apply {
+                pbLogin.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+
                 etEmail.error =
-                    FieldErrorMapper.mapToString(state.emailError)?.let { getString(it) }
+                    AuthFieldErrorMapper.mapToString(state.emailError)?.let { getString(it) }
+
                 etPassword.error =
-                    FieldErrorMapper.mapToString(state.passwordError)?.let { getString(it) }
+                    AuthFieldErrorMapper.mapToString(state.passwordError)?.let { getString(it) }
+
+                btnLogin.isEnabled = state.isLoginBtnEnabled
             }
         }
     }
 
-    private fun observeValidationEvents() {
-        collect(flow = loginViewModel.validationEvents) { event ->
+    private fun observeLoginEvents() {
+        collect(flow = loginViewModel.loginEvents) { event ->
             when (event) {
-                is LoginViewModel.ValidationEvent.Success -> {
-                    loginViewModel.login()
-                }
+                is LoginEvent.LoginSuccess -> navigateToHome()
+                is LoginEvent.LoginError ->
+                    event.message?.let { requireContext().showErrorToast(it) }
             }
         }
     }
@@ -82,26 +63,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun setUpInputEvents() {
         binding.apply {
             etEmail.onTextChanged { email ->
-                loginViewModel.handleEvent(LoginFormEvent.EmailChanged(email))
+                loginViewModel.handleEvent(LoginUiEvents.EmailChanged(email))
             }
             etPassword.onTextChanged { password ->
-                loginViewModel.handleEvent(LoginFormEvent.PasswordChanged(password))
+                loginViewModel.handleEvent(LoginUiEvents.PasswordChanged(password))
             }
             cbRemember.setOnCheckedChangeListener { _, isChecked ->
-                loginViewModel.handleEvent(LoginFormEvent.RememberMeChanged(isChecked))
+                loginViewModel.handleEvent(LoginUiEvents.RememberMeChanged(isChecked))
             }
         }
     }
 
     private fun loginBtnListener() {
         binding.btnLogin.setOnClickListener {
-            loginViewModel.handleEvent(LoginFormEvent.Submit(rememberMe = binding.cbRemember.isChecked))
+            loginViewModel.handleEvent(LoginUiEvents.Submit)
         }
-    }
-
-    private fun navigateToHome() {
-        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-        findNavController().navigate(action)
     }
 
     private fun registerBtnListener() {
@@ -110,6 +86,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             findNavController().navigate(action)
         }
     }
+
+
+    private fun navigateToHome() {
+        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        findNavController().navigate(action)
+    }
+
 
     private fun registerFragmentListener() {
         setFragmentResultListener("credentials") { _, bundle ->

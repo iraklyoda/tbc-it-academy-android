@@ -3,10 +3,7 @@ package com.example.baseproject.ui.authentication.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.baseproject.domain.common.Resource
-import com.example.baseproject.domain.model.ProfileSession
-import com.example.baseproject.domain.preferences.AppPreferenceKeys
 import com.example.baseproject.domain.use_case.auth.LogInUserUseCase
-import com.example.baseproject.domain.use_case.preferences.SavePreferenceValueUseCase
 import com.example.baseproject.domain.use_case.validation.ValidateEmailUseCase
 import com.example.baseproject.domain.use_case.validation.ValidatePasswordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,61 +21,63 @@ class LoginViewModel @Inject constructor(
     private val logInUserUseCase: LogInUserUseCase,
     private val validateEmailUseCase: ValidateEmailUseCase,
     private val validatePasswordUseCase: ValidatePasswordUseCase,
-    private val savePreferenceValueUseCase: SavePreferenceValueUseCase
 ) : ViewModel() {
 
-    private val _loginFormState = MutableStateFlow(LoginFormState())
-    val loginFormState: StateFlow<LoginFormState> get() = _loginFormState
+    private val _uiState = MutableStateFlow(LoginUiState())
+    val uiState: StateFlow<LoginUiState> get() = _uiState
 
-    private val _loginStateFlow: MutableStateFlow<Resource<ProfileSession?>> =
-        MutableStateFlow(Resource.Success(null))
-    val loginStateFlow get() = _loginStateFlow
+    private val _loginEvents = Channel<LoginEvent>()
+    val loginEvents = _loginEvents.receiveAsFlow()
 
-    private val validationEventChannel = Channel<ValidationEvent>()
-    val validationEvents = validationEventChannel.receiveAsFlow()
+    fun handleEvent(event: LoginUiEvents) {
+        val formBeenSubmitted = uiState.value.formBeenSubmitted
 
-    fun handleEvent(event: LoginFormEvent) {
-        _loginFormState.update {
-            when(event) {
-                is LoginFormEvent.EmailChanged -> it.copy(email = event.email)
-                is LoginFormEvent.PasswordChanged -> it.copy(password = event.password)
-                is LoginFormEvent.RememberMeChanged -> it.copy(rememberMe = event.rememberMe)
-                is LoginFormEvent.Submit -> {
-                    submitLoginData()
-                    it
-                }
+        when (event) {
+            // Email Validation
+            is LoginUiEvents.EmailChanged -> _uiState.update {
+                val emailError =
+                    if (formBeenSubmitted) validateEmailUseCase(event.email).error else null
+
+                it.copy(email = event.email, emailError = emailError)
             }
+
+            // Password Validation
+            is LoginUiEvents.PasswordChanged -> _uiState.update {
+                val passwordError =
+                    if (formBeenSubmitted) validatePasswordUseCase(event.password).error else null
+                it.copy(password = event.password, passwordError = passwordError)
+            }
+
+            is LoginUiEvents.RememberMeChanged -> _uiState.update { it.copy(rememberMe = event.rememberMe) }
+            is LoginUiEvents.Submit -> submitLoginData()
         }
     }
 
     private fun submitLoginData() {
-        val formState = loginFormState.value
+        if (validateForm())
+            login()
+        else
+            _uiState.update { it.copy(formBeenSubmitted = true) }
+    }
 
-        val emailResult = validateEmailUseCase(formState.email)
-        val passwordResult = validatePasswordUseCase(formState.password)
+    private fun validateForm(): Boolean {
+        val emailResult = validateEmailUseCase(uiState.value.email)
+        val passwordResult = validatePasswordUseCase(uiState.value.password)
 
-        _loginFormState.update {
+        _uiState.update {
             it.copy(
                 emailError = emailResult.error,
                 passwordError = passwordResult.error,
             )
         }
 
-        if (listOf(
-                emailResult,
-                passwordResult,
-            ).any { !it.successful }
-        ) return
-
-        viewModelScope.launch {
-            validationEventChannel.send(ValidationEvent.Success)
-        }
+        return emailResult.successful && passwordResult.successful
     }
 
     fun login() {
-        val email = loginFormState.value.email
-        val password = loginFormState.value.password
-        val rememberMe = loginFormState.value.rememberMe
+        val email = uiState.value.email
+        val password = uiState.value.password
+        val rememberMe = uiState.value.rememberMe
 
         viewModelScope.launch {
             logInUserUseCase(
@@ -86,19 +85,30 @@ class LoginViewModel @Inject constructor(
                 password = password,
                 rememberMe = rememberMe
             ).collectLatest { resource ->
-                _loginStateFlow.value = resource
+                when (resource) {
+                    is Resource.Loader -> _uiState.update { it.copy(isLoading = resource.loading) }
+
+                    is Resource.Success -> _uiState.update {
+                        _loginEvents.send(LoginEvent.LoginSuccess)
+
+                        it.copy(
+                            isLoading = false,
+                            loginSession = resource.data
+                        )
+                    }
+
+                    is Resource.Error -> _uiState.update {
+                        _loginEvents.send(LoginEvent.LoginError(resource.errorMessage))
+                        it.copy(isLoading = false)
+                    }
+                }
             }
         }
     }
-
-    fun saveAuthPreferences(token: String, email: String) {
-        viewModelScope.launch {
-            savePreferenceValueUseCase(key = AppPreferenceKeys.TOKEN_KEY, value = token)
-            savePreferenceValueUseCase(key = AppPreferenceKeys.EMAIL_KEY, value = email)
-        }
-    }
-
-    sealed class ValidationEvent {
-        data object Success : ValidationEvent()
-    }
 }
+
+sealed interface LoginEvent {
+    data object LoginSuccess : LoginEvent
+    data class LoginError(val message: String?) : LoginEvent
+}
+

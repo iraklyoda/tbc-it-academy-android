@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/distance_md"
         android:layout_marginTop="@dimen/distance_md"
-        android:background="@drawable/btn_bg_dark"
+        android:background="@drawable/btn_auth_state"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/white"

@@ -30,7 +30,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
 
     private fun checkToken() {
         lifecycleScope.launch {
-            val token: String? = readPreferenceValueUseCase(key = AppPreferenceKeys.TOKEN_KEY)?.firstOrNull()
+            val token: String? = readPreferenceValueUseCase(key = AppPreferenceKeys.TOKEN_KEY, defaultValue = "")?.firstOrNull()
 
             if (!token.isNullOrEmpty()) {
                 navigateToHome()

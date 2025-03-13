@@ -147,7 +147,7 @@
         android:layout_marginTop="40dp"
         android:text="@string/register"
         android:textColor="@color/white"
-        android:background="@drawable/btn_bg_dark"
+        android:background="@drawable/btn_auth_state"
         android:textAllCaps="false"
         android:textSize="23sp"
         android:layout_marginHorizontal="@dimen/distance_md"

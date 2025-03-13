@@ -3,7 +3,7 @@ package com.example.baseproject.ui.utils
 import com.example.baseproject.R
 import com.example.baseproject.domain.common.AuthFieldErrorType
 
-object FieldErrorMapper {
+object AuthFieldErrorMapper {
     fun mapToString(errorType: AuthFieldErrorType?): Int? {
         return when(errorType) {
             AuthFieldErrorType.EMPTY -> R.string.field_is_empty

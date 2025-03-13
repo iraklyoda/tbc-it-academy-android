@@ -15,7 +15,7 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     suspend fun getEmail(): String? {
-        return readPreferenceValueUseCase(key = AppPreferenceKeys.EMAIL_KEY)?.firstOrNull()
+        return readPreferenceValueUseCase(key = AppPreferenceKeys.EMAIL_KEY, defaultValue = "")?.firstOrNull()
     }
 
     suspend fun clearSession() {

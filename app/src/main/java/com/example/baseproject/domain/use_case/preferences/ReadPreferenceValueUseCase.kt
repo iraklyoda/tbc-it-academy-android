@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ReadPreferenceValueUseCase @Inject constructor(
     private val preferencesStorage: PreferencesStorage
 ) {
-    suspend operator fun <T> invoke(key: PreferenceKey<T>): Flow<T>? {
-        return preferencesStorage.readValue(key = key, defaultValue = key.defaultValue)
+    suspend operator fun <T> invoke(key: PreferenceKey<T>, defaultValue: T): Flow<T>? {
+        return preferencesStorage.readValue(key = key, defaultValue = defaultValue)
     }
 }
