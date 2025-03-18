@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
     suspend fun getCategories(): Flow<Resource<List<GetCategory>>>
+    suspend fun searchCategories(query: String): Flow<Resource<List<GetCategory>>>
 }

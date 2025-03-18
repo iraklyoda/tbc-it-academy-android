@@ -8,5 +8,5 @@ data class GetCategory(
     val bglNumber: String?,
     val bglVariant: String?,
     val orderId: Int?,
-    val children: List<GetCategory>
+    val categoryLevel: Int,
 )

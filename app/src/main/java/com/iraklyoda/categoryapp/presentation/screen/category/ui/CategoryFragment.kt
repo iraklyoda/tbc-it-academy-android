@@ -1,13 +1,15 @@
-package com.iraklyoda.categoryapp.presentation.screen.category
+package com.iraklyoda.categoryapp.presentation.screen.category.ui
 
-import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.iraklyoda.categoryapp.databinding.FragmentCategoryBinding
 import com.iraklyoda.categoryapp.presentation.BaseFragment
+import com.iraklyoda.categoryapp.presentation.screen.category.CategoryAdapter
+import com.iraklyoda.categoryapp.presentation.screen.category.CategoryEvent
+import com.iraklyoda.categoryapp.presentation.screen.category.CategoryUiEvent
 import com.iraklyoda.categoryapp.presentation.utils.collect
 import com.iraklyoda.categoryapp.presentation.utils.collectLatest
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +26,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
     override fun start() {
         categoryViewModel.onEvent(CategoryEvent.FetchCategories)
         setCategoriesAdapter()
+        setUpSearch()
     }
 
     override fun observers() {
@@ -36,9 +39,24 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
         binding.rvCategories.adapter = categoryAdapter
     }
 
+    private fun setUpSearch() {
+        binding.svCategories.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    categoryViewModel.onEvent(CategoryEvent.SearchCategories(query = newText))
+                }
+                return true
+            }
+        })
+    }
+
     private fun observeCategoryState() {
         collectLatest(flow = categoryViewModel.state) { state ->
-            manageProgressBar(loader = state.loader)
+            manageProgressBar(loader = state.loader, searchLoader = state.searchLoader)
             categoryAdapter.submitList(state.categories)
         }
     }
@@ -51,7 +69,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
         }
     }
 
-    private fun manageProgressBar(loader: Boolean) {
+    private fun manageProgressBar(loader: Boolean, searchLoader: Boolean) {
         binding.pbCategories.isVisible = loader
+        binding.pbSearch.isVisible = searchLoader
     }
 }

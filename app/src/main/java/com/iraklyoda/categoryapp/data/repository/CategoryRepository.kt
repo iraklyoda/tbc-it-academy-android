@@ -16,8 +16,15 @@ class CategoryRepositoryImpl @Inject constructor(
 ) : CategoryRepository {
     override suspend fun getCategories(): Flow<Resource<List<GetCategory>>> {
         return apiHelper.handleHttpRequest { categoryService.getCategories() }
-            .mapResource { category ->
-                category.map { it.toDomain() }
+            .mapResource { categories ->
+                categories.toDomain()
+            }
+    }
+
+    override suspend fun searchCategories(query: String): Flow<Resource<List<GetCategory>>> {
+        return apiHelper.handleHttpRequest { categoryService.searchCategories(query = query) }
+            .mapResource { categories ->
+                categories.toDomain()
             }
     }
 }

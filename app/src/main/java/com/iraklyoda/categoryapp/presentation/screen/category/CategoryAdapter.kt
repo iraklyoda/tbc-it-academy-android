@@ -29,7 +29,7 @@ class CategoryAdapter :
                 CategoryLevelAdapter()
             }
             fun onBind(category: CategoryUi) {
-                val parentCount: List<Int> = List(category.parentCount.coerceAtMost(4)) {0}
+                val parentCount: List<Int> = List(category.categoryLevel.coerceAtMost(4)) {0}
 
                 binding.apply {
                     tvTitle.text = category.name

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/distance_md"
     android:paddingHorizontal="@dimen/distance_lg"
-    tools:context=".presentation.screen.category.CategoryFragment">
+    tools:context=".presentation.screen.category.ui.CategoryFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_category"
@@ -21,9 +21,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_md"
+        app:queryHint="@string/search_categories"
+        app:iconifiedByDefault="false"
         android:background="@drawable/input_bg"
         android:hint="@string/search"
         app:layout_constraintTop_toBottomOf="@id/tv_category" />
+
+    <ProgressBar
+        android:id="@+id/pb_search"
+        app:layout_constraintStart_toEndOf="@id/tv_category"
+        app:layout_constraintTop_toTopOf="@id/tv_category"
+        app:layout_constraintBottom_toBottomOf="@id/tv_category"
+        android:layout_marginStart="8dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
 
     <View
         android:id="@+id/view_line_01"
