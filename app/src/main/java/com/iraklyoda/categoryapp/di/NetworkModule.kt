@@ -1,6 +1,7 @@
 package com.iraklyoda.categoryapp.di
 
 import com.iraklyoda.categoryapp.BuildConfig
+import com.iraklyoda.categoryapp.data.remote.api.CategoryService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -50,5 +51,11 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryService(retrofit: Retrofit): CategoryService {
+        return retrofit.create(CategoryService::class.java)
     }
 }

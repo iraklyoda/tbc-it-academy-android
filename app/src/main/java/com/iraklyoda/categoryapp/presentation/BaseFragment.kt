@@ -25,6 +25,7 @@ abstract class BaseFragment<VB : ViewBinding>(
         super.onViewCreated(view, savedInstanceState)
         start()
         listeners()
+        observers()
     }
 
     override fun onDestroyView() {
@@ -33,5 +34,6 @@ abstract class BaseFragment<VB : ViewBinding>(
     }
 
     abstract fun start()
-    abstract fun listeners()
+    protected open fun listeners(){}
+    protected open fun observers(){}
 }
