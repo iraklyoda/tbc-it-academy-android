@@ -1,4 +1,4 @@
-package com.example.baseproject
+package com.example.baseproject.presentation
 
 import com.example.baseproject.databinding.FragmentFirstBinding
 
