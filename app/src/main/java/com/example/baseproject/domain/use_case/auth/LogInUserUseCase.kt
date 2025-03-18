@@ -7,7 +7,6 @@ import com.example.baseproject.domain.preferences.AppPreferenceKeys
 import com.example.baseproject.domain.preferences.PreferencesStorage
 import com.example.baseproject.domain.repository.LogInRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface LogInUserUseCase {

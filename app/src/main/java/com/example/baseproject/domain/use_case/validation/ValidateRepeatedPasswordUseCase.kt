@@ -4,13 +4,13 @@ import com.example.baseproject.domain.common.AuthFieldErrorType
 import javax.inject.Inject
 
 class ValidateRepeatedPasswordUseCase @Inject constructor() {
-    operator fun invoke(password: String, repeatedPassword: String): ValidationResult {
+    operator fun invoke(password: String, repeatedPassword: String): AuthFieldErrorType? {
         if (repeatedPassword.isBlank())
-            return ValidationResult(error = AuthFieldErrorType.EMPTY)
+            return AuthFieldErrorType.EMPTY
 
         if (password != repeatedPassword)
-            return ValidationResult(error = AuthFieldErrorType.PasswordsDoNotMatch)
+            return AuthFieldErrorType.PasswordsDoNotMatch
 
-        return ValidationResult(successful = true)
+        return null
     }
 }

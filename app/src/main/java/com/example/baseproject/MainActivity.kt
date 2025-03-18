@@ -7,7 +7,7 @@ import androidx.navigation.Navigation.findNavController
 import com.example.baseproject.databinding.ActivityMainBinding
 import com.example.baseproject.domain.preferences.AppPreferenceKeys
 import com.example.baseproject.domain.use_case.preferences.ReadPreferenceValueUseCase
-import com.example.baseproject.ui.authentication.login.LoginFragmentDirections
+import com.example.baseproject.presentation.authentication.screen.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch

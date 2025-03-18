@@ -5,15 +5,16 @@ import java.util.regex.Pattern.compile
 import javax.inject.Inject
 
 class ValidateEmailUseCase @Inject constructor() {
-    operator fun invoke(email: String): ValidationResult {
+    operator fun invoke(email: String): AuthFieldErrorType? {
         if (email.isBlank()) {
-            return ValidationResult(error = AuthFieldErrorType.EMPTY)
+            return AuthFieldErrorType.EMPTY
         }
 
         if (!emailRegex.matcher(email).matches()) {
-            return ValidationResult(error = AuthFieldErrorType.InvalidFormat)
+            return AuthFieldErrorType.InvalidFormat
         }
-        return ValidationResult(successful = true)
+
+        return null
     }
 
     private val emailRegex = compile(

@@ -4,16 +4,14 @@ import com.example.baseproject.domain.common.AuthFieldErrorType
 import javax.inject.Inject
 
 class ValidatePasswordUseCase @Inject constructor() {
-    operator fun invoke(password: String): ValidationResult {
+    operator fun invoke(password: String): AuthFieldErrorType? {
         if (password.isBlank()) {
-            return ValidationResult(error = AuthFieldErrorType.EMPTY)
+            return AuthFieldErrorType.EMPTY
         }
 
         if (password.length < 8) {
-            return ValidationResult(error = AuthFieldErrorType.TooShort)
+            return AuthFieldErrorType.TooShort
         }
-        return ValidationResult(
-            successful = true
-        )
+        return null
     }
 }
