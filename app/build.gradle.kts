@@ -7,12 +7,14 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+val bundleId = "com.iraklyoda.categoryapp"
+
 android {
-    namespace = "com.example.baseproject"
+    namespace = bundleId
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.baseproject"
+        applicationId = bundleId
         minSdk = 25
         targetSdk = 34
         versionCode = 1
@@ -21,7 +23,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://run.mocky.io/v3/\"")
+        }
         release {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://run.mocky.io/v3//\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

@@ -1,6 +1,6 @@
-package com.example.baseproject.data.remote.common
+package com.iraklyoda.categoryapp.data.remote.common
 
-import com.example.baseproject.domain.common.Resource
+import com.iraklyoda.categoryapp.domain.common.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

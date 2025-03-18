@@ -1,4 +1,4 @@
-package com.example.baseproject.domain.common
+package com.iraklyoda.categoryapp.domain.common
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

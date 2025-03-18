@@ -1,6 +1,6 @@
-package com.example.baseproject.di
+package com.iraklyoda.categoryapp.di
 
-import com.example.baseproject.BuildConfig
+import com.iraklyoda.categoryapp.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides

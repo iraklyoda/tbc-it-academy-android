@@ -1,4 +1,4 @@
-package com.example.baseproject
+package com.iraklyoda.categoryapp
 
 import org.junit.Test
 

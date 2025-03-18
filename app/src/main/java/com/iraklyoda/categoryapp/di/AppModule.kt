@@ -1,6 +1,6 @@
-package com.example.baseproject.di
+package com.iraklyoda.categoryapp.di
 
-import com.example.baseproject.data.remote.common.ApiHelper
+import com.iraklyoda.categoryapp.data.remote.common.ApiHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
