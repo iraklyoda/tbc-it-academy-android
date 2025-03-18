@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/distance_md"
+    android:paddingHorizontal="@dimen/distance_lg"
+    tools:context=".presentation.screen.CategoryFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:background="@drawable/input_bg"
+        android:hint="@string/search"
+        app:layout_constraintTop_toBottomOf="@id/tv_category" />
+
+    <View
+        android:id="@+id/view_line_01"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/distance_lg"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@id/sv_categories" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_md"
+        android:text="@string/suggestions"
+        android:textColor="@color/north_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_line_01" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/distance_md"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_suggestion" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
