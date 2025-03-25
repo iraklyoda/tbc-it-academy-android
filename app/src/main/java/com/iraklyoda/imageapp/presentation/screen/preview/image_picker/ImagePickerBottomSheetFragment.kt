@@ -44,11 +44,6 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val imagePickerViewModel: ImagePickerViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setActivityResults()
-    }
-
     private fun setActivityResults() {
         pickMedia =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -118,6 +113,7 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setActivityResults()
         listeners()
         observers()
     }

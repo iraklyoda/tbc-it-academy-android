@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.iraklyoda.imageapp.R
 import com.iraklyoda.imageapp.databinding.FragmentPreviewBinding
 import com.iraklyoda.imageapp.presentation.BaseFragment
 import com.iraklyoda.imageapp.presentation.screen.preview.image_picker.ImagePickerBottomSheetFragment
@@ -16,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBinding::inflate) {
 
     private val previewViewModel: PreviewViewModel by viewModels()
-
     private val imagePickerBottomSheetFragment: ImagePickerBottomSheetFragment by lazy {
         ImagePickerBottomSheetFragment()
     }
@@ -53,7 +53,10 @@ class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBind
             }
 
             imageUri?.let {
-                Glide.with(requireContext()).load(it).into(binding.ivPreview)
+                Glide.with(requireContext())
+                    .load(it)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(binding.ivPreview)
             }
         }
     }
@@ -74,6 +77,4 @@ class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBind
             )
         )
     }
-
-
 }

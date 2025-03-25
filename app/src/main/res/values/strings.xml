@@ -8,4 +8,9 @@
     <string name="camera_access_is_required_to_take_photos_please_grant_the_permission">Camera access is required to take photos. Please grant the permission.</string>
     <string name="grant">Grant</string>
     <string name="cancel">Cancel</string>
+
+    <string name="default_notification_channel_id">424242</string>
+    <string name="image_app_main_channel">Image App Main Channel</string>
+    <string name="main_channel_for_global_notifications">Main Channel for global notifications</string>
+
 </resources>
