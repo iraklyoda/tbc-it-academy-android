@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_image">Add Image</string>
     <string name="image_preview">Image Preview</string>
+    <string name="permission_needed">Permission Needed</string>
+    <string name="camera_access_is_required_to_take_photos_please_grant_the_permission">Camera access is required to take photos. Please grant the permission.</string>
+    <string name="grant">Grant</string>
+    <string name="cancel">Cancel</string>
 </resources>

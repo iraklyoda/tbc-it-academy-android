@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.google.services)
 }
 
 val bundleId = "com.iraklyoda.imageapp"
@@ -65,6 +66,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.github.glide)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.storage)
 }
 
 kapt {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132651585121",
+    "project_id": "image-app-abcf1",
+    "storage_bucket": "image-app-abcf1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132651585121:android:e93518e095b6ca5d71a420",
+        "android_client_info": {
+          "package_name": "com.iraklyoda.imageapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7rKUofoOmQiAfTEIdbXLGkEJpNnNucyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

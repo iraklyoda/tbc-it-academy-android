@@ -1,11 +1,14 @@
-package com.iraklyoda.imageapp.presentation.screen.preview
+package com.iraklyoda.imageapp.presentation.screen.preview.image_picker
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,29 +18,52 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
+import com.iraklyoda.imageapp.R
 import com.iraklyoda.imageapp.databinding.FragmentImagePickerBottomSheetBinding
+import com.iraklyoda.imageapp.presentation.utils.collect
+import com.iraklyoda.imageapp.presentation.utils.collectLatest
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 
+@AndroidEntryPoint
 class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentImagePickerBottomSheetBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+    private lateinit var uploadMedia: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var takePicturePreviewLauncher: ActivityResultLauncher<Void?>
-
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String?>
+
+    private val imagePickerViewModel: ImagePickerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setActivityResults()
+    }
 
+    private fun setActivityResults() {
         pickMedia =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 uri?.let {
                     compressUri(imageUri = uri)?.let { bitmap ->
                         onImageSuccess(bitmap = bitmap)
+                    }
+                }
+            }
+
+        uploadMedia =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                uri?.let {
+                    compressUri(imageUri = uri)?.let { bitmap ->
+                        imagePickerViewModel.onEvent(ImagePickerEvent.UploadImage(bitmap = bitmap))
                     }
                 }
             }
@@ -54,9 +80,19 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
-            if (isGranted) launchCamera()
-            else Toast.makeText(requireContext(), "Camera permission required", Toast.LENGTH_SHORT)
-                .show()
+            if (isGranted) {
+                launchCamera()
+            } else {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                    Snackbar.make(
+                        requireView(),
+                        "Camera permission required",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                } else {
+                    showSettingsDialog()
+                }
+            }
         }
     }
 
@@ -83,11 +119,42 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listeners()
+        observers()
     }
 
     private fun listeners() {
         setPickPictureBtnListener()
-        setTakePictureBtnListener()
+        setTakeImageBtnListener()
+        setUploadImageBtnListener()
+    }
+
+    private fun observers() {
+        observeUploadState()
+        observeImagePickerEvents()
+    }
+
+    private fun observeUploadState() {
+        collectLatest(flow = imagePickerViewModel.state) { state ->
+            binding.loaderInclude.loaderContainer.isVisible = state.loading
+
+            listOf(binding.btnUpload, binding.btnTakeImage, binding.btnPickGallery)
+                .forEach { it.isInvisible = state.loading }
+        }
+    }
+
+    private fun observeImagePickerEvents() {
+        collect(flow = imagePickerViewModel.uiEvents) { event ->
+            when (event) {
+                is ImagePickerUiEvent.DismissDialog -> {
+                    onImageSuccess(imageUri = event.imageUri)
+                }
+
+                is ImagePickerUiEvent.ShowError -> {
+                    Toast.makeText(requireContext(), event.error, Toast.LENGTH_SHORT).show()
+
+                }
+            }
+        }
     }
 
     private fun setPickPictureBtnListener() {
@@ -96,9 +163,15 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setTakePictureBtnListener() {
-        binding.btnTakePicture.setOnClickListener {
+    private fun setTakeImageBtnListener() {
+        binding.btnTakeImage.setOnClickListener {
             checkCameraPermission()
+        }
+    }
+
+    private fun setUploadImageBtnListener() {
+        binding.btnUpload.setOnClickListener {
+            uploadMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }
 
@@ -106,13 +179,34 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         takePicturePreviewLauncher.launch(null)
     }
 
-    private fun onImageSuccess(bitmap: Bitmap) {
+    private fun showSettingsDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.permission_needed))
+            .setMessage(getString(R.string.camera_access_is_required_to_take_photos_please_grant_the_permission))
+            .setPositiveButton(getString(R.string.grant)) { dialog, _ ->
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", requireContext().packageName, null)
+                }
+                startActivity(intent)
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun onImageSuccess(bitmap: Bitmap? = null, imageUri: Uri? = null) {
         val bundle = Bundle().apply {
-            putByteArray("bitmap", bitmapToByteArray(bitmap))
+            putByteArray("bitmap", bitmap?.let { bitmapToByteArray(it) })
+            putString("imageUri", imageUri.toString())
         }
         setFragmentResult("imageResult", bundle)
         dismiss()
     }
+
+    // Image Format Handling
 
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
@@ -147,5 +241,4 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

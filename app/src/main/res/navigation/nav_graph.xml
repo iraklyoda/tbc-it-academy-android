@@ -19,7 +19,7 @@
     </fragment>
     <dialog
         android:id="@+id/imagePickerBottomSheetFragment"
-        android:name="com.iraklyoda.imageapp.presentation.screen.preview.ImagePickerBottomSheetFragment"
+        android:name="com.iraklyoda.imageapp.presentation.screen.preview.image_picker.ImagePickerBottomSheetFragment"
         android:label="fragment_image_picker_bottom_sheet"
         tools:layout="@layout/fragment_image_picker_bottom_sheet" >
         <action
