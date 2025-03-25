@@ -1,8 +1,8 @@
-package com.example.baseproject
+package com.iraklyoda.imageapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.baseproject.databinding.ActivityMainBinding
+import com.iraklyoda.imageapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

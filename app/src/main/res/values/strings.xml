@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Base Project</string>
+    <string name="app_name">Image App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_image">Add Image</string>
+    <string name="image_preview">Image Preview</string>
 </resources>

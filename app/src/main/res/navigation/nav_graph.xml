@@ -7,7 +7,23 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.baseproject.presentation.FirstFragment"
+        android:name="com.iraklyoda.imageapp.presentation.screen.preview.PreviewFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_preview" >
+        <action
+            android:id="@+id/action_firstFragment_to_imagePickerBottomSheetFragment"
+            app:destination="@id/imagePickerBottomSheetFragment" />
+        <argument
+            android:name="ImageUri"
+            app:argType="string" />
+    </fragment>
+    <dialog
+        android:id="@+id/imagePickerBottomSheetFragment"
+        android:name="com.iraklyoda.imageapp.presentation.screen.preview.ImagePickerBottomSheetFragment"
+        android:label="fragment_image_picker_bottom_sheet"
+        tools:layout="@layout/fragment_image_picker_bottom_sheet" >
+        <action
+            android:id="@+id/action_imagePickerBottomSheetFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </dialog>
 </navigation>

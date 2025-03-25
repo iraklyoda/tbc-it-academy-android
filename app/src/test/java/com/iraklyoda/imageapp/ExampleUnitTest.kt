@@ -1,4 +1,4 @@
-package com.example.baseproject
+package com.iraklyoda.imageapp
 
 import org.junit.Test
 

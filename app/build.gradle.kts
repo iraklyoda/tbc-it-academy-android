@@ -7,12 +7,14 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+val bundleId = "com.iraklyoda.imageapp"
+
 android {
-    namespace = "com.example.baseproject"
+    namespace = bundleId
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.baseproject"
+        applicationId = bundleId
         minSdk = 25
         targetSdk = 34
         versionCode = 1
@@ -62,6 +64,7 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.github.glide)
 }
 
 kapt {

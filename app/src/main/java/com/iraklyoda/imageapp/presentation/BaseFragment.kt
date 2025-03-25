@@ -1,4 +1,4 @@
-package com.example.baseproject.presentation
+package com.iraklyoda.imageapp.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,6 +25,7 @@ abstract class BaseFragment<VB : ViewBinding>(
         super.onViewCreated(view, savedInstanceState)
         start()
         listeners()
+        observers()
     }
 
     override fun onDestroyView() {
@@ -34,4 +35,5 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     abstract fun start()
     abstract fun listeners()
+    abstract fun observers()
 }
