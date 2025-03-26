@@ -12,5 +12,6 @@
     <string name="default_notification_channel_id">424242</string>
     <string name="image_app_main_channel">Image App Main Channel</string>
     <string name="main_channel_for_global_notifications">Main Channel for global notifications</string>
+    <string name="camera_permission_required">Camera permission required</string>
 
 </resources>

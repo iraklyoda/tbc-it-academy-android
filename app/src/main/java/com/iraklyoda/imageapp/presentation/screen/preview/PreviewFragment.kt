@@ -47,7 +47,6 @@ class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBind
             val byteArray = bundle.getByteArray("bitmap")
             val imageUri = bundle.getString("imageUri")
             val bitmap = byteArray?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
-            Log.d("bitmapIraklyoda", bitmap.toString())
             bitmap?.let {
                 onImageSelected(bitmap = bitmap)
             }

@@ -81,7 +81,7 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                     Snackbar.make(
                         requireView(),
-                        "Camera permission required",
+                        getString(R.string.camera_permission_required),
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {

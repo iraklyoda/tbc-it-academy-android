@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.iraklyoda.imageapp.data.repository.ImageRepository
 import com.iraklyoda.imageapp.domain.common.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,10 +35,8 @@ class ImagePickerViewModel @Inject constructor(
     }
 
     private fun uploadImageToStorage(bitmap: Bitmap) {
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.d("ImagePickerViewModel", "DispatchersIOOO")
+        viewModelScope.launch {
             imageRepository.uploadBitmap(bitmap).collectLatest { resource ->
-                Log.d("ImagePickerViewModel", "Collecting")
                 when (resource) {
                     is Resource.Loader -> {
                         _state.update { it.copy(loading = resource.loading) }

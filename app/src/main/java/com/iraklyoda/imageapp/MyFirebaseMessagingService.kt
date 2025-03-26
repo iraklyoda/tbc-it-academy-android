@@ -24,7 +24,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             content = json.getString("content"),
             notificationId = json.getInt("id")
         )
-
     }
 
     private fun showNotification(title: String, content: String, notificationId: Int) {
