@@ -1,6 +1,7 @@
 package com.iraklyoda.imageapp.presentation.screen.preview
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -27,21 +28,28 @@ class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBind
 
     override fun observers() {
         observePreviewUiEvents()
+        observePreviewState()
     }
 
     private fun observePreviewUiEvents() {
         collect(flow = previewViewModel.uiEvents) { event ->
             when (event) {
                 is PreviewUiEvent.OpenImagePickerBottomSheet -> showImagePickerBottomSheet()
-                is PreviewUiEvent.UpdatePreviewImage -> event.bitmap?.let { updatePreviewImage(bitmap = it) }
             }
+        }
+    }
+
+    private fun observePreviewState() {
+        collect(flow = previewViewModel.state) { state ->
+            Log.d("IMAGE_TAKEN", "IN PREVIEW FRAGMENT OBSERVER ${state.imageBitmap}")
+            state.imageBitmap?.let { updatePreviewImage(bitmap = it) }
         }
     }
 
     private fun imagePickerFragmentListener() {
         setFragmentResultListener(ImagePickerBottomSheetFragment.IMAGE_PICKER_REQUEST_KEY) { _, bundle ->
             val imageUri = bundle.getString(ImagePickerBottomSheetFragment.IMAGE_URI_KEY)
-
+            Log.d("IMAGE_TAKEN", "IN PREVIEW FRAGMENT ${imageUri?.toUri()}")
             imageUri?.let {
                 previewViewModel.onEvent(PreviewEvent.ImageSelected(imageUri = imageUri.toUri()))
             }

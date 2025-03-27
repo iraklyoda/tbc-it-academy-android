@@ -41,38 +41,32 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var takePicturePreviewLauncher: ActivityResultLauncher<Uri?>
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String?>
 
-    // Camera image Uri
-    private var imageUri: Uri? = null
-
     private val imagePickerViewModel: ImagePickerViewModel by viewModels()
 
     private fun setActivityResults() {
+
+        // Pick Image From Gallery
         pickMediaLauncher =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 uri?.let {
-                    onImageSuccess(imageUri = uri)
+                    imagePickerViewModel.onEvent(ImagePickerEvent.ImageSelected(imageUri = uri))
                 }
             }
 
+        // Take A Picture
         takePicturePreviewLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
-            if (success) {
-                // Picture was taken successfully and saved to imageUri
-                Log.d("CameraFragment", "Image capture successful. Uri: $imageUri")
-                // Load the image from the Uri into the ImageView
-                imageUri?.let { uri ->
-                    onImageSuccess(imageUri = uri)
+                if (success) {
+                    imagePickerViewModel.onEvent(ImagePickerEvent.ImageTaken)
                 }
-            } else {
-                imageUri = null // Reset Uri if capture failed
             }
-        }
 
+        // Ask for Camera Permission
         requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
             if (isGranted) {
-                launchCamera()
+                generateUri()
             } else {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                     requireView().showSnackbar(message = getString(R.string.camera_permission_required))
@@ -128,10 +122,11 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
     private fun observeImagePickerEvents() {
         collect(flow = imagePickerViewModel.uiEvents) { event ->
             when (event) {
-                is ImagePickerUiEvent.DismissDialog -> onImageSuccess(imageUri = event.imageUri)
+                is ImagePickerUiEvent.ImageSelected -> onImageSuccess(imageUri = event.imageUri)
                 is ImagePickerUiEvent.ShowError -> event.error?.let { binding.root.showSnackbar(it) }
                 is ImagePickerUiEvent.LaunchMediaPicker -> launchImagePicker()
-                is ImagePickerUiEvent.LaunchCamera -> checkCameraPermission()
+                is ImagePickerUiEvent.GenerateUri -> checkCameraPermission()
+                is ImagePickerUiEvent.LaunchCamera -> launchCamera(imageUri = event.imageUri)
                 is ImagePickerUiEvent.LaunchMediaUploader -> launchUploadImage()
             }
         }
@@ -162,20 +157,24 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
-    private fun launchCamera() {
+    private fun generateUri() {
         val context = requireContext()
         val photoFile = File(
             context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
             "photo_${System.currentTimeMillis()}.jpg"
         )
-        imageUri = FileProvider.getUriForFile(
+        val imageUri = FileProvider.getUriForFile(
             context,
             "${context.packageName}.fileprovider",
             photoFile
         )
-
-        takePicturePreviewLauncher.launch(imageUri) // Change to use TakePicture()
+        imagePickerViewModel.onEvent(event = ImagePickerEvent.GenerateImageUri(imageUri = imageUri))
     }
+
+    private fun launchCamera(imageUri: Uri) {
+        takePicturePreviewLauncher.launch(imageUri)
+    }
+
     private fun launchUploadImage() {
         pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
@@ -185,7 +184,7 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
             ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED -> launchCamera()
+            ) == PackageManager.PERMISSION_GRANTED -> generateUri()
 
             else -> requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
@@ -217,13 +216,13 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         dismiss()
     }
 
-    companion object {
-        const val IMAGE_URI_KEY = "IMAGE_URI"
-        const val IMAGE_PICKER_REQUEST_KEY = "IMAGE_RESULT"
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val IMAGE_URI_KEY = "IMAGE_URI"
+        const val IMAGE_PICKER_REQUEST_KEY = "IMAGE_RESULT"
     }
 }

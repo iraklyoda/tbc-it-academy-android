@@ -2,6 +2,7 @@ package com.iraklyoda.imageapp.presentation.screen.preview
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iraklyoda.imageapp.data.common.ImageHelper
@@ -37,13 +38,14 @@ class PreviewViewModel @Inject constructor(
     private fun setImage(bitmap: Bitmap?) {
         viewModelScope.launch {
             _state.update { it.copy(imageBitmap = bitmap) }
-            _uiEvents.send(PreviewUiEvent.UpdatePreviewImage(bitmap = bitmap))
         }
     }
 
     private fun setImage(imageUri: Uri) {
         viewModelScope.launch {
+            Log.d("IMAGE_TAKEN", "IN PREVIEW VIEWMODEL setImage $imageUri")
             val bitmap = imageHelper.compressUri(imageUri = imageUri)
+            Log.d("IMAGE_TAKEN", "IN PREVIEW VIEWMODEL BITMAP $bitmap")
             setImage(bitmap)
         }
     }
