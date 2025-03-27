@@ -1,8 +1,7 @@
 package com.iraklyoda.imageapp.presentation.screen.preview
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Log
+import androidx.core.net.toUri
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -10,16 +9,13 @@ import com.iraklyoda.imageapp.R
 import com.iraklyoda.imageapp.databinding.FragmentPreviewBinding
 import com.iraklyoda.imageapp.presentation.BaseFragment
 import com.iraklyoda.imageapp.presentation.screen.preview.image_picker.ImagePickerBottomSheetFragment
-import com.iraklyoda.imageapp.presentation.utils.collectLatest
+import com.iraklyoda.imageapp.presentation.utils.collect
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBinding::inflate) {
 
     private val previewViewModel: PreviewViewModel by viewModels()
-    private val imagePickerBottomSheetFragment: ImagePickerBottomSheetFragment by lazy {
-        ImagePickerBottomSheetFragment()
-    }
 
     override fun start() {
     }
@@ -30,50 +26,45 @@ class PreviewFragment : BaseFragment<FragmentPreviewBinding>(FragmentPreviewBind
     }
 
     override fun observers() {
-        uiStateObserver()
+        observePreviewUiEvents()
     }
 
-    private fun uiStateObserver() {
-        collectLatest(flow = previewViewModel.state) { state ->
-
-            state.imageBitmap?.let {
-                Glide.with(requireContext()).load(it).into(binding.ivPreview)
+    private fun observePreviewUiEvents() {
+        collect(flow = previewViewModel.uiEvents) { event ->
+            when (event) {
+                is PreviewUiEvent.OpenImagePickerBottomSheet -> showImagePickerBottomSheet()
+                is PreviewUiEvent.UpdatePreviewImage -> event.bitmap?.let { updatePreviewImage(bitmap = it) }
             }
         }
     }
 
     private fun imagePickerFragmentListener() {
-        setFragmentResultListener("imageResult") { _, bundle ->
-            val byteArray = bundle.getByteArray("bitmap")
-            val imageUri = bundle.getString("imageUri")
-            val bitmap = byteArray?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
-            bitmap?.let {
-                onImageSelected(bitmap = bitmap)
-            }
+        setFragmentResultListener(ImagePickerBottomSheetFragment.IMAGE_PICKER_REQUEST_KEY) { _, bundle ->
+            val imageUri = bundle.getString(ImagePickerBottomSheetFragment.IMAGE_URI_KEY)
 
             imageUri?.let {
-                Glide.with(requireContext())
-                    .load(it)
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .into(binding.ivPreview)
+                previewViewModel.onEvent(PreviewEvent.ImageSelected(imageUri = imageUri.toUri()))
             }
         }
     }
 
     private fun setAddImageBtnListener() {
         binding.btnAddImg.setOnClickListener {
-            imagePickerBottomSheetFragment.show(
-                parentFragmentManager,
-                imagePickerBottomSheetFragment.tag
-            )
+            previewViewModel.onEvent(PreviewEvent.AddImageClicked)
         }
     }
 
-    private fun onImageSelected(bitmap: Bitmap?) {
-        previewViewModel.onEvent(
-            PreviewEvent.SetImage(
-                bitmap = bitmap
-            )
+    private fun showImagePickerBottomSheet() {
+        ImagePickerBottomSheetFragment().show(
+            parentFragmentManager,
+            "ImagePickerBottomSheet"
         )
+    }
+
+    private fun updatePreviewImage(bitmap: Bitmap) {
+        Glide.with(requireContext())
+            .load(bitmap)
+            .placeholder(R.drawable.baseline_image_24)
+            .into(binding.ivPreview)
     }
 }

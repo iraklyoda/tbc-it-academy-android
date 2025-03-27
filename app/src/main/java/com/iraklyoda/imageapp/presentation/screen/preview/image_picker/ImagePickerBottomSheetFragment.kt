@@ -4,32 +4,31 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import com.iraklyoda.imageapp.R
 import com.iraklyoda.imageapp.databinding.FragmentImagePickerBottomSheetBinding
 import com.iraklyoda.imageapp.presentation.utils.collect
 import com.iraklyoda.imageapp.presentation.utils.collectLatest
+import com.iraklyoda.imageapp.presentation.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
+import java.io.File
 
 @AndroidEntryPoint
 class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
@@ -37,40 +36,37 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentImagePickerBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
-    private lateinit var uploadMedia: ActivityResultLauncher<PickVisualMediaRequest>
-    private lateinit var takePicturePreviewLauncher: ActivityResultLauncher<Void?>
+    private lateinit var pickMediaLauncher: ActivityResultLauncher<PickVisualMediaRequest>
+    private lateinit var uploadMediaLauncher: ActivityResultLauncher<PickVisualMediaRequest>
+    private lateinit var takePicturePreviewLauncher: ActivityResultLauncher<Uri?>
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String?>
+
+    // Camera image Uri
+    private var imageUri: Uri? = null
 
     private val imagePickerViewModel: ImagePickerViewModel by viewModels()
 
     private fun setActivityResults() {
-        pickMedia =
+        pickMediaLauncher =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 uri?.let {
-                    compressUri(imageUri = uri)?.let { bitmap ->
-                        onImageSuccess(bitmap = bitmap)
-                    }
-                }
-            }
-
-        uploadMedia =
-            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-                uri?.let {
-                    compressUri(imageUri = uri)?.let { bitmap ->
-                        imagePickerViewModel.onEvent(ImagePickerEvent.UploadImage(bitmap = bitmap))
-                    }
+                    onImageSuccess(imageUri = uri)
                 }
             }
 
         takePicturePreviewLauncher =
-            registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
-                bitmap?.let {
-                    compressBitmap(bitmap)?.let { bitmap ->
-                        onImageSuccess(bitmap = bitmap)
-                    }
+            registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
+            if (success) {
+                // Picture was taken successfully and saved to imageUri
+                Log.d("CameraFragment", "Image capture successful. Uri: $imageUri")
+                // Load the image from the Uri into the ImageView
+                imageUri?.let { uri ->
+                    onImageSuccess(imageUri = uri)
                 }
+            } else {
+                imageUri = null // Reset Uri if capture failed
             }
+        }
 
         requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -79,11 +75,7 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
                 launchCamera()
             } else {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
-                    Snackbar.make(
-                        requireView(),
-                        getString(R.string.camera_permission_required),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    requireView().showSnackbar(message = getString(R.string.camera_permission_required))
                 } else {
                     showSettingsDialog()
                 }
@@ -91,15 +83,9 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun checkCameraPermission() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED -> launchCamera()
-
-            else -> requestPermissionLauncher.launch(Manifest.permission.CAMERA)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setActivityResults()
     }
 
     override fun onCreateView(
@@ -113,7 +99,6 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setActivityResults()
         listeners()
         observers()
     }
@@ -129,6 +114,8 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
         observeImagePickerEvents()
     }
 
+    // Observers
+
     private fun observeUploadState() {
         collectLatest(flow = imagePickerViewModel.state) { state ->
             binding.loaderInclude.loaderContainer.isVisible = state.loading
@@ -141,38 +128,67 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
     private fun observeImagePickerEvents() {
         collect(flow = imagePickerViewModel.uiEvents) { event ->
             when (event) {
-                is ImagePickerUiEvent.DismissDialog -> {
-                    onImageSuccess(imageUri = event.imageUri)
-                }
-
-                is ImagePickerUiEvent.ShowError -> {
-                    Toast.makeText(requireContext(), event.error, Toast.LENGTH_SHORT).show()
-
-                }
+                is ImagePickerUiEvent.DismissDialog -> onImageSuccess(imageUri = event.imageUri)
+                is ImagePickerUiEvent.ShowError -> event.error?.let { binding.root.showSnackbar(it) }
+                is ImagePickerUiEvent.LaunchMediaPicker -> launchImagePicker()
+                is ImagePickerUiEvent.LaunchCamera -> checkCameraPermission()
+                is ImagePickerUiEvent.LaunchMediaUploader -> launchUploadImage()
             }
         }
     }
 
+    // Listeners
+
     private fun setPickPictureBtnListener() {
         binding.btnPickGallery.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            imagePickerViewModel.onEvent(ImagePickerEvent.PickImageClicked)
         }
     }
 
     private fun setTakeImageBtnListener() {
         binding.btnTakeImage.setOnClickListener {
-            checkCameraPermission()
+            imagePickerViewModel.onEvent(ImagePickerEvent.TakeAPictureClicked)
         }
     }
 
     private fun setUploadImageBtnListener() {
         binding.btnUpload.setOnClickListener {
-            uploadMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            imagePickerViewModel.onEvent(ImagePickerEvent.UploadImageClicked)
         }
     }
 
+
+    private fun launchImagePicker() {
+        pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
     private fun launchCamera() {
-        takePicturePreviewLauncher.launch(null)
+        val context = requireContext()
+        val photoFile = File(
+            context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+            "photo_${System.currentTimeMillis()}.jpg"
+        )
+        imageUri = FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider",
+            photoFile
+        )
+
+        takePicturePreviewLauncher.launch(imageUri) // Change to use TakePicture()
+    }
+    private fun launchUploadImage() {
+        pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun checkCameraPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED -> launchCamera()
+
+            else -> requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
     }
 
     private fun showSettingsDialog() {
@@ -193,44 +209,17 @@ class ImagePickerBottomSheetFragment : BottomSheetDialogFragment() {
             .show()
     }
 
-    private fun onImageSuccess(bitmap: Bitmap? = null, imageUri: Uri? = null) {
+    private fun onImageSuccess(imageUri: Uri? = null) {
         val bundle = Bundle().apply {
-            putByteArray("bitmap", bitmap?.let { bitmapToByteArray(it) })
-            putString("imageUri", imageUri.toString())
+            putString(IMAGE_URI_KEY, imageUri.toString())
         }
-        setFragmentResult("imageResult", bundle)
+        setFragmentResult(IMAGE_PICKER_REQUEST_KEY, bundle)
         dismiss()
     }
 
-    // Image Format Handling
-
-    private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        return stream.toByteArray()
-    }
-
-    private fun compressUri(imageUri: Uri): Bitmap? {
-        val bitmap = uriToBitmap(imageUri)
-        return compressBitmap(bitmap)
-    }
-
-    private fun uriToBitmap(uri: Uri): Bitmap? {
-        return try {
-            val inputStream = requireContext().contentResolver.openInputStream(uri)
-            BitmapFactory.decodeStream(inputStream)
-        } catch (e: Exception) {
-            Log.e("ImagePicker", "Error converting Uri to Bitmap", e)
-            null
-        }
-    }
-
-    private fun compressBitmap(bitmap: Bitmap?): Bitmap? {
-        if (bitmap == null) return null
-        val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
-        val byteArray = outputStream.toByteArray()
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    companion object {
+        const val IMAGE_URI_KEY = "IMAGE_URI"
+        const val IMAGE_PICKER_REQUEST_KEY = "IMAGE_RESULT"
     }
 
     override fun onDestroyView() {

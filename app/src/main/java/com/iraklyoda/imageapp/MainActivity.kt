@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.iraklyoda.imageapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import android.Manifest
+import androidx.activity.enableEdgeToEdge
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

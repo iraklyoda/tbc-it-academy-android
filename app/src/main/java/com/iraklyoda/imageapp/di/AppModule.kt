@@ -1,12 +1,12 @@
 package com.iraklyoda.imageapp.di
 
-import android.media.Image
-import com.google.firebase.storage.FirebaseStorage
+import android.content.Context
+import com.iraklyoda.imageapp.data.common.ImageHelper
 import com.iraklyoda.imageapp.data.remote.common.ApiHelper
-import com.iraklyoda.imageapp.data.repository.ImageRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -21,7 +21,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideImageRepository(firebaseStorage: FirebaseStorage): ImageRepository {
-        return ImageRepository(firebaseStorage = firebaseStorage)
+    fun provideImageHelper(@ApplicationContext appContext: Context): ImageHelper {
+        return ImageHelper(appContext = appContext)
     }
 }
