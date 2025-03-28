@@ -7,18 +7,33 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 @HiltAndroidApp
-class MyApp : Application() {
+class MyApp : Application(), Configuration.Provider{
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override val workManagerConfiguration: Configuration
+        get() {
+            Log.d("MyAppConfig", "Providing WorkManager Configuration via property getter")
+            return Configuration.Builder()
+                .setWorkerFactory(workerFactory)
+                .build()
+        }
 
     override fun onCreate() {
         super.onCreate()
         setUpMessaging()
         createNotificationChannel()
     }
+
 
     private fun setUpMessaging() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -55,4 +70,5 @@ class MyApp : Application() {
     companion object {
         const val FIREBASE_MESSAGING_TAG = "FIREBASE_MESSAGING_TAG"
     }
+
 }

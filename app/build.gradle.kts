@@ -69,6 +69,8 @@ dependencies {
     implementation(libs.github.glide)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.storage)
+    implementation(libs.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
 }
 
 kapt {

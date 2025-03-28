@@ -20,15 +20,12 @@ class ImageRepositoryImpl @Inject constructor(
 
     private val storageRef = firebaseStorage.reference
 
-    override fun uploadImage(inputStream: InputStream): Flow<Resource<Uri>> = flow {
+    override fun uploadImage(imageUri: Uri): Flow<Resource<Uri>> = flow {
         emit(Resource.Loader(loading = true))
         try {
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            inputStream.copyTo(byteArrayOutputStream) // Convert InputStream to ByteArray
-            val data = byteArrayOutputStream.toByteArray()
 
-            val imageRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
-            val uploadTask = imageRef.putBytes(data).await()
+            val imageRef = storageRef.child("images/img_${System.currentTimeMillis()}.jpg")
+            val uploadTask = imageRef.putFile(imageUri)
             val downloadUrl = imageRef.downloadUrl.await()
 
             emit(Resource.Success(downloadUrl))

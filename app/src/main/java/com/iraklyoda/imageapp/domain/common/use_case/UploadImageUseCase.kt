@@ -8,13 +8,13 @@ import java.io.InputStream
 import javax.inject.Inject
 
 interface UploadImageUseCase {
-    suspend operator fun invoke(inputStream: InputStream): Flow<Resource<Uri>>
+    suspend operator fun invoke(imageUri: Uri): Flow<Resource<Uri>>
 }
 
 class UploadImageUseCaseImpl @Inject constructor(
     private val imageRepository: ImageRepository
 ) : UploadImageUseCase {
-    override suspend fun invoke(inputStream: InputStream): Flow<Resource<Uri>> {
-        return imageRepository.uploadImage(inputStream = inputStream)
+    override suspend fun invoke(imageUri: Uri): Flow<Resource<Uri>> {
+        return imageRepository.uploadImage(imageUri = imageUri)
     }
 }
