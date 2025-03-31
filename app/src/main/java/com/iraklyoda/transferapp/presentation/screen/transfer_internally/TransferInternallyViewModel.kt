@@ -47,13 +47,16 @@ class TransferInternallyViewModel @Inject constructor(
         val currencyRate = state.value.currencyRate ?: return
 
         viewModelScope.launch {
-            val fromAccount = state.value.toAccount
-            val toAccount = state.value.fromAccount
+            val fromAccount = state.value.fromAccount
+            val toAccount = state.value.toAccount
 
             if (fromAccount != null && toAccount != null) {
-                convertCurrency(from = fromAccount, to = toAccount, amount = amount)?.let { convertedAmount ->
-                    val updateSellAmountEvent = TransferInternallyUiEvent.UpdateSellAmount(convertedAmount)
-                    _uiEvent.send(updateSellAmountEvent)
+                convertCurrency(
+                    from = fromAccount,
+                    to = toAccount,
+                    amount = amount
+                )?.let { convertedAmount ->
+                    _uiEvent.send(TransferInternallyUiEvent.UpdateSellAmount(convertedAmount))
                 }
             }
         }
@@ -63,19 +66,29 @@ class TransferInternallyViewModel @Inject constructor(
         val currencyRate = state.value.currencyRate ?: return
 
         viewModelScope.launch {
-            val fromAccount = state.value.fromAccount
-            val toAccount = state.value.toAccount
+            val fromAccount = state.value.toAccount
+            val toAccount = state.value.fromAccount
 
             if (fromAccount != null && toAccount != null) {
-                convertCurrency(from = fromAccount, to = toAccount, amount = amount)?.let { convertedAmount ->
-                    val updateBuyAmountEvent = TransferInternallyUiEvent.UpdateBuyAmount(convertedAmount)
-                    _uiEvent.send(updateBuyAmountEvent)
+                convertCurrency(
+                    from = fromAccount,
+                    to = toAccount,
+                    amount = amount
+                )?.let { convertedAmount ->
+                    _uiEvent.send(
+                        TransferInternallyUiEvent.UpdateBuyAmount(convertedAmount)
+                    )
                 }
             }
         }
     }
 
     private fun convertCurrency(from: AccountUi, to: AccountUi, amount: Double): Double? {
+
+        if (amount == 0.0) {
+            return amount
+        }
+
         val exchangeRates = state.value.currencyRate?.let {
             mapOf(
                 "GEL" to 1.0,
@@ -107,7 +120,7 @@ class TransferInternallyViewModel @Inject constructor(
 
         viewModelScope.launch {
             getCurrencyRateUseCase().collectLatest { resource ->
-                when(resource) {
+                when (resource) {
                     is Resource.Loader -> _state.update { it.copy(currencyLoading = resource.loading) }
                     is Resource.Success -> _state.update { it.copy(currencyRate = resource.data.toUi()) }
                     is Resource.Error -> _state.update {

@@ -8,6 +8,7 @@ data class TransferInternallyState(
     val toAccount: AccountUi? = null,
     val currencyRate: CurrencyRateUi? = null,
     val currencyLoading: Boolean = false,
+    val currencyRateMessage: String? = null,
     val currencyErrorMessage: String? = null
 ) {
     val needsCurrencyExchange: Boolean?

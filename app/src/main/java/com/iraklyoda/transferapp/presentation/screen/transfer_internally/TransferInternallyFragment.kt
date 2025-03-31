@@ -59,6 +59,7 @@ class TransferInternallyFragment :
                 is TransferInternallyUiEvent.UpdateSellAmount -> {
                     binding.etSell.setText(uiEvent.amount.toString())
                 }
+
                 is TransferInternallyUiEvent.UpdateBuyAmount -> {
                     binding.etBuy.setText(String.format("%.2f", uiEvent.amount))
                 }
@@ -126,15 +127,26 @@ class TransferInternallyFragment :
     private fun setSellAmountChangedListener() {
         binding.etSell.doOnTextChanged { text, _, _, _ ->
             if (text != null) {
-                if (text.isNotEmpty())
-                    transferInternallyViewModel.onEvent(TransferInternallyEvent.SellAmountUpdated(amount = text.toString().toDouble()))
+                if (text.isNotEmpty()) {
+                    transferInternallyViewModel.onEvent(
+                        TransferInternallyEvent.SellAmountUpdated(
+                            amount = text.toString().toDouble()
+                        )
+                    )
+                } else {
+                    binding.etBuy.setText("")
+                }
             }
         }
     }
 
     private fun setBuyAmountChangedListener() {
         binding.etBuy.doOnTextChanged { text, _, _, _ ->
-            transferInternallyViewModel.onEvent(TransferInternallyEvent.BuyAmountUpdated(amount = text.toString().toDouble()))
+            transferInternallyViewModel.onEvent(
+                TransferInternallyEvent.BuyAmountUpdated(
+                    amount = text.toString().toDouble()
+                )
+            )
         }
     }
 
@@ -163,7 +175,7 @@ class TransferInternallyFragment :
         }
     }
 
-    // To Receiver
+// To Receiver
 
     private fun setToAccountFragmentResultListener() {
         setFragmentResultListener(TO_ACCOUNT_REQUEST_KEY) { requestKey, bundle ->
@@ -186,7 +198,7 @@ class TransferInternallyFragment :
         }
     }
 
-    // Helpers
+// Helpers
 
     private fun openFromAccountBottomSheet() {
         FromAccountFragment().show(

@@ -339,7 +339,7 @@
             android:id="@+id/et_description"
             android:text="@string/transfer_between_your_accounts"
             android:layout_width="match_parent"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
