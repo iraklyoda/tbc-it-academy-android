@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
+    tools:context=".presentation.screen.transfer_internally.TransferInternallyFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/transfer_internally"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header" />
+
+    <!--    FROM    -->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/from"
+        app:layout_constraintBottom_toTopOf="@id/btn_from"
+        app:layout_constraintStart_toStartOf="@id/btn_from" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="@string/from_account"
+        android:textAllCaps="false"
+        android:background="@drawable/transfer_btn_bg"
+        android:paddingVertical="18dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_arrow_back" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:visibility="gone"
+        android:id="@+id/iv_from_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:contentPadding="4dp"
+        android:background="?attr/colorImageBackground"
+        android:scaleType="centerInside"
+        android:layout_marginVertical="12dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/visa"
+        app:layout_constraintBottom_toBottomOf="@id/btn_from"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/btn_from"
+        app:layout_constraintTop_toTopOf="@id/btn_from"
+        app:shapeAppearanceOverlay="@style/CircleImageStyle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_from_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/cash"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/iv_from_card"
+        app:layout_constraintTop_toTopOf="@id/iv_from_card" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_from_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="350"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_from_card"
+        app:layout_constraintStart_toStartOf="@id/tv_from_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_from_currency_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="$"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_from_amount"
+        app:layout_constraintStart_toEndOf="@id/tv_from_amount" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_from_hidden_digits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="****"
+        app:layout_constraintEnd_toStartOf="@id/tv_from_digits"
+        app:layout_constraintTop_toTopOf="@id/tv_from_digits" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_from_digits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="2345"
+        app:layout_constraintBottom_toBottomOf="@id/btn_from"
+        app:layout_constraintEnd_toEndOf="@id/btn_from"
+        app:layout_constraintTop_toTopOf="@id/btn_from" />
+
+    <!--    TO    -->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/to"
+        app:layout_constraintBottom_toTopOf="@id/btn_to"
+        app:layout_constraintStart_toStartOf="@id/btn_to" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:textAllCaps="false"
+        android:text="@string/to_account"
+        android:id="@+id/btn_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/transfer_btn_bg"
+        android:paddingVertical="18dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_from" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:visibility="gone"
+        android:id="@+id/iv_to_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorImageBackground"
+        app:contentPadding="4dp"
+        android:layout_marginVertical="12dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/master_card"
+        app:layout_constraintBottom_toBottomOf="@id/btn_to"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/btn_to"
+        app:layout_constraintTop_toTopOf="@id/btn_to"
+        app:shapeAppearanceOverlay="@style/CircleImageStyle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_to_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/cash"
+        android:textColor="?attr/colorTertiary"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/iv_to_card"
+        app:layout_constraintTop_toTopOf="@id/iv_to_card" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_to_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="350"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_to_card"
+        app:layout_constraintStart_toStartOf="@id/tv_to_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_to_currency_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="€"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_to_amount"
+        app:layout_constraintStart_toEndOf="@id/tv_to_amount" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_to_hidden_digits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="****"
+        app:layout_constraintEnd_toStartOf="@id/tv_to_digits"
+        app:layout_constraintTop_toTopOf="@id/tv_to_digits" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_to_digits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="2345"
+        app:layout_constraintBottom_toBottomOf="@id/btn_to"
+        app:layout_constraintEnd_toEndOf="@id/btn_to"
+        app:layout_constraintTop_toTopOf="@id/btn_to" />
+
+    <!--  Sell/Buy  -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:visibility="gone"
+        android:id="@+id/tl_sell"
+        app:layout_constraintTop_toBottomOf="@id/btn_to"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tl_buy"
+        app:shapeAppearanceOverlay="@style/RoundedTextField"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        app:boxStrokeWidth="0dp"
+        app:boxBackgroundColor="?attr/colorSecondaryContainer"
+        android:hint="@string/sell"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_sell"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:visibility="gone"
+        android:id="@+id/tl_buy"
+        app:layout_constraintTop_toBottomOf="@id/btn_to"
+        app:layout_constraintStart_toEndOf="@id/tl_sell"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedTextField"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        android:layout_width="0dp"
+        app:boxStrokeWidth="0dp"
+        app:boxBackgroundColor="?attr/colorSecondaryContainer"
+        android:layout_marginTop="16dp"
+        android:hint="@string/buy"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_buy"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        android:id="@+id/tv_currency_info"
+        android:layout_width="wrap_content"
+        android:text="Lorem Ipsum 1$ = 0.25 L Lorem ipsum is simply"
+        app:layout_constraintTop_toBottomOf="@id/tl_sell"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorTertiary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <ProgressBar
+        android:id="@+id/pb_currency"
+        app:layout_constraintTop_toTopOf="@id/tv_currency_info"
+        app:layout_constraintBottom_toBottomOf="@id/tv_currency_info"
+        app:layout_constraintStart_toStartOf="@id/tv_currency_info"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tv_currency_info"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <!--  Amount  -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:visibility="gone"
+        android:id="@+id/tl_amount"
+        app:layout_constraintTop_toBottomOf="@id/btn_to"
+        android:layout_width="0dp"
+        app:shapeAppearanceOverlay="@style/RoundedTextField"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxBackgroundColor="?attr/colorSecondaryContainer"
+        android:hint="@string/amount"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_amount"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--  Description  -->
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_amount"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tv_currency_info, tl_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tl_description"
+        app:layout_constraintTop_toBottomOf="@id/barrier_amount"
+        android:layout_width="match_parent"
+        app:shapeAppearanceOverlay="@style/RoundedTextField"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxBackgroundColor="?attr/colorSecondaryContainer"
+        android:layout_marginTop="16dp"
+        android:hint="@string/description"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_description"
+            android:text="@string/transfer_between_your_accounts"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_continue"
+        android:text="@string/continue_string"
+        android:textAllCaps="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/enter_btn_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,24 +4,31 @@ plugins {
     alias(libs.plugins.androidx.navigation.safeargs.kotlin)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
 }
 
+val bundleId = "com.iraklyoda.transferapp"
+
 android {
-    namespace = "com.example.baseproject"
+    namespace = bundleId
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.baseproject"
+        applicationId = bundleId
         minSdk = 25
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://run.mocky.io/v3/\"")
+        }
         release {
+            buildConfigField(name = "BASE_URL", type = "String", value = "\"https://run.mocky.io/v3/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -62,6 +69,10 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
+
+    // Glide
+    implementation(libs.glide)
+
 }
 
 kapt {
