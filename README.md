@@ -28,7 +28,9 @@ This repository contains assignments and quiz projects from the TBC IT Academy f
 - [Assignment 22 - Security Pin App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-22)
 - [Assignment 23 - E-Auth Login and Registration Page 4](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-23)
 - [Assignment 24 - Travel Social App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-24)
-
+- [Assignment 25](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-25)
+- [Assignment 26](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-26)
+- [Assignment 27 - Internal Transaction App](https://github.com/iraklyoda/tbc-it-academy-android/tree/assignment-27)
 
 ## Quiz Projects
 
