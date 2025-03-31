@@ -1,5 +1,6 @@
 package com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.from
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iraklyoda.transferapp.domain.common.Resource
@@ -21,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FromAccountViewModel @Inject constructor(
-    private val getDebitCardsUseCase: GetAccountsUseCase
+    private val getAccountsUseCase: GetAccountsUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(FromAccountState())
@@ -39,9 +40,10 @@ class FromAccountViewModel @Inject constructor(
 
     private fun fetchDebitCards() {
         viewModelScope.launch {
-            getDebitCardsUseCase().collectLatest { resource ->
+            getAccountsUseCase().collectLatest { resource ->
                 when (resource) {
                     is Resource.Loader -> _state.update {
+                        Log.d("NO_INTERNET_CARDS", resource.loading.toString())
                         it.copy(isLoading = resource.loading)
                     }
 
@@ -49,10 +51,7 @@ class FromAccountViewModel @Inject constructor(
                         it.copy(accounts = resource.data.map { getDebitCard -> getDebitCard.toUi() })
                     }
 
-                    is Resource.Error -> _state.update {
-                        _uiEvent.send(FromAccountUiEvent.HandleFetchingError(errorMessage = resource.errorMessage))
-                        it.copy(errorMessage = resource.errorMessage)
-                    }
+                    is Resource.Error -> onFetchingError(errorMessage = resource.errorMessage)
                 }
             }
         }
@@ -61,6 +60,13 @@ class FromAccountViewModel @Inject constructor(
     private fun onAccountChosen(account: AccountUi) {
         viewModelScope.launch {
             _uiEvent.send(FromAccountUiEvent.HandleChosenAccount(account = account))
+        }
+    }
+
+    private fun onFetchingError(errorMessage: String) {
+        viewModelScope.launch {
+            _uiEvent.send(FromAccountUiEvent.HandleFetchingError(errorMessage = errorMessage))
+            _state.update { it.copy(errorMessage = errorMessage) }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.to
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -8,7 +9,6 @@ import com.iraklyoda.transferapp.databinding.FragmentToAccountBinding
 import com.iraklyoda.transferapp.presentation.BaseBottomSheetDialogFragment
 import com.iraklyoda.transferapp.presentation.extensions.collect
 import com.iraklyoda.transferapp.presentation.extensions.collectLatest
-import com.iraklyoda.transferapp.presentation.extensions.showSnackbar
 import com.iraklyoda.transferapp.presentation.extensions.updateInvisibility
 import com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.from.model.AccountUi
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,7 +80,7 @@ class ToAccountFragment :
     }
 
     private fun handleFetchingError(errorMessage: String) {
-        binding.root.showSnackbar(message = errorMessage)
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
         dismiss()
     }
 

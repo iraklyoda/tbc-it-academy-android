@@ -11,9 +11,9 @@ interface GetAccountsUseCase {
 }
 
 class GetAccountsUseCaseImpl @Inject constructor(
-    private val debitCardRepository: AccountRepository
+    private val accountRepository: AccountRepository
 ) : GetAccountsUseCase {
     override suspend fun invoke(): Flow<Resource<List<GetDebitCard>>> {
-        return debitCardRepository.getInternalAccounts()
+        return accountRepository.getInternalAccounts()
     }
 }

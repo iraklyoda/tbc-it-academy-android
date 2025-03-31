@@ -1,6 +1,8 @@
 package com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.from
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -9,7 +11,6 @@ import com.iraklyoda.transferapp.databinding.FragmentFromAccountBinding
 import com.iraklyoda.transferapp.presentation.BaseBottomSheetDialogFragment
 import com.iraklyoda.transferapp.presentation.extensions.collect
 import com.iraklyoda.transferapp.presentation.extensions.collectLatest
-import com.iraklyoda.transferapp.presentation.extensions.showSnackbar
 import com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.from.adapter.FromAccountAdapter
 import com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.from.event.FromAccountEvent
 import com.iraklyoda.transferapp.presentation.screen.transfer_internally.bottom_sheet.from.event.FromAccountUiEvent
@@ -77,7 +78,9 @@ class FromAccountFragment :
     }
 
     private fun handleFetchingError(errorMessage: String) {
-        binding.root.showSnackbar(message = errorMessage)
+        Log.d("NO_INTERNET_ERROR_UI", "???")
+
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
         dismiss()
     }
 
