@@ -47,8 +47,8 @@ class TransferInternallyViewModel @Inject constructor(
         val currencyRate = state.value.currencyRate ?: return
 
         viewModelScope.launch {
-            val fromAccount = state.value.fromAccount
-            val toAccount = state.value.toAccount
+            val toAccount = state.value.fromAccount
+            val fromAccount = state.value.toAccount
 
             if (fromAccount != null && toAccount != null) {
                 convertCurrency(
@@ -66,8 +66,8 @@ class TransferInternallyViewModel @Inject constructor(
         val currencyRate = state.value.currencyRate ?: return
 
         viewModelScope.launch {
-            val fromAccount = state.value.toAccount
-            val toAccount = state.value.fromAccount
+            val toAccount = state.value.toAccount
+            val fromAccount = state.value.fromAccount
 
             if (fromAccount != null && toAccount != null) {
                 convertCurrency(

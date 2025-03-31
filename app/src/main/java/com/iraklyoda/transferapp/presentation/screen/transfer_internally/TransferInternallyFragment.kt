@@ -277,8 +277,8 @@ class TransferInternallyFragment :
 
             Log.d("UPDATE_VISIBILITY", exchangeNeeded.toString())
 
-            tlSell.suffixText = toCurrency.getSymbol()
-            tlBuy.suffixText = fromCurrency.getSymbol()
+            tlSell.suffixText = fromCurrency.getSymbol()
+            tlBuy.suffixText = toCurrency.getSymbol()
         }
     }
 }
