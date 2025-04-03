@@ -18,10 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.iraklyoda.userssocialapp.R
 import com.iraklyoda.userssocialapp.presentation.screen.home.model.UserUi
 
@@ -43,7 +46,10 @@ fun UserCard(user: UserUi) {
                 modifier = Modifier
                     .size(64.dp)
                     .clip(RoundedCornerShape(32.dp)),
-                model = user.avatarUrl,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(user.avatarUrl)
+                    .crossfade(true)
+                    .build(),
                 placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
                 error = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = "User Avatar",

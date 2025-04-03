@@ -104,11 +104,11 @@ fun LoginContent(
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = Dimens.SpacingLarger)
                 .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
@@ -133,8 +133,8 @@ fun LoginContent(
                 Image(
                     painter = painterResource(id = R.drawable.vector_login),
                     contentDescription = "Register Illustration",
+                    contentScale = ContentScale.Fit,
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit
                 )
             }
 
@@ -187,7 +187,7 @@ fun LoginContent(
                             },
                         )
                         Text(
-                            stringResource(R.string.remember_me),
+                            text = stringResource(R.string.remember_me),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier
                                 .clickable(

@@ -69,8 +69,8 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.retrofit)
     implementation(libs.okhttp)
-    implementation(libs.glide)
     implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     // androidx
     implementation(libs.androidx.core.ktx)
