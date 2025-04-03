@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.glide)
+    implementation(libs.coil.compose)
 
     // androidx
     implementation(libs.androidx.core.ktx)
@@ -90,6 +91,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.paging.compose)
+
 
     // Hilt
     implementation(libs.hilt.android)

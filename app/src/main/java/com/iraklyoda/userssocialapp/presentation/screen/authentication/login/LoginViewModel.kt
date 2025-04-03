@@ -38,10 +38,10 @@ class LoginViewModel @Inject constructor(
 
         when (event) {
             // Email Validation
-            is LoginEvent.EmailChanged -> onEmailChanged(email = event.email)
+            is LoginEvent.EmailChanged -> onEmailChange(email = event.email)
 
             // Password Validation
-            is LoginEvent.PasswordChanged -> onPasswordChanged(password = event.password)
+            is LoginEvent.PasswordChanged -> onPasswordChange(password = event.password)
 
             // Remember Me Handling
             is LoginEvent.RememberMeChanged -> onRememberMeToggle(rememberMe = event.rememberMe)
@@ -50,10 +50,10 @@ class LoginViewModel @Inject constructor(
             is LoginEvent.Submit -> submitLoginData()
 
             // Register Navigation
-            is LoginEvent.RegisterBtnClicked -> onRegisterBtnClicked()
+            is LoginEvent.RegisterBtnClicked -> onRegisterBtnClick()
 
             // Set Credentials
-            is LoginEvent.SetCredentials -> onCredentialsReceived(
+            is LoginEvent.SetCredentials -> onCredentialsReceive(
                 email = event.email,
                 password = event.password
             )
@@ -63,19 +63,19 @@ class LoginViewModel @Inject constructor(
     // Ui Events
 
     // Register Clicked
-    private fun onRegisterBtnClicked() {
+    private fun onRegisterBtnClick() {
         viewModelScope.launch {
             _sideEffect.send(LoginSideEffect.NavigateToRegister)
         }
     }
 
-    // Set Credentials Coming From Registration
-    private fun onCredentialsReceived(email: String, password: String) {
+    // Credentials Received from registration screen
+    private fun onCredentialsReceive(email: String, password: String) {
         uiState = uiState.copy(email = email, password = password)
     }
 
     // Email Changed
-    private fun onEmailChanged(email: String) {
+    private fun onEmailChange(email: String) {
         uiState = uiState.copy(email = email)
 
         val emailError =
@@ -84,7 +84,7 @@ class LoginViewModel @Inject constructor(
     }
 
     // Password Changed
-    private fun onPasswordChanged(password: String) {
+    private fun onPasswordChange(password: String) {
         uiState = uiState.copy(password = password)
 
         val passwordError =
@@ -92,7 +92,7 @@ class LoginViewModel @Inject constructor(
         state = state.copy(passwordError = passwordError)
     }
 
-    // Remember me toggle
+    // Remember me toggled
     private fun onRememberMeToggle(rememberMe: Boolean) {
         uiState = uiState.copy(rememberMe = rememberMe)
 

@@ -95,7 +95,9 @@ fun AppNavGraph(navController: NavHostController) {
         // Profile Screen
         composable<ProfileScreenDestination> {
             ProfileScreen(navigateToLogin = {
-                navController.navigate(LoginScreenDestination())
+                navController.navigate(LoginScreenDestination()) {
+                    popUpTo(SplashScreenDestination) { inclusive = true }
+                }
             })
         }
     }

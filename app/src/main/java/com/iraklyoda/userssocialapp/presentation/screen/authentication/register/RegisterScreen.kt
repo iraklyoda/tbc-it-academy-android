@@ -36,8 +36,8 @@ import com.iraklyoda.userssocialapp.R
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
 import com.iraklyoda.userssocialapp.presentation.utils.CollectSideEffect
-import com.iraklyoda.userssocialapp.presentation.utils.components.AuthTextField
-import com.iraklyoda.userssocialapp.presentation.utils.components.MyCircularProgress
+import com.iraklyoda.userssocialapp.presentation.component.AuthTextField
+import com.iraklyoda.userssocialapp.presentation.component.MyCircularProgress
 
 
 @Composable

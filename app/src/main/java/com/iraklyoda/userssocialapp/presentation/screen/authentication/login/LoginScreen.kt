@@ -19,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -39,11 +38,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.iraklyoda.userssocialapp.R
+import com.iraklyoda.userssocialapp.presentation.component.AuthTextField
+import com.iraklyoda.userssocialapp.presentation.component.MyButton
+import com.iraklyoda.userssocialapp.presentation.component.MyCircularProgress
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
 import com.iraklyoda.userssocialapp.presentation.utils.CollectSideEffect
-import com.iraklyoda.userssocialapp.presentation.utils.components.AuthTextField
-import com.iraklyoda.userssocialapp.presentation.utils.components.MyCircularProgress
 
 @Composable
 fun LoginScreen(
@@ -203,39 +203,17 @@ fun LoginContent(
                 }
 
                 // Login Button
-                Button(
-                    onClick = {
-                        onEvent(
-                            LoginEvent.Submit
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = Dimens.ButtonHeight),
-                    enabled = state.isLoginBtnEnabled
-                ) {
-                    Text(
-                        text = "Login",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
+                MyButton(
+                    onClick = { onEvent(LoginEvent.Submit) },
+                    isEnabled = state.isLoginBtnEnabled,
+                    text = stringResource(R.string.login)
+                )
 
                 // Register Btn
-                Button(
-                    onClick = {
-                        onEvent(
-                            LoginEvent.RegisterBtnClicked
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = Dimens.ButtonHeight),
-                ) {
-                    Text(
-                        text = "Register",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
+                MyButton(
+                    onClick = { onEvent(LoginEvent.RegisterBtnClicked) },
+                    text = stringResource(R.string.register)
+                )
             }
         }
     }

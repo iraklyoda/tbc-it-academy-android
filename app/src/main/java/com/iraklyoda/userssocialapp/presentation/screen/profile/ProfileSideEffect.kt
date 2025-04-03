@@ -1,4 +1,5 @@
 package com.iraklyoda.userssocialapp.presentation.screen.profile
 
-class ProfileSideEffect {
+sealed interface ProfileSideEffect {
+    data object NavigateToLogin: ProfileSideEffect
 }
