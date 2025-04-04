@@ -6,9 +6,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.iraklyoda.userssocialapp.data.UserMapper.toEntity
 import com.iraklyoda.userssocialapp.data.local.db.AppDatabase
 import com.iraklyoda.userssocialapp.data.local.db.UserEntity
+import com.iraklyoda.userssocialapp.data.mapper.toEntity
 import com.iraklyoda.userssocialapp.data.remote.api.UserService
 import retrofit2.HttpException
 import java.io.IOException

@@ -1,6 +1,6 @@
 package com.iraklyoda.userssocialapp.domain.model
 
-data class User(
+data class GetUser(
     val id: Int,
     val fullName: String,
     val email: String,
