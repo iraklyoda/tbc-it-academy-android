@@ -13,7 +13,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -31,13 +30,12 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.iraklyoda.userssocialapp.R
-import com.iraklyoda.userssocialapp.presentation.component.UserCard
+import com.iraklyoda.userssocialapp.presentation.screen.home.component.UserCard
 import com.iraklyoda.userssocialapp.presentation.screen.home.model.UserUi
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
 import com.iraklyoda.userssocialapp.presentation.utils.CollectSideEffect
 import kotlinx.coroutines.flow.MutableStateFlow
-
 
 @Composable
 fun HomeScreen(
@@ -68,75 +66,73 @@ fun HomeScreenContent(
     state: HomeState,
     onEvent: (HomeEvent) -> Unit
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                // Header
-                Text(
-                    text = "Home",
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = Dimens.SpacingMedium),
-                    textAlign = TextAlign.Center
-                )
+            // Header
+            Text(
+                text = "Home",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = Dimens.SpacingMedium),
+                textAlign = TextAlign.Center
+            )
 
 
-                LazyColumn {
+            LazyColumn {
 
-                    items(
-                        count = usersPagingItems.itemCount,
-                        key = usersPagingItems.itemKey { user -> user.id })
-                    { index ->
-                        val user = usersPagingItems[index]
-                        user?.let {
-                            UserCard(user = it)
-                        }
+                items(
+                    count = usersPagingItems.itemCount,
+                    key = usersPagingItems.itemKey { user -> user.id })
+                { index ->
+                    val user = usersPagingItems[index]
+                    user?.let {
+                        UserCard(user = it)
                     }
+                }
 
-                    // Loading State
-                    if (usersPagingItems.loadState.append is LoadState.Loading) {
-                        item {
-                            CircularProgressIndicator(modifier = Modifier.padding(16.dp))
-                        }
+                // Loading State
+                if (usersPagingItems.loadState.append is LoadState.Loading) {
+                    item {
+                        CircularProgressIndicator(modifier = Modifier.padding(16.dp))
                     }
+                }
 
-                    // No Users
-                    if (usersPagingItems.itemCount == 0 && !state.loader) {
-                        item {
-                            Text(
-                                text = stringResource(R.string.no_users_found),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = Color.Gray,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(16.dp),
-                            )
-                        }
+                // No Users
+                if (usersPagingItems.itemCount == 0 && !state.loader) {
+                    item {
+                        Text(
+                            text = stringResource(R.string.no_users_found),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.Gray,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(16.dp),
+                        )
                     }
                 }
             }
+        }
 
-            IconButton(
-                onClick = {
-                    onEvent(HomeEvent.ProfileBtnClicked)
-                },
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(Dimens.SpacingMedium)
-                    .size(52.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.AccountCircle,
-                    contentDescription = "Profile",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+        IconButton(
+            onClick = {
+                onEvent(HomeEvent.ProfileBtnClicked)
+            },
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(Dimens.SpacingMedium)
+                .size(52.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = "Profile",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }

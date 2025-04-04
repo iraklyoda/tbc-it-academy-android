@@ -16,7 +16,7 @@ class ValidateEmailUseCase @Inject constructor() {
 
         return null
     }
-
+    
     private val emailRegex = compile(
         "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
                 "\\@" +

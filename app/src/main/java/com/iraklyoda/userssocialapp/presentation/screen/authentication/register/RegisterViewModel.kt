@@ -11,7 +11,7 @@ import com.iraklyoda.userssocialapp.domain.use_case.auth.SignUpUserUseCase
 import com.iraklyoda.userssocialapp.domain.use_case.validation.ValidateEmailUseCase
 import com.iraklyoda.userssocialapp.domain.use_case.validation.ValidatePasswordUseCase
 import com.iraklyoda.userssocialapp.domain.use_case.validation.ValidateRepeatedPasswordUseCase
-import com.iraklyoda.userssocialapp.presentation.screen.authentication.register.mapper.toUi
+import com.iraklyoda.userssocialapp.presentation.screen.authentication.mapper.mapToStringResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -45,8 +45,14 @@ class RegisterViewModel @Inject constructor(
             // Password Validation
             is RegisterEvent.PasswordChanged -> onPasswordChanged(password = event.password)
 
+            // Password Visibility Toggle
+            is RegisterEvent.TogglePasswordVisibility -> onPasswordVisibilityToggle()
+
             // Repeated Password Validation
             is RegisterEvent.RepeatedPasswordChanged -> onRepeatedPasswordChanged(repeatedPassword = event.repeatedPassword)
+
+            // Repeated Password Visibility Toggle
+            is RegisterEvent.ToggleRepeatPasswordVisibility -> onRepeatedPasswordVisibilityToggle()
 
             // Submit Form
             is RegisterEvent.Submit -> submitRegisterData()
@@ -61,7 +67,7 @@ class RegisterViewModel @Inject constructor(
 
         val emailError =
             if (state.formBeenSubmitted) validateEmailUseCase(email = email) else null
-        state = state.copy(emailError = emailError)
+        state = state.copy(emailErrorResource = emailError?.mapToStringResource())
     }
 
     // Password Changed
@@ -78,11 +84,15 @@ class RegisterViewModel @Inject constructor(
             ) else null
 
         state = state.copy(
-            passwordError = passwordError,
-            repeatedPasswordError = repeatedPasswordError
+            passwordErrorResource = passwordError?.mapToStringResource(),
+            repeatedPasswordErrorResource = repeatedPasswordError?.mapToStringResource()
         )
     }
 
+    // Toggle Password Visibility
+    private fun onPasswordVisibilityToggle() {
+        uiState = uiState.copy(passwordVisible = !uiState.passwordVisible)
+    }
 
     // Repeated Password Changed
     private fun onRepeatedPasswordChanged(repeatedPassword: String) {
@@ -94,7 +104,12 @@ class RegisterViewModel @Inject constructor(
                 repeatedPassword = repeatedPassword
             ) else null
 
-        state = state.copy(repeatedPasswordError = repeatedPasswordError)
+        state = state.copy(repeatedPasswordErrorResource = repeatedPasswordError?.mapToStringResource())
+    }
+
+    // Toggle Repeated Password Visibility
+    private fun onRepeatedPasswordVisibilityToggle() {
+        uiState = uiState.copy(repeatedPasswordVisible = !uiState.repeatedPasswordVisible)
     }
 
     // Form Submitted
@@ -119,9 +134,9 @@ class RegisterViewModel @Inject constructor(
         )
 
         state = state.copy(
-            emailError = emailError,
-            passwordError = passwordError,
-            repeatedPasswordError = repeatedPasswordError
+            emailErrorResource = emailError?.mapToStringResource(),
+            passwordErrorResource = passwordError?.mapToStringResource(),
+            repeatedPasswordErrorResource = repeatedPasswordError?.mapToStringResource()
         )
 
         val errors: List<AuthFieldErrorType?> =
@@ -141,7 +156,6 @@ class RegisterViewModel @Inject constructor(
                     is Resource.Loader -> state = state.copy(loader = resource.loading)
 
                     is Resource.Success -> {
-                        state = state.copy(registerSession = resource.data.toUi())
                         _sideEffect.send(
                             RegisterSideEffect.NavigateToLogin(
                                 email = email,

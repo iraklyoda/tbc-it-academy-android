@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 
 @Composable
-fun MyButton(
+fun ButtonComponent(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     isEnabled: Boolean = true,

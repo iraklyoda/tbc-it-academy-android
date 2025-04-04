@@ -4,8 +4,8 @@ import com.iraklyoda.userssocialapp.domain.common.Resource
 import com.iraklyoda.userssocialapp.domain.common.handleSuccess
 import com.iraklyoda.userssocialapp.domain.model.LoginSession
 import com.iraklyoda.userssocialapp.domain.preferences.AppPreferenceKeys
-import com.iraklyoda.userssocialapp.domain.preferences.PreferencesStorage
 import com.iraklyoda.userssocialapp.domain.repository.LogInRepository
+import com.iraklyoda.userssocialapp.domain.use_case.preferences.SavePreferenceValueUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ interface LogInUserUseCase {
 
 class LogInUserUseCaseImpl @Inject constructor(
     private val loginRepository: LogInRepository,
-    private val preferencesStorage: PreferencesStorage
+    private val savePreferenceValueUseCase: SavePreferenceValueUseCase,
 ) : LogInUserUseCase {
     override suspend operator fun invoke(
         email: String,
@@ -28,14 +28,13 @@ class LogInUserUseCaseImpl @Inject constructor(
     ): Flow<Resource<LoginSession>> {
         return loginRepository.login(email, password, rememberMe)
             .handleSuccess { resource ->
-                saveLoginPreferences(email = email, token = resource.token, rememberMe = rememberMe)
+                savePreferenceValueUseCase(key = AppPreferenceKeys.EMAIL_KEY, value = email)
+                if (rememberMe) {
+                    savePreferenceValueUseCase(
+                        key = AppPreferenceKeys.TOKEN_KEY,
+                        value = resource.token
+                    )
+                }
             }
-    }
-
-    private suspend fun saveLoginPreferences(email: String, token: String, rememberMe: Boolean) {
-        preferencesStorage.saveValue(key = AppPreferenceKeys.EMAIL_KEY, value = email)
-        if (rememberMe) {
-            preferencesStorage.saveValue(key = AppPreferenceKeys.TOKEN_KEY, value = token)
-        }
     }
 }

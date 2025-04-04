@@ -13,10 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -29,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.iraklyoda.userssocialapp.R
 import com.iraklyoda.userssocialapp.domain.common.AuthFieldErrorType
-import com.iraklyoda.userssocialapp.presentation.screen.authentication.mapper.AuthFieldErrorMapper
+import com.iraklyoda.userssocialapp.presentation.screen.authentication.mapper.mapToStringResource
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.PlaceHolderColor
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
@@ -43,17 +39,17 @@ fun AuthTextField(
     leadingIcon: ImageVector,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
-    error: AuthFieldErrorType? = null
+    isPasswordVisible: Boolean = false,
+    onTrailingIconClick: () -> Unit = {},
+    errorResource: Int? = null
 ) {
-    var isPasswordVisible by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
         TextField(
             value = value,
             onValueChange = { onValueChange(it) },
-            isError = error != null,
+            isError = errorResource != null,
             placeholder = {
                 Text(
                     text = label,
@@ -79,7 +75,7 @@ fun AuthTextField(
             trailingIcon = {
                 if (isPassword) {
                     IconButton(
-                        onClick = { isPasswordVisible = !isPasswordVisible },
+                        onClick = { onTrailingIconClick() },
                         modifier = Modifier.padding(horizontal = Dimens.SpacingLarge)
                     ) {
                         Icon(
@@ -98,33 +94,44 @@ fun AuthTextField(
                 .fillMaxWidth()
         )
 
-        error?.let { errorType ->
-            AuthFieldErrorMapper.mapToString(errorType)?.let { stringResId ->
-                Text(
-                    text = stringResource(id = stringResId),
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier.padding(
-                        start = Dimens.SpacingMedium,
-                        top = Dimens.SpacingSmall
-                    )
+        errorResource?.let {
+            Text(
+                text = stringResource(errorResource),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.padding(
+                    start = Dimens.SpacingMedium,
+                    top = Dimens.SpacingSmall
                 )
-            }
+            )
         }
     }
 }
 
 @Preview
 @Composable
-fun AuthTextFieldPreview() {
+fun AuthTextFieldEmailPreview() {
     UsersSocialAppTheme {
         AuthTextField(
-            value = "",
+            value = "jemali@gmail.com",
             onValueChange = {},
-            isPassword = true,
             label = "Email",
             leadingIcon = Icons.Default.AccountCircle,
-            error = AuthFieldErrorType.EMPTY
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AuthTextFieldPasswordPreview() {
+    UsersSocialAppTheme {
+        AuthTextField(
+            value = "hdsajkh",
+            isPassword = true,
+            onValueChange = {},
+            label = "Email",
+            leadingIcon = Icons.Default.AccountCircle,
+            errorResource = AuthFieldErrorType.EMPTY.mapToStringResource()
         )
     }
 }

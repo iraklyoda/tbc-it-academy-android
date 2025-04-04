@@ -10,7 +10,7 @@ import com.iraklyoda.userssocialapp.domain.common.Resource
 import com.iraklyoda.userssocialapp.domain.use_case.auth.LogInUserUseCase
 import com.iraklyoda.userssocialapp.domain.use_case.validation.ValidateEmailUseCase
 import com.iraklyoda.userssocialapp.domain.use_case.validation.ValidatePasswordUseCase
-import com.iraklyoda.userssocialapp.presentation.screen.authentication.login.mapper.toUi
+import com.iraklyoda.userssocialapp.presentation.screen.authentication.mapper.mapToStringResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -35,7 +35,6 @@ class LoginViewModel @Inject constructor(
     val sideEffect: Flow<LoginSideEffect> = _sideEffect.receiveAsFlow()
 
     fun onEvent(event: LoginEvent) {
-
         when (event) {
             // Email Validation
             is LoginEvent.EmailChanged -> onEmailChange(email = event.email)
@@ -43,14 +42,17 @@ class LoginViewModel @Inject constructor(
             // Password Validation
             is LoginEvent.PasswordChanged -> onPasswordChange(password = event.password)
 
+            // Password Visibility Toggle
+            is LoginEvent.TogglePasswordVisibility -> onPasswordVisibilityToggle()
+
             // Remember Me Handling
-            is LoginEvent.RememberMeChanged -> onRememberMeToggle(rememberMe = event.rememberMe)
+            is LoginEvent.ToggleRememberMe -> onRememberMeToggle()
 
             // Submit Form
             is LoginEvent.Submit -> submitLoginData()
 
             // Register Navigation
-            is LoginEvent.RegisterBtnClicked -> onRegisterBtnClick()
+            is LoginEvent.NavigateToRegister -> navigateToRegister()
 
             // Set Credentials
             is LoginEvent.SetCredentials -> onCredentialsReceive(
@@ -63,7 +65,7 @@ class LoginViewModel @Inject constructor(
     // Ui Events
 
     // Register Clicked
-    private fun onRegisterBtnClick() {
+    private fun navigateToRegister() {
         viewModelScope.launch {
             _sideEffect.send(LoginSideEffect.NavigateToRegister)
         }
@@ -80,7 +82,7 @@ class LoginViewModel @Inject constructor(
 
         val emailError =
             if (state.formBeenSubmitted) validateEmailUseCase(email = email) else null
-        state = state.copy(emailError = emailError)
+        state = state.copy(emailErrorResource = emailError?.mapToStringResource())
     }
 
     // Password Changed
@@ -89,13 +91,17 @@ class LoginViewModel @Inject constructor(
 
         val passwordError =
             if (state.formBeenSubmitted) validatePasswordUseCase(password = password) else null
-        state = state.copy(passwordError = passwordError)
+        state = state.copy(passwordErrorResource = passwordError?.mapToStringResource())
+    }
+
+    // Toggle Password Visibility
+    private fun onPasswordVisibilityToggle() {
+        uiState = uiState.copy(passwordVisible = !uiState.passwordVisible)
     }
 
     // Remember me toggled
-    private fun onRememberMeToggle(rememberMe: Boolean) {
-        uiState = uiState.copy(rememberMe = rememberMe)
-
+    private fun onRememberMeToggle() {
+        uiState = uiState.copy(rememberMe = !uiState.rememberMe)
     }
 
     // Form Submitted
@@ -118,12 +124,12 @@ class LoginViewModel @Inject constructor(
     private fun validateForm(
         email: String, password: String
     ): Boolean {
-        val emailError = validateEmailUseCase(email)
-        val passwordError = validatePasswordUseCase(password)
+        val emailError: AuthFieldErrorType? = validateEmailUseCase(email)
+        val passwordError: AuthFieldErrorType? = validatePasswordUseCase(password)
 
         state = state.copy(
-            emailError = emailError,
-            passwordError = passwordError
+            emailErrorResource = emailError?.mapToStringResource(),
+            passwordErrorResource = passwordError?.mapToStringResource()
         )
 
         val errors: List<AuthFieldErrorType?> = listOf(emailError, passwordError)
@@ -143,7 +149,6 @@ class LoginViewModel @Inject constructor(
                     is Resource.Loader -> state = state.copy(loader = resource.loading)
 
                     is Resource.Success -> {
-                        state = state.copy(loginSession = resource.data.toUi())
                         _sideEffect.send(LoginSideEffect.NavigateToHome)
                     }
 

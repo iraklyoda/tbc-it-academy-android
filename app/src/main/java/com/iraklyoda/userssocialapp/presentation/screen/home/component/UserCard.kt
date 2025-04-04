@@ -1,4 +1,4 @@
-package com.iraklyoda.userssocialapp.presentation.component
+package com.iraklyoda.userssocialapp.presentation.screen.home.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

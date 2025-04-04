@@ -52,7 +52,6 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
 
-
         // Login Screen
         composable<LoginScreenDestination> { backStackEntry ->
             val loginScreenDestination: LoginScreenDestination = backStackEntry.toRoute()
@@ -74,23 +73,29 @@ fun AppNavGraph(navController: NavHostController) {
         }
 
         // Register Screen
-        composable<RegisterScreenDestination> { RegisterScreen(
-            navigateToLogin = { email, password ->
-                navController.navigate(LoginScreenDestination(
-                    email = email,
-                    password = password
-                ))
-            }
-        ) }
+        composable<RegisterScreenDestination> {
+            RegisterScreen(
+                navigateToLogin = { email, password ->
+                    navController.navigate(
+                        LoginScreenDestination(
+                            email = email,
+                            password = password
+                        )
+                    )
+                }
+            )
+        }
 
         // Home Screen
-        composable<HomeScreenDestination> { HomeScreen(
-            navigateToProfile = {
-                navController.navigate(
-                    ProfileScreenDestination
-                )
-            }
-        ) }
+        composable<HomeScreenDestination> {
+            HomeScreen(
+                navigateToProfile = {
+                    navController.navigate(
+                        ProfileScreenDestination
+                    )
+                }
+            )
+        }
 
         // Profile Screen
         composable<ProfileScreenDestination> {
@@ -101,5 +106,4 @@ fun AppNavGraph(navController: NavHostController) {
             })
         }
     }
-
 }

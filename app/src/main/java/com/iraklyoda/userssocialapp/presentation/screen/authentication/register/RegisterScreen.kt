@@ -18,12 +18,10 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,11 +31,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.iraklyoda.userssocialapp.R
+import com.iraklyoda.userssocialapp.presentation.component.AuthTextField
+import com.iraklyoda.userssocialapp.presentation.component.MyCircularProgress
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
 import com.iraklyoda.userssocialapp.presentation.utils.CollectSideEffect
-import com.iraklyoda.userssocialapp.presentation.component.AuthTextField
-import com.iraklyoda.userssocialapp.presentation.component.MyCircularProgress
 
 
 @Composable
@@ -84,121 +82,117 @@ fun RegisterContent(
     onEvent: (RegisterEvent) -> Unit
 ) {
     val scrollState = rememberScrollState()
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 30.dp)
+            .verticalScroll(scrollState),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
+
+        Text(
+            text = "Register",
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+
+        // Image
+        Image(
+            painter = painterResource(id = R.drawable.vector_register),
+            contentDescription = "Register Illustration",
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 30.dp)
-                .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .align(alignment = Alignment.CenterHorizontally)
+                .fillMaxWidth(0.6f)
+                .aspectRatio(1.2f),
+        )
+
+        Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+
+        // Form
+        Column(
+            verticalArrangement = Arrangement.spacedBy(Dimens.SpacingLarge),
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
-
-            Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
-
-            Text(
-                text = "Register",
-                style = MaterialTheme.typography.titleLarge,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
+            // Email
+            AuthTextField(
+                value = uiState.email,
+                onValueChange = { onEvent(RegisterEvent.EmailChanged(it)) },
+                label = "Email",
+                keyboardType = KeyboardType.Email,
+                leadingIcon = Icons.Default.Email,
+                errorResource = state.emailErrorResource
             )
 
-            Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+            // Password
+            AuthTextField(
+                value = uiState.password,
+                onValueChange = {
+                    onEvent(
+                        RegisterEvent.PasswordChanged(
+                            password = it,
+                            repeatedPassword = uiState.repeatedPassword
+                        )
+                    )
+                },
+                label = "Password",
+                keyboardType = KeyboardType.Password,
+                leadingIcon = Icons.Default.Lock,
+                errorResource = state.passwordErrorResource,
+                isPassword = true,
+                isPasswordVisible = uiState.passwordVisible,
+                onTrailingIconClick = { onEvent(RegisterEvent.TogglePasswordVisibility) }
+            )
 
+            // Repeat Password
+            AuthTextField(
+                value = uiState.repeatedPassword,
+                onValueChange = {
+                    onEvent(
+                        RegisterEvent.RepeatedPasswordChanged(
+                            repeatedPassword = it,
+                            password = uiState.password,
+                        )
+                    )
+                },
+                label = "Repeat Password",
+                keyboardType = KeyboardType.Password,
+                leadingIcon = Icons.Default.Lock,
+                errorResource = state.repeatedPasswordErrorResource,
+                isPassword = true,
+                isPasswordVisible = uiState.repeatedPasswordVisible,
+                onTrailingIconClick = { onEvent(RegisterEvent.ToggleRepeatPasswordVisibility) }
+            )
 
-            // Image
-            Box(
-                modifier = Modifier
-                    .align(alignment = Alignment.CenterHorizontally)
-                    .fillMaxWidth(0.6f)
-                    .aspectRatio(1.2f)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.vector_register),
-                    contentDescription = "Register Illustration",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit
-                )
-            }
-
-            Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
-
-            // Form
-            Column(
-                verticalArrangement = Arrangement.spacedBy(Dimens.SpacingLarge),
+            // Button
+            Button(
+                onClick = {
+                    onEvent(
+                        RegisterEvent.Submit
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(height = Dimens.ButtonHeight),
+                enabled = state.isSignUpBtnEnabled
             ) {
-                // Email
-                AuthTextField(
-                    value = uiState.email,
-                    onValueChange = { onEvent(RegisterEvent.EmailChanged(it)) },
-                    label = "Email",
-                    keyboardType = KeyboardType.Email,
-                    leadingIcon = Icons.Default.Email,
-                    error = state.emailError
+                Text(
+                    stringResource(R.string.submit),
+                    style = MaterialTheme.typography.bodyLarge
                 )
-
-                // Password
-                AuthTextField(
-                    value = uiState.password,
-                    onValueChange = {
-                        onEvent(
-                            RegisterEvent.PasswordChanged(
-                                password = it,
-                                repeatedPassword = uiState.repeatedPassword
-                            )
-                        )
-                    },
-                    label = "Password",
-                    keyboardType = KeyboardType.Password,
-                    leadingIcon = Icons.Default.Lock,
-                    error = state.passwordError,
-                    isPassword = true
-                )
-
-                // Repeat Password
-                AuthTextField(
-                    value = uiState.repeatedPassword,
-                    onValueChange = {
-                        onEvent(
-                            RegisterEvent.RepeatedPasswordChanged(
-                                repeatedPassword = it,
-                                password = uiState.password,
-                            )
-                        )
-                    },
-                    label = "Repeat Password",
-                    keyboardType = KeyboardType.Password,
-                    leadingIcon = Icons.Default.Lock,
-                    error = state.repeatedPasswordError,
-                    isPassword = true
-                )
-
-                // Button
-                Button(
-                    onClick = {
-                        onEvent(
-                            RegisterEvent.Submit
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = Dimens.ButtonHeight),
-                    enabled = state.isSignUpBtnEnabled
-                ) {
-                    Text(
-                        stringResource(R.string.submit),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
             }
+
+            Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun RegisterScreenPreview() {
     UsersSocialAppTheme {
