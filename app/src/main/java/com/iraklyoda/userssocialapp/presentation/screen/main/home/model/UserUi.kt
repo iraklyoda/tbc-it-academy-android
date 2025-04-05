@@ -1,4 +1,4 @@
-package com.iraklyoda.userssocialapp.presentation.screen.home.model
+package com.iraklyoda.userssocialapp.presentation.screen.main.home.model
 
 data class UserUi(
     val id: Int,

@@ -2,6 +2,7 @@ package com.iraklyoda.userssocialapp.presentation.screen.authentication.register
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,8 +32,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.iraklyoda.userssocialapp.R
-import com.iraklyoda.userssocialapp.presentation.component.AuthTextField
-import com.iraklyoda.userssocialapp.presentation.component.MyCircularProgress
+import com.iraklyoda.userssocialapp.presentation.common.component.AuthTextField
+import com.iraklyoda.userssocialapp.presentation.common.component.MyCircularProgress
+import com.iraklyoda.userssocialapp.presentation.screen.authentication.component.AuthScreenBackground
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
 import com.iraklyoda.userssocialapp.presentation.utils.CollectSideEffect
@@ -59,135 +61,137 @@ fun RegisterScreen(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        RegisterContent(
-            state = viewModel.state,
-            uiState = viewModel.uiState,
-            onEvent = { registerEvent ->
-                viewModel.onEvent(registerEvent)
-            }
-        )
+    RegisterContent(
+        state = viewModel.state,
+        uiState = viewModel.uiState,
+        onEvent = { registerEvent ->
+            viewModel.onEvent(registerEvent)
+        },
+        scrollState = rememberScrollState()
+    )
 
-        // Handle Loader State
-        if (viewModel.state.loader) {
-            MyCircularProgress()
-        }
+    // Handle Loader State
+    if (viewModel.state.loader) {
+        MyCircularProgress()
     }
+
 }
 
 @Composable
 fun RegisterContent(
     state: RegisterState,
     uiState: RegisterUiState,
-    onEvent: (RegisterEvent) -> Unit
+    onEvent: (RegisterEvent) -> Unit,
+    scrollState: ScrollState
 ) {
-    val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 30.dp)
-            .verticalScroll(scrollState),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
-
-        Text(
-            text = "Register",
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
-
-        // Image
-        Image(
-            painter = painterResource(id = R.drawable.vector_register),
-            contentDescription = "Register Illustration",
-            modifier = Modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .fillMaxWidth(0.6f)
-                .aspectRatio(1.2f),
-        )
-
-        Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
-
-        // Form
+    AuthScreenBackground {
         Column(
-            verticalArrangement = Arrangement.spacedBy(Dimens.SpacingLarge),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .padding(horizontal = 30.dp)
+                .verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Email
-            AuthTextField(
-                value = uiState.email,
-                onValueChange = { onEvent(RegisterEvent.EmailChanged(it)) },
-                label = "Email",
-                keyboardType = KeyboardType.Email,
-                leadingIcon = Icons.Default.Email,
-                errorResource = state.emailErrorResource
-            )
 
-            // Password
-            AuthTextField(
-                value = uiState.password,
-                onValueChange = {
-                    onEvent(
-                        RegisterEvent.PasswordChanged(
-                            password = it,
-                            repeatedPassword = uiState.repeatedPassword
-                        )
-                    )
-                },
-                label = "Password",
-                keyboardType = KeyboardType.Password,
-                leadingIcon = Icons.Default.Lock,
-                errorResource = state.passwordErrorResource,
-                isPassword = true,
-                isPasswordVisible = uiState.passwordVisible,
-                onTrailingIconClick = { onEvent(RegisterEvent.TogglePasswordVisibility) }
-            )
+            Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
 
-            // Repeat Password
-            AuthTextField(
-                value = uiState.repeatedPassword,
-                onValueChange = {
-                    onEvent(
-                        RegisterEvent.RepeatedPasswordChanged(
-                            repeatedPassword = it,
-                            password = uiState.password,
-                        )
-                    )
-                },
-                label = "Repeat Password",
-                keyboardType = KeyboardType.Password,
-                leadingIcon = Icons.Default.Lock,
-                errorResource = state.repeatedPasswordErrorResource,
-                isPassword = true,
-                isPasswordVisible = uiState.repeatedPasswordVisible,
-                onTrailingIconClick = { onEvent(RegisterEvent.ToggleRepeatPasswordVisibility) }
+            Text(
+                text = "Register",
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
             )
-
-            // Button
-            Button(
-                onClick = {
-                    onEvent(
-                        RegisterEvent.Submit
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(height = Dimens.ButtonHeight),
-                enabled = state.isSignUpBtnEnabled
-            ) {
-                Text(
-                    stringResource(R.string.submit),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
 
             Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+
+            // Image
+            Image(
+                painter = painterResource(id = R.drawable.vector_register),
+                contentDescription = "Register Illustration",
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .fillMaxWidth(0.6f)
+                    .aspectRatio(1.2f),
+            )
+
+            Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+
+            // Form
+            Column(
+                verticalArrangement = Arrangement.spacedBy(Dimens.SpacingLarge),
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                // Email
+                AuthTextField(
+                    value = uiState.email,
+                    onValueChange = { onEvent(RegisterEvent.EmailChanged(it)) },
+                    label = "Email",
+                    keyboardType = KeyboardType.Email,
+                    leadingIcon = Icons.Default.Email,
+                    errorResource = state.emailErrorResource
+                )
+
+                // Password
+                AuthTextField(
+                    value = uiState.password,
+                    onValueChange = {
+                        onEvent(
+                            RegisterEvent.PasswordChanged(
+                                password = it,
+                                repeatedPassword = uiState.repeatedPassword
+                            )
+                        )
+                    },
+                    label = "Password",
+                    keyboardType = KeyboardType.Password,
+                    leadingIcon = Icons.Default.Lock,
+                    errorResource = state.passwordErrorResource,
+                    isPassword = true,
+                    isPasswordVisible = uiState.passwordVisible,
+                    onTrailingIconClick = { onEvent(RegisterEvent.TogglePasswordVisibility) }
+                )
+
+                // Repeat Password
+                AuthTextField(
+                    value = uiState.repeatedPassword,
+                    onValueChange = {
+                        onEvent(
+                            RegisterEvent.RepeatedPasswordChanged(
+                                repeatedPassword = it,
+                                password = uiState.password,
+                            )
+                        )
+                    },
+                    label = "Repeat Password",
+                    keyboardType = KeyboardType.Password,
+                    leadingIcon = Icons.Default.Lock,
+                    errorResource = state.repeatedPasswordErrorResource,
+                    isPassword = true,
+                    isPasswordVisible = uiState.repeatedPasswordVisible,
+                    onTrailingIconClick = { onEvent(RegisterEvent.ToggleRepeatPasswordVisibility) }
+                )
+
+                // Button
+                Button(
+                    onClick = {
+                        onEvent(
+                            RegisterEvent.Submit
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(height = Dimens.ButtonHeight),
+                    enabled = state.isSignUpBtnEnabled
+                ) {
+                    Text(
+                        stringResource(R.string.submit),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+            }
         }
     }
 }
@@ -200,7 +204,8 @@ fun RegisterScreenPreview() {
             RegisterContent(
                 state = RegisterState(),
                 uiState = RegisterUiState(),
-                onEvent = {}
+                onEvent = {},
+                scrollState = rememberScrollState()
             )
             if (false) {
                 MyCircularProgress()

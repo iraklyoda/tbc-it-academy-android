@@ -1,4 +1,4 @@
-package com.iraklyoda.userssocialapp.presentation.component
+package com.iraklyoda.userssocialapp.presentation.common.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

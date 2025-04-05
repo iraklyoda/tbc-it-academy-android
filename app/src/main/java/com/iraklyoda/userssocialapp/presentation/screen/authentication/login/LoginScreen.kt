@@ -30,11 +30,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.iraklyoda.userssocialapp.R
-import com.iraklyoda.userssocialapp.presentation.component.AuthTextField
-import com.iraklyoda.userssocialapp.presentation.component.ButtonComponent
-import com.iraklyoda.userssocialapp.presentation.component.MyCircularProgress
+import com.iraklyoda.userssocialapp.presentation.common.component.AuthTextField
+import com.iraklyoda.userssocialapp.presentation.common.component.ButtonComponent
+import com.iraklyoda.userssocialapp.presentation.common.component.MyCircularProgress
+import com.iraklyoda.userssocialapp.presentation.screen.authentication.component.AuthScreenBackground
 import com.iraklyoda.userssocialapp.presentation.screen.authentication.login.component.RememberMeCheckbox
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
@@ -46,7 +48,7 @@ fun LoginScreen(
     email: String,
     password: String,
     navigateToRegisterScreen: () -> Unit,
-    navigateToHomeScreen: () -> Unit
+    navigateToHomeScreen: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -69,7 +71,8 @@ fun LoginScreen(
     }
 
     LaunchedEffect(Unit) {
-        viewModel.onEvent(event = LoginEvent.SetCredentials(email = email, password = password))
+        if (email.isNotEmpty())
+            viewModel.onEvent(event = LoginEvent.SetCredentials(email = email, password = password))
     }
 
     val scrollState = rememberScrollState()
@@ -84,7 +87,6 @@ fun LoginScreen(
     if (viewModel.state.loader) {
         MyCircularProgress()
     }
-
 }
 
 @Composable
@@ -94,95 +96,94 @@ fun LoginContent(
     onEvent: (LoginEvent) -> Unit,
     scrollState: ScrollState
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = Dimens.SpacingLarger)
-            .verticalScroll(scrollState),
-    ) {
-
-        Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
-
-        Text(
-            text = stringResource(R.string.login),
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
-
-
-        // Image
-        Image(
-            painter = painterResource(id = R.drawable.vector_login),
-            contentDescription = "Register Illustration",
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .fillMaxWidth(0.6f)
-                .aspectRatio(1.2f),
-        )
-
-        Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
-
-        // Form
+    AuthScreenBackground {
         Column(
-            verticalArrangement = Arrangement.spacedBy(Dimens.SpacingLarge),
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .padding(horizontal = 30.dp)
+                .verticalScroll(scrollState),
         ) {
-            // Email
-            AuthTextField(
-                value = uiState.email,
-                onValueChange = { onEvent(LoginEvent.EmailChanged(it)) },
-                label = stringResource(R.string.email),
-                keyboardType = KeyboardType.Email,
-                leadingIcon = Icons.Default.Email,
-                errorResource = state.emailErrorResource
+            Spacer(modifier = Modifier.height(Dimens.SpacingXXL))
+
+            Text(
+                text = stringResource(R.string.login),
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
             )
 
-            Column {
-                // Password
+            Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+
+            // Image
+            Image(
+                painter = painterResource(id = R.drawable.vector_login),
+                contentDescription = "Register Illustration",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .fillMaxWidth(0.6f)
+                    .aspectRatio(1.2f),
+            )
+
+            Spacer(modifier = Modifier.height(Dimens.SpacingLarge))
+
+            // Form
+            Column(
+                verticalArrangement = Arrangement.spacedBy(Dimens.SpacingLarge),
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                // Email
                 AuthTextField(
-                    value = uiState.password,
-                    onValueChange = {
-                        onEvent(
-                            LoginEvent.PasswordChanged(
-                                password = it,
-                            )
-                        )
-                    },
-                    label = stringResource(R.string.password),
-                    keyboardType = KeyboardType.Password,
-                    leadingIcon = Icons.Default.Lock,
-                    errorResource = state.passwordErrorResource,
-                    isPassword = true,
-                    isPasswordVisible = uiState.passwordVisible,
-                    onTrailingIconClick = { onEvent(LoginEvent.TogglePasswordVisibility) }
+                    value = uiState.email,
+                    onValueChange = { onEvent(LoginEvent.EmailChanged(it)) },
+                    label = stringResource(R.string.email),
+                    keyboardType = KeyboardType.Email,
+                    leadingIcon = Icons.Default.Email,
+                    errorResource = state.emailErrorResource
                 )
 
-                // Remember Me Checkbox
-                RememberMeCheckbox(
-                    checkedState = uiState.rememberMe,
-                    onToggle = { onEvent(LoginEvent.ToggleRememberMe) }
+                Column {
+                    // Password
+                    AuthTextField(
+                        value = uiState.password,
+                        onValueChange = {
+                            onEvent(
+                                LoginEvent.PasswordChanged(
+                                    password = it,
+                                )
+                            )
+                        },
+                        label = stringResource(R.string.password),
+                        keyboardType = KeyboardType.Password,
+                        leadingIcon = Icons.Default.Lock,
+                        errorResource = state.passwordErrorResource,
+                        isPassword = true,
+                        isPasswordVisible = uiState.passwordVisible,
+                        onTrailingIconClick = { onEvent(LoginEvent.TogglePasswordVisibility) }
+                    )
+
+                    // Remember Me Checkbox
+                    RememberMeCheckbox(
+                        checkedState = uiState.rememberMe,
+                        onToggle = { onEvent(LoginEvent.ToggleRememberMe) }
+                    )
+                }
+
+                // Login Button
+                ButtonComponent(
+                    onClick = { onEvent(LoginEvent.Submit) },
+                    isEnabled = state.isLoginBtnEnabled,
+                    text = stringResource(R.string.login)
+                )
+
+                // Register Btn
+                ButtonComponent(
+                    onClick = { onEvent(LoginEvent.NavigateToRegister) },
+                    text = stringResource(R.string.register)
                 )
             }
-
-            // Login Button
-            ButtonComponent(
-                onClick = { onEvent(LoginEvent.Submit) },
-                isEnabled = state.isLoginBtnEnabled,
-                text = stringResource(R.string.login)
-            )
-
-            // Register Btn
-            ButtonComponent(
-                onClick = { onEvent(LoginEvent.NavigateToRegister) },
-                text = stringResource(R.string.register)
-            )
-
         }
     }
 }

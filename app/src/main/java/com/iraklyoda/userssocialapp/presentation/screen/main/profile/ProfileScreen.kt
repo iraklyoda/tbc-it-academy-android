@@ -1,5 +1,6 @@
-package com.iraklyoda.userssocialapp.presentation.screen.profile
+package com.iraklyoda.userssocialapp.presentation.screen.main.profile
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.iraklyoda.userssocialapp.R
-import com.iraklyoda.userssocialapp.presentation.component.ButtonComponent
+import com.iraklyoda.userssocialapp.presentation.common.component.ButtonComponent
 import com.iraklyoda.userssocialapp.presentation.theme.Dimens
 import com.iraklyoda.userssocialapp.presentation.theme.UsersSocialAppTheme
 import com.iraklyoda.userssocialapp.presentation.utils.CollectSideEffect
@@ -47,6 +48,7 @@ fun ProfileContent(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = Dimens.SpacingMedium)
     ) {
         state.userEmail?.let {

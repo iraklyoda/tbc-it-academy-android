@@ -35,4 +35,6 @@
     <string name="submit">Submit</string>
     <string name="profile_welcome_hello">Hello \n %1$s</string>
     <string name="no_users_found">No users found</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.iraklyoda.userssocialapp.presentation.screen.home.component
+package com.iraklyoda.userssocialapp.presentation.screen.main.home.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,7 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.iraklyoda.userssocialapp.R
-import com.iraklyoda.userssocialapp.presentation.screen.home.model.UserUi
+import com.iraklyoda.userssocialapp.presentation.screen.main.home.model.UserUi
 
 @Composable
 fun UserCard(user: UserUi) {

@@ -1,4 +1,4 @@
-package com.iraklyoda.userssocialapp.presentation.screen.profile
+package com.iraklyoda.userssocialapp.presentation.screen.main.profile
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

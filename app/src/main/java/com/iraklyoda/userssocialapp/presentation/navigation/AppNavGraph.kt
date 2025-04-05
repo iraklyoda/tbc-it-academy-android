@@ -3,14 +3,14 @@ package com.iraklyoda.userssocialapp.presentation.navigation
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.iraklyoda.userssocialapp.presentation.screen.authentication.login.LoginScreen
 import com.iraklyoda.userssocialapp.presentation.screen.authentication.register.RegisterScreen
-import com.iraklyoda.userssocialapp.presentation.screen.home.HomeScreen
-import com.iraklyoda.userssocialapp.presentation.screen.profile.ProfileScreen
+import com.iraklyoda.userssocialapp.presentation.screen.main.MainScreen
 import com.iraklyoda.userssocialapp.presentation.screen.splash.SplashScreen
 import kotlinx.serialization.Serializable
 
@@ -27,27 +27,30 @@ data class LoginScreenDestination(
 data object RegisterScreenDestination
 
 @Serializable
-data object HomeScreenDestination
-
-@Serializable
-data object ProfileScreenDestination
+data object MainScreenDestination
 
 @Composable
-fun AppNavGraph(navController: NavHostController) {
-
+fun AppNavGraph(navController: NavHostController, modifier: Modifier) {
     NavHost(
-        navController = navController, startDestination = SplashScreenDestination,
-        enterTransition = { EnterTransition.None }, exitTransition = { ExitTransition.None }
+        navController = navController,
+        startDestination = SplashScreenDestination,
+        modifier = modifier,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
     ) {
 
         // Splash Screen (Entry Point)
         composable<SplashScreenDestination> {
             SplashScreen(
                 navigateToLoginScreen = {
-                    navController.navigate(LoginScreenDestination())
+                    navController.navigate(LoginScreenDestination()) {
+                        popUpTo(SplashScreenDestination) { inclusive = true }
+                    }
                 },
                 navigateToHomeScreen = {
-                    navController.navigate(HomeScreenDestination)
+                    navController.navigate(MainScreenDestination) {
+                        popUpTo(SplashScreenDestination) { inclusive = true }
+                    }
                 }
             )
         }
@@ -65,8 +68,8 @@ fun AppNavGraph(navController: NavHostController) {
                 },
 
                 navigateToHomeScreen = {
-                    navController.navigate(HomeScreenDestination) {
-                        popUpTo(SplashScreenDestination) { inclusive = true }
+                    navController.navigate(MainScreenDestination) {
+                        popUpTo(LoginScreenDestination()) { inclusive = true }
                     }
                 }
             )
@@ -81,29 +84,24 @@ fun AppNavGraph(navController: NavHostController) {
                             email = email,
                             password = password
                         )
-                    )
+                    ) {
+                        popUpTo(SplashScreenDestination) { inclusive = true }
+                    }
                 }
             )
         }
 
-        // Home Screen
-        composable<HomeScreenDestination> {
-            HomeScreen(
-                navigateToProfile = {
+        // Main Screen
+        composable<MainScreenDestination> {
+            MainScreen(
+                navigateToLogin = {
                     navController.navigate(
-                        ProfileScreenDestination
-                    )
+                        LoginScreenDestination()
+                    ) {
+                        popUpTo(MainScreenDestination) { inclusive = true }
+                    }
                 }
             )
-        }
-
-        // Profile Screen
-        composable<ProfileScreenDestination> {
-            ProfileScreen(navigateToLogin = {
-                navController.navigate(LoginScreenDestination()) {
-                    popUpTo(SplashScreenDestination) { inclusive = true }
-                }
-            })
         }
     }
 }

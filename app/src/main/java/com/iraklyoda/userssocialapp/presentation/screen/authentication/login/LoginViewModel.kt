@@ -133,7 +133,6 @@ class LoginViewModel @Inject constructor(
         )
 
         val errors: List<AuthFieldErrorType?> = listOf(emailError, passwordError)
-
         return errors.all { it == null }
     }
 

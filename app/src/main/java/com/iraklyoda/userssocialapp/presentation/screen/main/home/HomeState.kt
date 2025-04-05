@@ -1,7 +1,7 @@
-package com.iraklyoda.userssocialapp.presentation.screen.home
+package com.iraklyoda.userssocialapp.presentation.screen.main.home
 
 import androidx.paging.PagingData
-import com.iraklyoda.userssocialapp.presentation.screen.home.model.UserUi
+import com.iraklyoda.userssocialapp.presentation.screen.main.home.model.UserUi
 
 data class HomeState(
     val loader: Boolean = false,
