@@ -64,6 +64,8 @@ dependencies {
     androidTestImplementation(composeBom)
     implementation(libs.material)
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
@@ -84,6 +86,7 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     // Compose
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
